@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>对象的新增属性</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var p = {
+			//传统的js对方法的声明
+			speak: function(){
+				
+			},
+			// ES6的方法的声明
+			say(){
+				console.log("ABC")
+			}
+		}
+		//p.say()
+		//======================
+		/*var p = {
+          name : '李四',
+          age : 20
+        }
+    		var attName = 'name';
+    		//【归纳】在ES5之前，如果属性名是个变量或者需要动态计算，
+    		// 则只能通过  对象[变量名]  的方式去访问。
+    		console.log(p[attName]) //这里 attName表示的是一个变量名。
+    		*/
+    		//==================
+    		var attName = 'name';
+    		var p = {
+        		attName : '李四',
+        		// 这里的attName是属性名，相当于各级p定义了属性名叫 attName的属性。
+        		age : 20
+    		}
+    		console.log(p[attName])  // undefined
+    		//===================
+    		var pro = "age"
+    		var age = 10
+    		var p2 = {
+    			// 字面量的时候，可以直接使用变量作为属性的名。
+    			// 动态计算属性名。
+    			[pro]: age
+    		}
+    		console.log(p2) //age: 10
+	</script>
+</html>

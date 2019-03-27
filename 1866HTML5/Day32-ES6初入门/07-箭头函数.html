@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>箭头函数</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 传统函数的声明
+		/*var sum = function (a, b){
+			return a + b
+		}
+		sum(1,2)*/
+		
+		//箭头函数的写法
+//		var sum = (a, b)=>{return a + b}
+//		console.log(sum(2,5))
+		//===================
+		//函数体如果只有一行代码，则可以省略大括号
+		//如果函数没有参数或者有多个参数，则小括号不能省略；
+		//如果函数只有一个参数，则小括号可以省略
+//		var foo = ()=>console.log("1")
+//		console.log(foo()) //undefined
+		//===================
+		/*var add = (a,b) => {
+			a = 20
+			return a + b
+		}
+		console.log(add(10, 40)) //60*/
+		//======================
+		//箭头函数没有this绑定
+		/*var name = "张三"
+		var obj = {
+			name: "李四",
+			speak: ()=>console.log(this.name), //张三
+			speak1: function(){
+				console.log(this.name) //李四
+			}
+		}
+		obj.speak()
+		obj.speak1()*/
+		//========================
+		/*var name = "张三"
+		var p = {
+			name: "李四",
+			speak: function(){
+				console.log(this) //this指向p对象  ---李四
+				var foo = ()=>console.log(this.name) //李四
+				foo()
+			}
+		}
+		p.speak()*/
+		//普通的函数的this指向受调用者的影响
+//		var s = p.speak
+		//这个s()函数是window在调用的，所以this指的是window
+		//从而导致箭头函数中的this也表示的是window
+//		s() //张三
+		//===========================
+		/*var i = 3
+		var p2 = {
+			i: 1,
+			foo: function(){
+				setInterval(() => console.log(this.i), 100)
+			}
+		}
+		p2.foo()
+		var foo = p2.foo
+		foo()*/
+		//============================
+		// 箭头函数内部无arguments；如果在箭头函数内部写了arguments
+		//那么它访问的肯定是它的外部函数的arguments
+		function add(a){
+			/*return function(b){
+				console.log(arguments[0]) //20
+			}*/
+			// 箭头函数的形式
+			return b=>console.log(arguments[0]) //10
+		}
+		var foo2 = add(10);
+		foo2(20);
+	</script>
+</html>
+<!--【归纳】箭头函数：胖箭头函数  拉姆达表达式
+	符号：=>      在其他语言中的符号：->
+	语法：(参数)=>{函数体}
+	1、如果只有一行函数体代码，则大括号可以省略
+	2、如果只有一个参数，则小括号可以省略
+	3、如果大括号省略了，那么方法的返回值就是整个行代码的返回值
+	4、箭头函数无this绑定的问题
+	5、箭头函数中的this与箭头函数外部函数的this保持一致，如果箭头函数
+	没有在其他函数的内部，则this永远指代window
+	6、箭头函数内部无arguments
+-->

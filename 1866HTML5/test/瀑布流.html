@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				width: 400px;
+				margin: 20px auto;
+			}
+			.box ul{
+				width: 100px;
+				float: left;
+				list-style: none;
+			}
+			.box li{
+				border: solid 1px black;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<ul></ul>
+			<ul></ul>
+			<ul></ul>
+			<ul></ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var ulArr = document.querySelectorAll("ul")
+		function initLi (index,count) {
+			if (index === count) {
+				return
+			}
+			var li = document.createElement("li")
+			var color = `rgba(${parseInt(Math.random()*255)}, 
+			${parseInt(Math.random()*255)},
+			${parseInt(Math.random()*255)},
+			${Math.random() + 1.0})`;
+			var h=parseInt(Math.random()*81+20)
+			li.style.height = h + "px"
+			li.style.backgroundColor = color
+			li.setAttribute("id",index)
+			li.innerHTML = index+1
+			var shortUl = ulArr[0]
+			for (let i = 0; i <ulArr.length; i++) {
+				if (shortUl.offsetHeight >= ulArr[i].offsetHeight) {
+					shortUl = ulArr[i]
+				}
+			}
+			shortUl.appendChild(li)
+			initLi(++index,count)
+		}
+		initLi(0,20)
+	</script>
+</html>

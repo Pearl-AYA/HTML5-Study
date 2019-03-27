@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		文件上传:<input type="file" multiple="multiple" />
+		<ol></ol>
+	</body>
+	<script type="text/javascript">
+		var inputFile = document.querySelector("input[type=file]")
+		inputFile.onchange = function () {
+			var fileArr = Array.prototype.slice.call(this.files)
+			for (var tempFile of fileArr) {
+				(function (tempFile) {
+					var fileReader = new FileReader()
+					fileReader.readAsDataURL(tempFile)
+					fileReader.onloadstart = function () {
+						console.log("读取开始")
+					}
+					fileReader.onprogress = function () {
+						console.log("读取过程中持续触发")
+					}
+					fileReader.onloadend = function () {
+						console.log("读取结束")
+						console.log(this.result)
+						if (/^(image)/.test(tempFile.type)) {
+							var img = document.createElement("img")
+							img.src = this.result
+							document.body.appendChild(img)
+						}else{
+							document.querySelector("ol").appendChild(createLi(tempFile))
+						}
+					}
+				})(tempFile)
+			}
+		}
+		function createLi (file) {
+			var li = document.createElement("li")
+			var spanName = document.createElement("span")
+			spanName.innerHTML = file.name + "&nbsp;&nbsp;"
+			li.appendChild(spanName)
+			var spanSize = document.createElement("span")
+			spanSize.innerHTML = (file.size/1024).toFixed(2) + "kb&nbsp;&nbsp;"
+			li.appendChild(spanSize)
+			var spanDate = document.createElement("span")
+			spanDate.innerHTML = getDataFormatToString(new Date())
+			li.appendChild(spanDate)
+			return li
+		}
+		function getDataFormatToString (date) {
+			return date.toLocaleDateString() + " "+ date.toLocaleTimeString()
+		}
+		var weekMap = new Map([
+			[0,"星期日"],
+			[1,"星期一"],
+			[2,"星期二"],
+			[3,"星期三"],
+			[4,"星期四"],
+			[5,"星期五"],
+			[6,"星期六"],
+		])
+	</script>
+</html>

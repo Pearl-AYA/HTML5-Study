@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>字符串的新增功能</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var s = "adcacdsfgjhdkcd"
+		// indexOf()方法返回子字符串在父串中第一次出现的下标位置
+		// 如果找到，则返回下标位置；如果没找到，则返回-1
+		console.log(s.indexOf("aaa")) //0
+		if(s.indexOf("aaa")){
+			console.log("找到了!")
+		}else{
+			console.log("没找到！")
+		}
+		//includes() 和 startsWith() 的参数2表示会以该索引为起始点进行匹配
+		console.log(s.includes("ac", 4)) //false
+		console.log(s.includes("aa")) //false
+		//startsWith()判断子字符串是否是父串的开头部分
+		console.log(s.startsWith("ac"))
+		console.log(s.endsWith("cd")) //true
+		
+		//【注意】endsWith()中的参数2表示参与匹配的字符串的总长度
+//		console.log(s.endsWith("a", 1))// true
+		//=================
+//		console.log("欢迎大家来到粤嵌".repeat(100))
+	</script>
+</html>

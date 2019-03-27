@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>DataView视图的创建</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 创建ArrayBuffer对象
+		var buffer = new ArrayBuffer(24)
+		/**
+		 * 【说明】DataView视图的设计目的，是用来处理网络设备传输
+		 * 过来的数据。通常，光纤/网线中的数据传输是大端序，PC端通常是
+		 * 小端序(不是绝对的)。大端字节序和小端字节序是可以自行设定的。
+		 * DataView视图是一个构造函数，接受一个ArrayBuffer对象作为
+		 * 参数，生成【视图】
+		 * 数字：8    0 0000000  00000000  00000000 00001000
+		 * 			 00010000  00000000 00000000 0000000  0
+		 */
+		// 创建DataView对象
+		var dv = new DataView(buffer)
+		/**
+		 * 【DataView实例有如下的属性可用】
+		 * 1、DataView.prototype.buffer: 返回对应的ArrayBuffer对象
+		 * 2、DataView.prototype.byteLength：返回占据的内存字节长度
+		 * 3、DataView.prototype.byteOffset：返回当前视图从对应的
+		 * ArrayBuffer对象的哪个字节开始
+		 */
+		/**
+		 * 【DataView实例提供8个方法读取内存】
+		 * 1、getInt8：读取1个字节，返回一个8位整数
+		 * 2、getUint8：读取1个字节，返回1个无符号的8位整数
+		 * 3、getInt16：读取2个字节，返回1个16位整数
+		 * 4、getUint16：读取2个字节，返回1个无符号的16位整数
+		 * 5、getInt32: 读取4个字节，返回一个32位的整数
+		 * 6、getUint32:  读取4个字节，返回一个无符号的32位的整数
+		 * 7、getFloat32： 读取4个字节，返回一个32位的浮点数
+		 * 8、getFloat64：读取8个字节，返回一个64位的浮点数
+		 * 这些get方法的参数都是一个字节序号(不能是负数，否则会报错)
+		 * 表示从哪个字节开始读取。
+		 */
+		
+		//从第1个字节开始读取一个8位无符号整数
+		var v1 = dv.getUint8(0)
+		console.log(v1) //0
+		// 从第2个字节开始读取一个16位的无符号整数
+		var v2 = dv.getUint16(1)
+		// 从第4个字节读取一个16位的无符号整数
+		var v3 = dv.getUint16(3)
+		//=================
+		/**
+		 * 【注意】如果一次读取两个或者两个以上字节，就必须明确
+		 * 数据的存储方式，到底是小端字节序还是大端字节序。
+		 * 默认情况下，DataView的get方法使用【大端字节序】解读数据
+		 * 如果要使用小端字节序解读，必须在get方法的第二个参数指定
+		 * true
+		 */
+		// 小端字节序
+		var v1 = dv.getUint16(1, true)
+		// 大端字节序
+		var v2 = dv.getUint16(3, false)
+		// 默认也是大端字节序
+		var v3 = dv.getUint16(3)
+	</script>
+</html>

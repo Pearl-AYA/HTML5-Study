@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>更多background相关属性</title>
+		<style type="text/css">
+			.icon{
+				width: 360px;
+				margin: 100px auto;
+				border: 1px solid red;
+				/*background: limegreen;*/
+				/*弹性布局*/
+				display: flex;
+				/*空隙在周围*/
+				justify-content: space-around;
+				/*可换行的*/
+				flex-wrap: wrap;
+				/*行内元素居中*/
+				text-align: center;
+			}
+			.icon span{
+				/*弹性盒布局的初始宽度,每个占20%。所以每行5个*/
+				flex-basis: 20%;
+				padding: 10px 0;
+				float: left;
+			}
+			.icon span i{
+				width: 32px;
+				height: 32px;
+				/*background-color: red;*/
+				display: block;
+				background-image: url(../img/un_ico_localnav_v7.12@2x.png);
+				/*设置背景尺寸为100%*/
+				background-size: 100% auto;
+				background-repeat: no-repeat;
+				/*块级元素居中*/
+				margin: 0 auto;
+			}
+			.icon span b{
+				font-weight: normal;
+			}
+			.icon span:nth-of-type(1) i{
+				background-position-y: 0;
+			}
+			.icon span:nth-of-type(2) i{
+				background-position-y: -32px;
+			}
+			.icon span:nth-of-type(3) i{
+				background-position-y: -64px;
+			}
+			.icon span:nth-of-type(4) i{
+				background-position-y: -96px;
+			}
+			.icon span:nth-of-type(5) i{
+				background-position-y: -128px;
+			}
+			.icon span:nth-of-type(6) i{
+				background-position-y: 0;
+			}
+			.icon span:nth-of-type(7) i{
+				background-position-y: -32px;
+			}
+			.icon span:nth-of-type(8) i{
+				background-position-y: -64px;
+			}
+			.icon span:nth-of-type(9) i{
+				background-position-y: -96px;
+			}
+			.icon span:nth-of-type(10) i{
+				background-position-y: -128px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="icon">
+			<span>
+				<i></i>
+				<b>文字</b>
+			</span>
+			<span>
+				<i></i>
+				<b>文字</b>
+			</span>
+			<!--============-->
+			<span>
+				<i></i>
+				<b>文字</b>
+			</span>
+			<span>
+				<i></i>
+				<b>文字</b>
+			</span>
+			<span>
+				<i></i>
+				<b>文字</b>
+			</span>
+			<span>
+				<i></i>
+				<b>文字</b>
+			</span>
+			<span>
+				<i></i>
+				<b>文字</b>
+			</span>
+			<span>
+				<i></i>
+				<b>文字</b>
+			</span>
+			<span>
+				<i></i>
+				<b>文字</b>
+			</span>
+			<span>
+				<i></i>
+				<b>文字</b>
+			</span>
+		</div>
+	</body>
+</html>

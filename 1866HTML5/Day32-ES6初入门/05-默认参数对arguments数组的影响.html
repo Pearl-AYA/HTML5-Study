@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>默认参数对arguments数组的影响</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//'use strict'
+		function foo(a,b){
+			//console.log(arguments)
+			
+			a = 20
+			for (var i = 0; i < arguments.length; i++) {
+				console.log(arguments[i])
+			}
+		}
+		foo(2,3,4,5,6)
+		//====================
+		//【注意】默认参数是ES6新增的内容，这里使用了默认参数
+		// 所以就是ES6
+		function foo2(a, b = 2){
+			a = 30
+			console.log("a = " + arguments[0])
+		}
+		foo2(1)
+		//====================
+		function foo3(a,b, ...c){
+			for(let i = 0; i < c.length; i++){
+				console.log(c[i])
+			}
+		}
+		foo3(2,3,4,5,6,7,8)
+	</script>
+</html>
+<!--【归纳】1、在ES5之前，更改参数的值，也会反应到arguments内部
+	2、在严格模式下，更改参数的值，不会反应到arguments内部，arguments
+	内部永远保持的是传入的最初的值
+	3、在ES6中，arguments和ES5中的严格模式一致；ES6中没有所谓的严格模式
+	和非严格模式之分，一律都是严格的。
+	4、未命名的参数，在ES6中用【剩余参数】来表示。
+-->

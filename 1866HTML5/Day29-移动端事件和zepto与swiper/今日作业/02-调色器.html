@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>调色器</title>
+		<script src="lib/jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<!--type="range"中的range表示该input是个【滑动条】-->
+		R：<input type="range" max="255" min="0" value="20"/><br />
+		G：<input type="range" max="255" min="0" value="20"/><br />
+		B：<input type="range" max="255" min="0" value="20"/><br />
+	</body>
+	<script type="text/javascript">
+		// 通过JQ去找inputs数组
+		var inputs = $("input")
+		var body = $("body")
+		// 获取value的初始值
+		var r = inputs.eq(0).val()
+		var g = inputs.eq(1).val()
+		var b = inputs.eq(2).val()
+		console.log(r)
+		// 刚开始的时候，需要先设置背景色
+		//【归纳】这个`rgb(${r}, ${g}, ${b})`需要使用反引号才生效
+		// 因为里面的${}是ES6模板字符串的语法
+		body.css("background", `rgb(${r}, ${g}, ${b})`)
+		//=====================
+		var index
+		var changeColor
+		
+		//监听鼠标按下去事件
+		inputs.mousedown(function(){
+			/**
+			 * 【归纳】index()方法用于获取到(标签名同为"input"的)下标值
+			 * 任何远古三的JQ对象都有index()方法。this是JS对象，所以需要
+			 * 使用$(this)的方式转化成JQ对象，才可以调用index()方法
+			 */
+			//console.log($(this))
+			index = $(this).index("input")
+			//console.log(index)
+			// 监听移动事件
+			$(this).on('mousemove', function(){
+				// 鼠标移动的时候，进度条的进度的value值会自动改变
+				changeColor = $(this).val()
+				switch(index){
+					// 判断是第几个下标
+					case 0:
+						r = changeColor;
+						break;
+					case 1:
+						g = changeColor;
+						break;
+					case 2:
+						b = changeColor;
+						break;
+				}
+				/**
+				 * 动态改变body的颜色，即设置【rgb(${r}, ${g}, ${b})】值
+				 */
+				body.css("background", `rgb(${r},${g}, ${b})`)
+			})
+			//=============
+			// 鼠标一旦抬起，立即停止鼠标的移动
+			inputs.mouseup(function(){
+				$(this).off('mousemove')
+			})
+		})
+	</script>
+</html>
+<!--range相关：三个range分别控制RGB三种颜色，
+每次调整之后，都会改变其背景颜色-->

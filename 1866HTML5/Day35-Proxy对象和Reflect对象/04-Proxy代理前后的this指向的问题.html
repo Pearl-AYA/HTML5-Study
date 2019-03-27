@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Proxy代理前后的this指向的问题</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【注意】虽然Proxy可以代理针对目标对象的访问，但是它并不是
+		 * 目标对象的透明代理，即不做任何拦截的情况下，也无法保证与目标对
+		 * 象的行为一致。主要原因：Proxy代理情况下，目标对象的内部的
+		 * this关键字会指向Proxy代理
+		 */
+		const target = {
+			m: function(){
+				console.log(this)
+				console.log(this === proxy)
+			}
+		}
+		const handler = {}
+		const proxy = new Proxy(target, handler)
+		// 用两种方式调用函数m
+		target.m() //fasle   没有代理的情况下，this指代target对象
+		proxy.m() //true  被Proxy代理的情况下，this指向Proxy对象
+	</script>
+</html>

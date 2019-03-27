@@ -1,0 +1,53 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+#my_table{
+	margin: 20px auto;
+	width: 400px;
+	text-align: center;
+	margin-bottom: 0;
+}
+.fenye{
+	font-size: 16px;
+	text-align: center;
+	margin: 10px auto;
+}
+.fenye a{
+	display: inline-block;
+	background: #f5f5f5;
+	border: 1px solid #cccccc;
+	height: 30px;
+	line-height: 30px;
+	width: 30px;
+	text-decoration: none;
+	color: black;
+	margin: 0 5px;
+}
+.fenye .prev,.fenye .next{
+	font-size: 14px;
+	width: 80px;
+}
+.fenye .start,.fenye .end{
+	width: 50px;
+	font-size: 14px;
+}
+.disabled{
+	pointer-events: none;
+	opacity: 0.5;
+}
+.active{
+	background-color: orange !important;
+	color: #ffffff !important;
+}
+.displayed_num{
+	width: 400px;
+	margin: 0 auto;
+	font-size: 12px;
+}
+.displayed_num a{
+	color: blue;
+}
+.activeLi{
+	background-color: yellow;
+}

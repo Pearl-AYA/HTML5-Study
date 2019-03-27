@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>3D柱形统计图(column-chart)</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	</head>
+	<!--【注意】details类是添加在了body标签上-->
+	<body>
+		<div class="background">
+			<div class="card">
+				<div class="photo"></div>
+				<h2>STEPS</h2>
+				<p>THIS WEEK</p>
+				<div class="chart">
+					<div class="bar bar1"><span>20,000</span></div>
+					<div class="bar bar2"><span>1,000</span></div>
+					<div class="bar bar3"><span>15,000</span></div>
+					<div class="bar bar4"><span>24,000</span></div>
+					<div class="bar bar5"><span>7,000</span></div>
+					<div class="bar bar6"><span>7,000</span></div>
+					<div class="bar bar7"><span>10,000</span></div>
+				</div>
+				<h3>93,000</h3>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		"use strict";
+		var body = document.body
+		var tilted = false
+		// 点击切换:本质是删除一个【details类】或者【添加details类】
+		var toggleTilt = function(){
+			//console.log(body.classList)
+			tilted = !tilted
+			if(tilted){
+				body.classList.add("details")
+			}else{
+				body.classList.remove("details")
+			}
+		}
+		// 监听点击事件
+		body.addEventListener('click', toggleTilt)
+		// 监听移动端触摸事件
+		body.addEventListener('touchstart', toggleTilt)
+	</script>
+</html>

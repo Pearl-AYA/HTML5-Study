@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>迭代器生成函数</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 【迭代器生成函数】一旦被调用，就会返回一个迭代器
+		/*function * creatorIterator(){
+			//调用一次next方法，只要碰到yield就会暂停
+			//然后返回一个对象{done：true/false ， value：1}
+			yield 1;
+			yield 2;
+			yield 3;
+		}*/
+		//var it = creatorIterator()
+		/*console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())*/
+		//==================
+		var arr = ["a", "b", "c", "d", "e", "f"]
+		//为数组定制迭代器
+		/*function *createIterator(arr){
+			for(let i = 0; i < arr.length; i++){
+				yield arr[i];
+			}
+		}
+		var it = createIterator(arr)
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())*/
+		//=========================
+		console.log(arr)
+		//返回与这个数组arr关联的迭代器对象
+		var it = arr[Symbol.iterator]()
+		
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+	</script>
+</html>

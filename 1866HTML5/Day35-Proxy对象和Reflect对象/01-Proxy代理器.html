@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Proxy代理器</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/*var p = {
+			name: "lisi"
+		}
+		//【set方法和get方法】统称【点运算】
+		p.name //调用p对象的get方法
+		p.name = "zhangsan" //调用了p对象的set方法*/
+		
+		/**
+		 * 【注意】Proxy构造方法的参数1：定义了一个【空对象】
+		 * 参数2：重新定义了set和get方法，重新定义了属性的读取(get)
+		 * 和设置行为(set)。【点运算】Proxy实际上重载了点运算。
+		 * 即用自己的定义的函数覆盖了语言的原始定义。
+		 */
+		var obj = new Proxy({}, {
+			// 【get方法】用于拦截某个属性的读取操作
+			get: function(target, key, receiver){
+				console.log(`getting ${key}`)
+				return Reflect.get(target, key, receiver)
+			},
+			//【set方法】用来拦截某个属性的赋值操作
+			set: function(target, key, value, receiver){
+				//console.log(typeof receiver) //object
+				console.log(`Setting ${key} ${target} ${value}}`)
+				return Reflect.set(target, key, value, receiver)
+			}
+		})
+		//obj.count = 1  // Setting count
+		++obj.count //getting count // Setting count
+	</script>
+</html>
+<!--【总结】ES6原生提供的Proxy构造函数，可以用来生成proxy实例
+	语法：Proxy(target，handler)
+	其中参数1：target表示待拦截的对象；
+	参数2：handler也是一个对象，用来定制拦截行为
+-->

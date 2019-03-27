@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>静态方法的继承</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		class Father{
+			constructor(name){
+				this.name = name;
+			}
+			say(){
+				console.log("父类的方法")
+			}
+			// 这个被static修饰的方法是【静态方法】
+			static foo(){
+				console.log("我是父类型的静态方法!" + this)
+			}
+		}
+		//声明Son类
+		//【extends】是表示继承的关键字。后面需要紧跟要继承的父类的类型
+		class Son extends Father{
+			constructor(age, name){
+				// 先需要显式地去调用父类的构造函数
+				super(name)
+				this.age = age
+			}
+			eat(){
+				console.log("子类的eat方法")
+			}
+		}
+		// 创建对象
+		//var son = new Son(18, "王二")
+		
+		//直接使用Son类调用从Father类继承过来的静态方法
+		Son.foo() // foo函数中的this指的是Son
+		Father.foo() // foo函数中的this指的是Father
+		//【归纳】Son的foo静态方法和Father的foo静态方法是同一个方法
+		// Son的foo()方法是通过继承从Father类中获得的
+		console.log(Son.foo === Father.foo) //true
+	</script>
+</html>

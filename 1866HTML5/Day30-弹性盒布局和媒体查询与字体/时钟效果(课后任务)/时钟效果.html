@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>数字时钟</title>
+<style type="text/css">
+*{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.d1{ 
+	width:450px; 
+	height:450px; 
+	border:20px solid #b4b4da; 
+	border-left:20px solid transparent; 
+	border-radius:50%; 
+	margin:50px auto;
+}
+.d2{ 
+	width:380px; 
+	height:380px; 
+	border:20px solid #666; 
+	border-radius:50%; 
+	margin:15px; 
+	position:absolute;
+}
+.u2{ 
+	width:380px; 
+	height:380px; 
+	background:#333 url(44.png) no-repeat; 
+	background-size:340px 280px; 
+	background-position:center center; 
+	border-radius:50%; position:relative;
+}
+.u2 .l2{ 
+	width:10px; height:20px; 
+	border-radius:5px; 
+	background:#ccc; 
+	position:absolute; 
+	top:0px; left:185px;
+}
+.u2 .l3{ 
+	width:10px; 
+	height:10px; 
+	border-radius:5px; 
+	background: red; 
+	position:absolute; 
+	top:0px; 
+	left:185px;
+}
+.u3{ 
+	width:360px; 
+	height:360px; 
+	margin:10px; 
+	position:absolute; 
+	top:0px; 
+	border-radius:50%;
+}
+.u3 .l4{ 
+	width:80px; 
+	height:80px; 
+	background:#f9c; 
+	position:absolute; 
+	top:140px; 
+	left:140px; 
+	border-radius:50%; 
+	z-index:5;
+}
+.u3 .l5{ 
+	width:10px; 
+	height:250px; 
+	background:#f9c; 
+	border-radius:5px; 
+	position:absolute; 
+	top:10px; 
+	left:175px; 
+	z-index:4; 
+	transform:rotate(0deg);
+}
+.u3 .l6{ 
+	width:16px; 
+	height:135px; 
+	background:#f6c; 
+	position:absolute; 
+	top:45px; 
+	left:172px; 
+	z-index:3; 
+	transform:rotate(0deg);
+}
+.u3 .l6:before{ 
+	content: ""; 
+	width:0px; 
+	height:0px; 
+	border:16px solid #f6c; 
+	position:absolute; 
+	border-top:none; 
+	border-left:8px solid transparent; 
+	border-right:8px solid transparent;
+	top:-16px;
+}
+.u3 .l6 .l6_1{
+	width:10px; 
+	height:130px;
+	background: rgba(253, 255, 222, 0.69);
+	position:absolute;
+	margin-left: 3px;
+	top:0;
+	border-radius: 10px 10px 0 0;
+}
+.u3 .l7{ 
+	width:20px; 
+	height:100px; 
+	background:#f3c;
+	position:absolute; 
+	top:80px; 
+	left:170px; 
+	z-index:2; 
+	transform:rotate(0deg);
+}
+.u3 .l7:before{ 
+	content: "";
+	width:0px; 
+	height:0px; 
+	border:20px solid #f3c; 
+	position:absolute; 
+	border-top:none; 
+	border-left:10px solid transparent; 
+	border-right:10px solid transparent; 
+	top:-20px;
+}
+.u3 .l7 .l7_1{
+	width: 14px; 
+	height: 80px;
+	background: rgba(253, 255, 222, 0.69);
+	position: absolute;
+	margin-left: 3px;
+	top:0;
+	border-radius: 5px 5px 0 0;
+}
+.u3 .l8{
+	color:#fff;
+	position: absolute;
+	top:20px;
+	left:44%;
+}
+</style>
+<!--【引入JQuery库】-->
+<script src="jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var c = "";
+		for(var a = 1; a <= 60; a++){
+			var b = a % 5;
+			if(b == 0){
+				//追加带l2的li标签
+				c += "<li class='l2'></li>";
+			}else{
+				//追加带l3的li标签
+				c += "<li class='l3'></li>";
+			}
+		}
+		//===================
+		$(".u2").append(c);
+		$(".u2 li").each(function(n){
+            $(".u2 li:eq(" + n + ")").css({"transform-origin":"5px 190px",
+               "transform":"rotate("+6*(n+1)+"deg)"});
+        });
+		//===================
+		//秒针运动
+		var dt = new Date();
+		var s = dt.getSeconds();
+		var m = dt.getMinutes();
+		var h = dt.getHours();
+		function jiShi(){
+			$(".l5").css({"transform-origin":"5px 170px", 
+				"transform":"rotate("+6*s+"deg)"});
+			$(".l6").css({"transform-origin":"8px 135px", 
+				"transform":"rotate("+6*(s/60+m)+"deg)"});
+			$(".l7").css({"transform-origin":"10px 100px", 
+				"transform":"rotate("+30*(m/60+h)+"deg)"});
+			s++;
+			if(s >= 60){
+				m++;
+				s = 0;
+				if(m >= 60){
+					h++;
+					m = 0;
+					if(h >= 12){
+						h = 0;
+					}
+				}
+			}
+		}
+		jiShi();
+		setInterval(jiShi, 1000);
+	});
+</script>
+</head>
+<body>
+  <div class="d1">
+    <div class="d2">
+    <!--===========-->
+      <ul class="u2"></ul>
+      <ul class="u3">
+        <li class="l4"></li>
+        <li class="l5"></li>
+        <li class="l6"><div class="l6_1"></div></li>
+        <li class="l7"><div class="l7_1"></div></li>
+        <li class="l8">CASIO</li>
+      </ul>
+      <!--=========-->
+    </div>
+  </div>
+</body>
+</html>

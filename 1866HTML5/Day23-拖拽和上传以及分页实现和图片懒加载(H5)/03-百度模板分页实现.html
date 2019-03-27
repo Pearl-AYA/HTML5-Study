@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原生分页实现</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script src="lib/jquery.js" type="text/javascript"></script>
+		<script src="lib/baiduTemplate.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<table id="my_table" border="1px">
+			<thead>
+				<tr>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>年龄</th>
+					<th>住址</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--<tr>
+					<td>随行者</td>
+					<td>男</td>
+					<td>18</td>
+					<td>广州黄埔区</td>
+				</tr>
+				<tr>
+					<td>随行者</td>
+					<td>男</td>
+					<td>19</td>
+					<td>广州黄埔区</td>
+				</tr>
+				<tr>
+					<td>随行者</td>
+					<td>男</td>
+					<td>20</td>
+					<td>广州黄埔区</td>
+				</tr>
+				<tr>
+					<td>随行者</td>
+					<td>男</td>
+					<td>21</td>
+					<td>广州黄埔区</td>
+				</tr>
+				<tr>
+					<td>随行者</td>
+					<td>男</td>
+					<td>22</td>
+					<td>广州黄埔区</td>
+				</tr>-->
+			</tbody>
+		</table>
+		<!--================-->
+		<!--上面是表单部分，下面是分页控制部分-->
+		<div class="fenye">
+			<a href="###" class="start">首页</a>
+			<a href="###" class="prev"><<上一页</a>
+			<!--为了灵活地决定这里的a标签的个数，采用动态添加的方式-->
+			<!--<a href="###" name="p" style="background-color: orange;color: #FFFFFF;">1</a>
+			<a href="###" name="p">2</a>
+			<a href="###" name="p">3</a>
+			<a href="###" name="p">4</a>
+			<a href="###" name="p">5</a>-->
+			
+			<a href="###" class="next">下一页>></a>
+			<a href="###" class="end">尾页</a>
+		</div>
+		<!--【🐷】在这里使用script标签来定义模板-->
+		<!--我们需要给模板定义一个id，方便让baidu模板里的方法找到它-->
+		<!--我们如果在这个里面想要识别JS的话，需要用<% %>把代码括起来，方可识别-->
+		<!--我们使用<%= %>来进行输出-->
+		<script type="text/template" id="person_tpl">
+			 <% for(var tempPerson of arr){ %>
+				<tr>
+					<td><%= tempPerson.name %></td>
+					<td><%= tempPerson.sex %></td>
+					<td><%= tempPerson.age %></td>
+					<td><%= tempPerson.addr %></td>
+				</tr>
+			<% } %>
+		</script>
+		<script type="text/template" id="pageBtns_tpl">
+			<% for(var i = 1; i <= count; i++){ %>
+				<% if(i == 1){ %>
+					<a href="###" name="p" style="background:orange;color:#fff;"><%= i %></a>
+				<% }else{ %>
+					<a href="###" name="p"><%= i %></a>
+				<% } %>
+			<% } %>
+		</script>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【原生分页实现的思路(原理)】首先和产品经理确定一下每页显示多少条数据
+		 * 然后通过后天的数据接口获取某一页的数据(到底第哪一页需要给这个接口)
+		 * 传入一个表示页码的参数。然后考虑如何显示数据。
+		 * 术语：页码、每页显示条目、数据总数、每页数据列表
+		 * 其中每页显示条目是动态的（暂定5条）
+		 * 数据总数是接口提供的。页码数需要根据数据总数和每页显示的条目数去计算的
+		 * 总页码数 = 总数据条数 / 每页数据条数
+		 * ？ =  28 / 5
+		 */
+		// 为了全局缓存所有的数据
+		var personsList = null
+		// 全局缓存数据总条数
+		var totalCount = 0
+		// 当前页码
+		var currentPageNo = 1
+		// 任务1：计算有多少页(以便初始化按钮)
+		function initBtn(){
+			// 通过jQ的getJSON方法获取数据
+			// 参数2：是连同请求发送到服务器的数据，null即无
+			$.getJSON("data.json", null, function(resultData){
+				// resultData是解析出来的Json对象
+				//console.log(resultData)
+				
+				/**
+				 * 把获取到的数据缓存到本地：persons和totalCount
+				 */
+				personsList = resultData.persons
+				totalCount = resultData.totalCount
+				// 动态添加【共XX页】按钮
+				var $all = $('<a href="###" style="width:80px">' + '共' + Math.ceil(totalCount / 5) + '页' + '</a>')
+				$('.prev').after($all)
+				//====================
+				// 包装
+				var obj = {
+					count: Math.ceil(totalCount / 5)
+				}
+				// 使用百度模板
+				// 百度模板本质就是一个接口
+				var str = baidu.template('pageBtns_tpl', obj)
+				//====================
+				// 将str追加到prev元素之后
+				$('.prev').after(str)
+				// 给所有的按钮绑定事件
+				$('.fenye a').on('click', fenyeFn)
+				// 默认显示第一页的数据
+				showData(currentPageNo)
+			})
+		}
+		// 函数调用
+		initBtn()
+		
+		// 构建某一页的数据  pageNo = 3
+		function showData(pageNo){
+			/**
+			 * 第1页：0--4
+			 * 第2页：5--9
+			 * 第3页：10--14
+			 * 第4页：15--19
+			 * 第5页：20--22
+			 */
+			// arrayObject.slice(start, end)方法可以从已有的数组中返回选定的元素,返回一个新的
+			//数组，包含从start到end(不包括该元素)的arrayObject中的元素
+			// currentArr数组的每个元素tempPerson代表一个人的信息
+			var currentArr = personsList.slice((pageNo - 1) * 5, pageNo * 5)
+			console.log(currentArr)
+			
+			/**
+			 * 【注意】使用百度模板
+			 * 这个baidu.template()方法有2个参数：
+			 * 参数1：是定义好的模板id：person_tpl
+			 * 参数2：要传入遍历的数据(注意：这个参数很特别，不能直接传原生数据)
+			 * 需要传入的原生数据用一个对象包起来，换句话说，传入的必须是包装好后的对象
+			 * 有一个返回值：返回值就是生成好的html字符串
+			 */
+			// 包装
+			var obj = {
+				arr: currentArr
+			}
+			// 调用百度模板方法:返回生成好的html标签的字符串
+			var str = baidu.template('person_tpl', obj)
+			
+			// 把$str作为tbody的html
+			$('tbody').html(str)
+		}
+		// 任务2：分页按钮点击逻辑
+		function fenyeFn(){
+			// 得到元素的html的值
+			//console.log("按钮上的文字是：" + $(this).html())
+			// 1、处理页码数的逻辑：点击后，currentPageNo的值被改变了
+			switch($(this).html()){
+				case '首页':
+					currentPageNo = 1
+					break
+				case '&lt;&lt;上一页':
+					currentPageNo--
+					break
+				case '下一页&gt;&gt;':
+					currentPageNo++
+					break
+				case '尾页':
+					currentPageNo = Math.ceil(totalCount / 5)
+					break
+				default:
+					currentPageNo = parseInt($(this).html())
+					break
+			}
+			console.log("当前页是：" + currentPageNo)
+			//===========================
+			//2、首尾、上下按钮的隐藏显示逻辑
+			if(currentPageNo == 1){
+				$('.start').css('display', 'none')
+				$('.prev').css('display', 'none')
+			}else{
+				$('.start').css('display', 'inline-block')
+				$('.prev').css('display', 'inline-block')
+			}
+			// 如果是最后一页
+			if(currentPageNo == Math.ceil(totalCount / 5)){
+				$('.end').css('display', 'none')
+				$('.next').css('display', 'none')
+			}else{
+				$('.end').css('display', 'inline-block')
+				$('.next').css('display', 'inline-block')
+			}
+			// 3、处理按钮颜色的逻辑
+			//获取全部页码按钮的数组
+			var $pageBtn = $('[name=p]')
+			//先把这几个按钮的样式还原成默认
+			$pageBtn.css({
+				background: "pink",
+				color: "#999"
+			})
+			// 然后再处理当前页码数对应的按钮样式
+			$pageBtn[currentPageNo - 1].style.background = 'orange'
+			$pageBtn[currentPageNo - 1].style.color = '#fff'
+			// 刷新数据
+			showData(currentPageNo)
+		}
+	</script>
+</html>

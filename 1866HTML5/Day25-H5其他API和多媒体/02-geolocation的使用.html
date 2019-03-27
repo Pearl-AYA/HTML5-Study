@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>geolocation的使用</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 判断浏览器是否支持geolocation(地理位置定位)
+		console.log(window)
+		if(navigator.geolocation){
+			var options = {
+				// 高精度是否可用
+				enableHighAccuracy: true,
+				//超时时间
+				timeout: 5000,
+				// 应用程序的缓存时间
+				maximumAge: 0
+			}
+			//alert('浏览器支持Geolocation!')
+			/*navigator.geolocation.getCurrentPosition(successCallBack,
+			errorCallBack, options)*/
+			var watchID = navigator.geolocation.watchPosition(successCallBack,
+			errorCallBack, options)
+			console.log("watchID = " + watchID)
+			if(true){
+				navigator.geolocation.clearWatch(watchID)
+			}
+		}
+		// 定位成功时返回函数
+		// position是位置对象(定位对象)
+		function successCallBack(position){
+			alert("纬度：" + position.coords.latitude + "\n经度：" + 
+			position.coords.longitude)
+			//............更多的属性自己演示
+		}
+		// 定位失败返回函数
+		function errorCallBack(error){
+			// 失败对象
+			var errorType = {
+				1: "位置服务被拒绝",
+				2: "获取不到位置信息",
+				3: "获取信息超时"
+			}
+			//error.code会返回信息的状态码，分别是1  2  3
+			alert(errorType[error.code])
+		}
+	</script>
+</html>

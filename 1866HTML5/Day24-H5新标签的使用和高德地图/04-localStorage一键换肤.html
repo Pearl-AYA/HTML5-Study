@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>localStorage一键换肤</title>
+		<!--内部样式-->
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box{
+				width: 500px;
+				height: 500px;
+				margin: 100px auto;
+				border: 5px solid red;
+			}
+			#box .btn{
+				width: 100px;
+				height: 40px;
+				font-size: 30px;
+				text-align: center;
+				line-height: 40px;
+				margin: 10px;
+				float: left;
+				color: white;
+			}
+			#box .btn:nth-of-type(1){
+				background-color: red;
+			}
+			#box .btn:nth-of-type(2){
+				background-color: green;
+			}
+			#box .btn:nth-of-type(3){
+				background-color: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<!--div#box>div.btn{红色}*3-->
+		<div id="box">
+			<div class="btn">红色</div>
+			<div class="btn">绿色</div>
+			<div class="btn">蓝色</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var box = document.querySelector("#box")
+		// 设置或者存储颜色
+		function setBgColor(color){
+			// 存储颜色值到本地localStorage中
+			window.localStorage.bgColor = color
+			// 即时改变背景颜色
+			box.style.backgroundColor = color
+		}
+		/**
+		 * 【获取颜色】每次重新打开浏览器的时候，通过getBgColor()方法
+		 * 可以获得上一次存储在window.localStorage中的bgColor属性中的颜色
+		 */
+		function getBgColor(){
+			// 从window.localStorage中将颜色值读出来
+			return window.localStorage.bgColor
+		}
+		// 设置容器的背景颜色
+		//box.style.backgroundColor = color
+		
+		// 初始化方法
+		function initPage(){
+			// 初始化的时候要调用getBgColor()方法
+			box.style.backgroundColor = getBgColor()
+		}
+		// 函数调用
+		initPage()
+		// 找到所有的button
+		var btns = document.querySelectorAll("#box .btn")
+		// 每次点击都会执行一次该循环
+		for(var i = 0; i < btns.length; i++){
+			btns[i].onclick = changeColor;
+		}
+		// 改变颜色
+		function changeColor(){
+			//console.log(this.style.backgroundColor)
+			
+			//【注意】【getComputedStyle(this, null)】是指获取到内部样式
+			// 或者外部样式设置的window的style，由此可以得到backgroundColor的值
+			// 如果是行内样式，可以通过this.stylebackground获取到
+			//console.log(getComputedStyle(this, null).backgroundColor)
+			
+			setBgColor(getComputedStyle(this, null).backgroundColor)
+		}
+	</script>
+</html>

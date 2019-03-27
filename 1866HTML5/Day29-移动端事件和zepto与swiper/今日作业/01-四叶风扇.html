@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>四叶风扇</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box{
+				width: 200px;
+				height: 200px;
+				background-color: pink;
+				margin: 100px auto;
+				border-radius: 50%;
+				animation: moveFans 1s linear infinite paused;
+				/*设置过渡时间*/
+				transition: all 0.5s;
+			}
+			@keyframes moveFans{
+				from{
+					transform: rotate(0deg);
+				}
+				to{
+					transform: rotate(360deg);
+				}
+			}
+			#box div{
+				width: 80px;
+				height: 30px;
+				background-color: yellowgreen;
+				/*通过border-radius可以绘制出任意形状的简单图形*/
+				/*【归纳】80px表示左上角的宽度；30px表示左上角的高度*/
+				border-radius: 80px 0 0 0 / 30px 0 0 0;
+			}
+			#box .center{
+				width: 30px;
+				height: 30px;
+				background: blue;
+				border-radius: 50%;
+				transform: translate(85px, -30px);
+			}
+			#box div:nth-of-type(1){
+				background: red;
+				transform: rotate(90deg) translate(35px, -60px);
+			}
+			#box div:nth-of-type(2){
+				background: yellow;
+				transform: rotate(180deg) translate(-115px, -60px);
+			}
+			#box div:nth-of-type(3){
+				background: greenyellow;
+				transform: rotate(270deg) translate(-85px, 60px);
+			}
+			#box div:nth-of-type(4){
+				background: deeppink;
+				transform: translateX(5px);
+			}
+			input{
+				color: red;
+				width: 200px;
+				height: 50px;
+				background-color: yellowgreen;
+				display: block;
+				font-size: 30px;
+				font-weight: bold;
+				margin: 150px auto;
+				border-radius: 50%;
+				outline: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div class="center"></div>
+		</div>
+		<input type="button" value="开始"/>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			var btn = document.querySelector("input")
+			var box = document.getElementById("box")
+			// 点击button
+			btn.onclick = function(){
+				if(this.value == "开始"){
+					this.value = '暂停'
+					
+					//【归纳】这里也可以通过设置box容器的style的animation属性去设置动画
+					//box.style.animation = "moveFans " + 2 + "s linear infinite"
+					box.style.animationPlayState = "running"
+				}else{
+					this.value = '开始'
+					box.style.animationPlayState = "paused"
+				}
+			}
+		}
+	</script>
+</html>

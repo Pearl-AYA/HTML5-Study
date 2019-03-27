@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>蛇吃月饼的故事</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			html,body{
+				width: 100%;
+			}
+			canvas{
+				background: #ccc;
+				margin: 10px auto;
+			}
+			#begin{
+				width: 200px;
+				height: 50px;
+				background-color: orange;
+				border-radius: 15px;
+				margin: 20px auto;
+				display: block;
+				outline: none;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvaId" width="1400" height="600"></canvas><br />
+		<button id="begin">开始游戏</button>
+	</body>
+	<!-- 显示分数 -->
+	<!-- 广告 -->
+	<!-- 弹窗 -->
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvaId");
+		var begin = document.getElementById("begin")
+		// 全局变量ctx
+		var ctx = canvas.getContext("2d");
+		// 【原型对象】
+		// 传入的参数options是个对象
+		function Snake(options){
+			this.width = options.width;
+			this.height = options.height;
+			//每一格子的宽高 20px
+			this.space = options.space;
+			// 游戏列数 30列
+			this.colCount = this.width / this.space;
+			// 游戏行数  30行
+			this.rowCount = this.height / this.space;
+			// 默认游戏方向(向右)
+			this.direction = "right";
+			// 定时器
+			this.timer = null;
+			// 画笔
+			this.ctx = options.ctx;
+		}
+		//prototype (很重要) 使得一些属性可以被继承（共享）
+		//1、初始化方法
+		Snake.prototype.init = function(){
+			// 绘制地图
+			this.drawMap();
+			// 绘制初始蛇
+			this.drawInitSnake();
+			// 绘制初始食物
+			this.drawInitFood();
+		}
+		// 2、开始方法
+		Snake.prototype.begin = function(){
+			var _this = this;
+			// 监听键盘事件
+			this.addEvnet();
+			// 定时器
+			this.timer = setInterval(function(){	
+				// 每隔150ms刷新绘制一次蛇
+				_this.drawSnake();
+			},150)
+		}
+		//======== 初始化的蛇的身体==========
+		Snake.prototype.drawInitSnake = function(){
+			this.snake = [
+				{x: 0, y: 20, color: "blue"},
+				{x: 20, y: 20, color: "green"},
+				{x: 40, y: 20, color: "red"}
+			]
+			//绘制蛇身体
+			for(var j = 0 ; j < this.snake.length; j++){
+				this.ctx.beginPath();
+				this.ctx.rect(this.snake[j].x, this.snake[j].y,
+					this.space, this.space);
+				this.ctx.fillStyle = this.snake[j].color;
+				this.ctx.fill();
+			}
+		}
+		//========初始化的食物的坐标=========
+		Snake.prototype.drawInitFood = function(){
+			this.food = {
+				x: 80,
+				y: 40,
+				color: "orange"
+			}
+			//绘制食物
+			this.ctx.beginPath();
+			this.ctx.rect(this.food.x, this.food.y,
+				this.space, this.space);
+			this.ctx.fillStyle = this.food.color;
+			this.ctx.fill();
+		}
+		//2、绘制地图
+		Snake.prototype.drawMap = function(){
+			// 设置画笔颜色
+			this.ctx.strokeStyle = "#333";
+			// 循环绘制
+			for(var i = 0 ; i <= this.colCount; i++){
+				this.ctx.moveTo(0, i * this.space);
+				this.ctx.lineTo(this.width, i * this.space);
+				this.ctx.moveTo(i * this.space, 0);
+				this.ctx.lineTo(i * this.space, this.height);
+				this.ctx.stroke();
+			}
+		}
+		//3、监听键盘事件
+		Snake.prototype.addEvnet = function(){
+			var _this = this;
+			document.addEventListener('keydown',function(){
+				console.log(123)
+			})
+			document.addEventListener('keydown',function(evt){
+				console.log("🍎🍎")
+				var event = evt || window.event;
+				var keyCode = event.keyCode;
+				// this 谁调用函数（事件） this 指向谁 document
+				if(keyCode == 38 && _this.direction != 'down'){
+					_this.direction = 'up'
+				}
+				if(keyCode == 40 && _this.direction != 'up'){
+					_this.direction = 'down'
+				}
+				if(keyCode == 37 && _this.direction != 'right'){
+					_this.direction = 'left'
+				}
+				if(keyCode == 39 && _this.direction != 'left'){
+					_this.direction = 'right'
+				}
+				//console.log(_this.direction)
+			})
+		}
+		//4、判断蛇吃到食物
+		Snake.prototype.eatFood = function(){
+			//检测蛇头和食物的碰撞
+			if(this.snake[this.snake.length - 1].x == this.food.x &&
+				this.snake[this.snake.length - 1].y == this.food.y){
+				// 蛇吃到食物需要往蛇的尾部添加一个格子
+				this.addSnake();
+				// 蛇吃到食物的时候 再次创建新的食物
+				this.createFood();
+			}
+		}
+		//5、创建食物
+		Snake.prototype.createFood = function(){
+			this.food = {
+				x: Math.floor(Math.random() * this.colCount) * this.space,
+				y: Math.floor(Math.random() * this.rowCount) * this.space,
+				color: "orange"
+			}
+			this.ctx.beginPath();
+			this.ctx.rect(this.food.x, this.food.y, this.space, this.space);
+			this.ctx.fillStyle = this.food.color;
+			this.ctx.fill();
+		}
+		//6、 设置蛇移动的函数
+		Snake.prototype.snakeMove = function(){
+			this.x = 0;// 水平方向移动
+			this.y = 0; //垂直方向移动
+			// console.log(this.direction)
+			if(this.direction == 'right'){
+				this.x = this.space;
+			}
+			if(this.direction == 'left'){
+				this.x = -this.space;
+			}
+			if(this.direction == 'down'){
+				this.y = this.space
+			}
+			if(this.direction == 'up'){
+				this.y = -this.space;
+			}
+	 		// 每次执行执行 清除画布了之后，蛇的坐标需要更新
+		 	for(var i = 0 ; i < this.snake.length - 1; i++){
+		 		this.snake[i].x = this.snake[i + 1].x;
+		 		this.snake[i].y = this.snake[i + 1].y;
+		 	}
+		 	// 设置蛇头的下一个动作坐标
+		 	this.snake[this.snake.length-1].x += this.x;
+		 	this.snake[this.snake.length-1].y += this.y;
+		}
+		//7、绘制蛇
+		Snake.prototype.drawSnake = function(){
+			// 清除指定的区域
+			this.ctx.clearRect(this.snake[0].x, this.snake[0].y,
+				this.space,this.space);
+			this.drawMap();
+			this.snakeMove();
+			//绘制更新蛇的位置 再次遍历蛇的数组（下一个动作）
+			for(var j = 0 ; j < this.snake.length; j++){
+				this.ctx.beginPath();
+				this.ctx.rect(this.snake[j].x, this.snake[j].y,
+					this.space, this.space);
+				this.ctx.fillStyle = this.snake[j].color;
+				this.ctx.fill();
+			}
+			//创建蛇身体
+			this.eatFood();
+			//记录蛇的身体的坐标
+			this.copySnake();
+		}
+		//8、往蛇数组添加一个格子
+		Snake.prototype.addSnake = function(){
+			var new_snake_body = {
+				x: this.snake[0].x - this.space,
+				x: this.snake[0].y - this.space,
+				color: "blue"
+			}
+			//蛇吃到食物需要往尾巴添加一个（格子）坐标
+			this.snake.unshift(new_snake_body);
+		}
+		//9、判断蛇是否撞墙/蛇头碰到蛇身 (检测碰撞)
+		Snake.prototype.toCheck = function(){
+			//记录蛇头
+			var snakeHead = this.snake[this.snake.length - 1];
+			if(snakeHead.x  < 0 || snakeHead.x > this.width ||
+				snakeHead.y < 0 || snakeHead.y > this.height){
+				alert("飞出地球🌍了")
+				clearInterval(this.timer)
+			}
+			//双层循环
+			for(var i = 0; i < this.newSnake.length; i++){
+					for(var j = i + 1; j<this.newSnake.length; j++){
+						// 更新过后的蛇头坐标和蛇身体坐标比较 如果存在相等
+						// 说明蛇头碰到蛇身体了
+						if(this.newSnake[j].x == this.newSnake[i].x &&
+							this.newSnake[j].y == this.newSnake[i].y){
+							clearInterval(this.timer);
+							alert("尼玛咬到自己的屁股了!")
+							return; // 终止代码
+						}
+					}
+			}
+		}
+		//10、生成新的蛇🐍
+		Snake.prototype.copySnake = function(){
+			// 创建新蛇数组
+			this.newSnake = [];
+			for(var i = 0 ; i < this.snake.length; i++){
+				this.newSnake.push({
+					x: this.snake[i].x,
+					y: this.snake[i].y
+				})
+			}
+			// 调用检测蛇活动是否超出范围和吃到食物的函数
+			this.toCheck(this.newSnake);
+		}
+		//实例化一个【Snake游戏对象】
+		var snakeGame = new Snake({
+			width: canvas.width,
+			height: canvas.height,
+			space: 20,
+			ctx: ctx
+		})
+		// 初始化游戏
+		snakeGame.init();
+		// 点击开始按钮，开始游戏
+		begin.onclick = function () {
+			// 开始游戏
+			snakeGame.begin()
+		}
+	</script>
+</html>

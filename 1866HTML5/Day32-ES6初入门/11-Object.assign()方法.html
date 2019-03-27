@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Object.assign()方法</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var p = {
+			name: "李四",
+			age: 20,
+			// 数组
+			girlFriends: ["柏芝", "凤姐", "白百何"]
+		}
+		// 空对象
+		var p1 = {}
+		// 浅拷贝  ----地址拷贝
+		Object.assign(p1, p)
+		console.log(p1)
+		p1.girlFriends.push("马蓉")
+		p1.name = "张三"
+		// 对于girlFriends数组而言，p和p1使用的是同一个数组
+		console.log(p1.girlFriends)
+		//【归纳】对于对象或者数组而言，因为是浅拷贝，即地址拷贝(内存相同)
+		console.log(p.girlFriends)
+		//【归纳】如果是非对象或者非数组，则是直接拷贝
+		console.log(p.name) //李四
+		console.log(p1.name) //张三
+	</script>
+</html>
+<!--【归纳】在JS语言中，直接把方法定义在构造函数名上的方法，
+	称之为【静态方法】静态方法不能通过构造函数创建出来的对象调用
+	function Person(){}  
+	Person.prototype.say = function(){} //实例方法或者对象方法
+	Person.hello = function(){} //静态方法
+	new Person().hello()  //静态方法不允许对象调用
+	在其他语言中，比如：OC  叫【类方法】static   【对象方法】
+-->

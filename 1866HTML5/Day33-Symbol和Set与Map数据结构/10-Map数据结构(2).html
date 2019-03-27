@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Map数据结构</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//创建Map对象
+		var map = new Map([
+			["name", "李四"],
+			["age", 20],
+			["sex", "男"]
+		]).set("a", "b")
+		//console.log(map)
+		//======================
+		//1、可以使用forEach()方法遍历map
+		map.forEach(function(value, key, self){
+			//console.log(value) //值
+			//console.log(key) //键
+			//console.log(self)
+		})
+		// 2、可以使用for...of遍历map
+		for(var v of map){
+			//console.log(v) //["name", "李四"]
+			//console.log(v[0]) //name
+			console.log(v[1]) //李四
+		}
+	</script>
+</html>

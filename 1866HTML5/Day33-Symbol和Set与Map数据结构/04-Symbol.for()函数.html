@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Symbol.for()函数</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【归纳】Symbol.for("a")获取一个Symbol类型的数据
+		 * 如果在全局的环境中能够获取到，则返回获取到的Symbol数据
+		 * 如果没有获取到就创建一个新的Symbol数据,而且会把它注册
+		 * 到全局环境中。Symbol()函数也会创建一个新的Symbol数据，
+		 * 但是不会把它注册到全局环境中。
+		 */
+		var s2 = Symbol.for("a")
+		function foo(){
+			var s1 = Symbol.for("a")
+			return s1
+		}
+		//函数的调用
+		var s1 = foo()
+		console.log(s1) //Symbol(a)
+		console.log(s2) //Symbol(a)
+		//【注意】结果是true。说明s1和s2是同一个Symbol
+		//因为s2已经被注册到了全局环境当中，被Symbol.for("a")搜索到了
+		console.log(s1 === s2) //true
+		//====================
+		//Symbol.keyFor()能够将已经被注册到全局环境中的Symbol
+		//数据的key返回回来
+		console.log(Symbol.keyFor(s1)) //a
+		var s3 = Symbol.for("abc")
+		console.log(Symbol.keyFor(s3)) //abc
+		
+		//Symbol()函数创建Symbol数据的时候不会把它注册到全局环境中
+		var s4 = Symbol("fff")
+		
+		//【归纳】Symbol.keyFor()只能从全局环境中去查询，
+		// 虽然s4这个Symbol数据存在，但是因为没有被注册到全局环境中
+		//所以Symbol.keyFor()查询不到
+		console.log(Symbol.keyFor(s4)) //undefined
+	</script>
+</html>

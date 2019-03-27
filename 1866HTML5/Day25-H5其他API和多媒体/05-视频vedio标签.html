@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vedio标签</title>
+	</head>
+	<body>
+		<!--<video controls autoplay width="1200" height="600" poster="./source/1.jpg">-->
+		<video controls width="1200" height="600" poster="./source/1.jpg">
+			<source src="http://www.runoob.com/try/demo_source/movie.mp4" type="audio/mp4"/>
+			<source src="source/终结者_Larry.MP4" type="audio/mp4"/>
+		</video>
+		<br />
+		<input type="button" value="切换视频"/>
+		<input type="button" value="测试其他属性和方法"/>
+	</body>
+	<script type="text/javascript">
+		var video = document.querySelector("video")
+		var changeBtn = document.querySelector("input")
+		var otherBtn = document.querySelectorAll("input")[1]
+		
+		var flag = true
+		changeBtn.onclick = function(){
+			if(flag){
+				video.src = 'source/终结者_Larry.MP4'
+				video.poster = './source/2.jpg'
+			}else{
+				video.src = 'source/Nimo.MP4'
+				video.poster = './source/3.jpg'
+			}
+			flag = !flag
+		}
+		//===================
+		// 其他操作
+		otherBtn.onclick = function(){
+			// 显示当前视频的URL(只读属性)
+			//console.log(video.currentSrc) 
+			//返回当前视频的长度(秒)
+			//console.log(video.duration)
+			
+			// 【注意】必须将video下的src视频地址设置成【在线视频】
+			// 否则这个currentTime无法设置
+			video.currentTime = 12.611
+			console.log(video.currentTime) //12.612
+			//===============
+			video.volume = 0.4
+			console.log(video.volume) //0.4
+			//===============
+			//video.muted = true
+			video.playbackRate = 2.0
+			console.log(video.ended)//false  or  true
+			//===============
+			video.loop = true
+			console.log(video.paused)
+		}
+		
+	</script>
+</html>

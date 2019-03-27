@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>函数的一些新增特性</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 函数的声明
+		function foo1(a = 40, f = function(){}){
+			f()
+			console.log(a)
+		}
+		// 函数的调用
+		//【归纳】当传了实参给函数的形参的时候，使用实际传的参数值
+		//如果没有传参，则使用默认值
+		/*foo1(2, function(){
+			console.log("Abc")
+		})*/
+//		foo1(20)
+//		foo1()
+		//======================
+		//【归纳】后面的参数的默认值为前面的参数的值
+		/*function foo2(a = 20, b = a){
+			console.log(a + " " + b)
+		}
+		foo2()*/
+		
+		//【注意】下面的写法是错误的，因为a在需要使用的时候还没有声明
+		/*function foo3(b = a, a = 20){
+			console.log(a + " " + b)
+		}
+		foo3()*/
+		//====================
+		// let出来的变量是有块级作用域的，但是作为全局变量的时候
+		// 是和普通的全局变量一样的，可以在函数内部使用
+		let a = 1
+		function getValue(){
+			return ++a
+		}
+		function foo4(a = getValue()){
+			console.log(a)
+		}
+		foo4()
+		foo4()
+		foo4()
+	</script>
+</html>

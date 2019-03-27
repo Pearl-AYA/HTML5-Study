@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Symbol数据类型</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//传统的JS中封装私有变量
+		/*var p = (function foo(){
+			var p = {
+				name: "lisi",
+				age: 20,
+				sex: "男"
+			}
+			return {
+				//这样话，这个name属性就【像】一个私有的变量
+				getName: function(){
+					return p.name
+				},
+				setName: function(name){
+					p.name = name
+				}
+			}
+		}())*/
+		//====================
+		//【Symbol】 第6种新的基本数据类型
+		var sym = Symbol("abc")
+		console.log(sym) //Symbol() //Symbol(abc)
+		
+		var sym2 = Symbol("abc")
+		console.log(sym2) //Symbol(abc)
+		console.log(sym == sym2) //false
+		console.log(typeof sym) //symbol
+	</script>
+</html>
+<!--【归纳】1、通过调用全局函数Symbol()来获取Symbol数据
+	每调用一次都是一个【新的Symbol数据】Symbol数据拥有【唯一性】
+	2、使用typeof可以测试Symbol数据的类型
+-->

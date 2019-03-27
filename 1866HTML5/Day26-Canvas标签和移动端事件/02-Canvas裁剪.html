@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas裁剪</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			table{
+				width: 500px;
+				height: 500px;
+				box-shadow: 10px 10px 10px gray;
+			}
+			table td{
+				border: 1px dashed gray;
+			}
+			canvas{
+				position: fixed;
+				left: 0;
+				top: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<table border="1" cellspacing="0" cellpadding="0">
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			
+		</table>
+		<canvas id="canvas" width="500" height="500"></canvas>
+	</body>
+	<script type="text/javascript">
+		// 画布
+		var cvs = document.querySelector("#canvas")
+		// 画笔  或者叫上下文
+		var ctx = cvs.getContext("2d")
+		
+		ctx.rect(0, 0, 200, 200)
+		// 圆弧0
+		ctx.beginPath()
+		ctx.arc(150, 300, 100, 0, Math.PI * 2, false)
+		ctx.strokeStyle = "orange"
+		ctx.lineWidth = 10
+		ctx.stroke()
+		ctx.closePath()
+		/**
+		 * 【场景保存】ctx.save()  使用save()方法可以把当前的全部场景
+		 * 保存一个原本。这个原本为裁剪提供样本。但是裁剪并不改变这个原本
+		 * 裁剪出的是局部副本。当我们执行裁剪操作后，【原本】将不再显示，只
+		 * 显示裁剪出的副本。等恢复的时候，其他的原本部分将和裁剪出的部分
+		 * 一起显示。而且将恢复全部区域的可操作属性。如果恢复出来的部分是空的
+		 * 之后又进行了绘制操作，那么属于正常绘制，可以显示。
+		 */
+		// 指定一个【裁剪区域】这个区域可以是其他的任何图形的区域
+		/**
+		 * 【clip()函数】根据上面指定的区域进行裁剪。使用ctx的clip()
+		 * 方法进行裁剪是，【裁剪的原理】是：根据指定的区域进行裁剪后，在
+		 * canvas上无论画什么图形，只有坐标落在裁剪区域内的部分才可以进行
+		 * 正常的显示。在裁剪区域内，之前画的内容和之后画的内容可以一起显示
+		 * 如果此时画一个清空矩形，则只有裁剪区域会被清空。总之，只有裁剪
+		 * 区域能被操作。
+		 */
+		// 画圆弧
+		ctx.beginPath()
+		ctx.arc(200, 200, 100, 0, Math.PI * 2, false)
+		ctx.lineWidth = 10
+		ctx.strokeStyle = 'greenyellow'
+		ctx.stroke()
+		ctx.closePath()
+		//================
+		/**
+		 * 因为使用了clip()方法，所以在clip()方法之后画的图形
+		 * 如果不在裁剪区域，就不会显示出来，如果我们想要正常地
+		 * 显示裁剪以前画的并且不在裁剪区域内的图形，我们可以
+		 * 利用restore()方法来【还原裁剪前通过save保存的全部场景】即可。
+		 * 
+		 */
+		// 圆弧2
+		ctx.beginPath()
+		ctx.arc(220, 220, 100, 0, Math.PI * 2, false)
+		ctx.strokeStyle = "red"
+		ctx.lineWidth = 10
+		ctx.stroke()
+		ctx.closePath()
+//		ctx.save()	
+		ctx.clip()
+//		ctx.restore()
+		
+	</script>
+</html>

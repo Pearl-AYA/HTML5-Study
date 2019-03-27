@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			@keyframes rorate {
+				0% {
+					transform: rotate(0);
+				}
+				25% {
+					transform: rotate(90deg);
+				}
+				50% {
+					transform: rotate(180deg);
+				}
+				75% {
+					transform: rotate(270deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			#container{
+				width: 300px;
+				margin: 100px auto;
+			}
+			#box {
+				width: 300px;
+				height: 300px;
+				background-color: pink;
+				border-radius: 50%;
+				position: relative;
+				animation: rorate 500ms infinite linear ;
+			}
+			#circle {
+				background-color: blue;
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				transform: translate(135px,135px);
+			}
+			.leaf {
+				height: 30px;
+				width: 120px;
+				border-top-left-radius: 100%;
+			}
+			.leaf:nth-of-type(1) {
+				background-color: yellow;
+				transform: rotate(90deg) translate(-75px,45px);
+			}
+			.leaf:nth-of-type(2) {
+				background-color: greenyellow;
+				transform: rotate(180deg) translate(-30px,30px);
+			}
+			.leaf:nth-of-type(3) {
+				background-color: aqua;
+				transform: rotate(270deg) translate(-15px,-45px);
+			}
+			
+			.leaf:nth-of-type(4) {
+				background-color: red;
+				transform: translate(-120px,-90px);
+			}
+			#btn{
+				width: 150px;
+				height: 60px;
+				margin: 20px 75px;
+			}
+			#speedRange{
+				width: 150px;
+				margin: 20px 75px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="container">
+			<div id="box">
+				<div id="circle">
+					<div class="leaf"></div>
+					<div class="leaf"></div>
+					<div class="leaf"></div>
+					<div class="leaf"></div>
+				</div>
+			</div>
+			<input type="range" max="100" min="0" value="100" id="speedRange" />
+			<button id="btn">暂停</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var btn = document.querySelector("#btn")
+		var box = document.querySelector("#box")
+		var speedRange = document.querySelector("#speedRange")
+		btn.onclick = function () {
+			if (this.innerHTML == "暂停") {
+				this.innerHTML = "开始"
+				box.style.animationPlayState = "paused"
+			}else{
+				this.innerHTML = "暂停"
+				box.style.animationPlayState = 'running'
+			}
+		}
+		speedRange.oninput = function () {
+			var speed = this.value*5
+			console.log(speed)
+			box.style.animationDuration = speed+"ms"
+		}
+	</script>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>高德地图的使用</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#container{
+				width: 100%;
+				height: 500px;
+				background-color: pink;
+			}
+		</style>
+		<!--使用JQ库-->
+		<script src="lib/jquery.js" type="text/javascript"></script>
+		<!--在页面中引入高德地图JavaScript API入口脚本-->
+		<script src="http://webapi.amap.com/maps?v=1.3&key=ada703346050dddedbfa41cd0314ec04" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<!--创建地图的容器，一定要给id-->
+		<div id="container"></div>
+		<div class="fenye">
+			<a href="###" class="start">首页</a>
+			<a href="###" class="prev"><<上一页</a>
+			<!--为了灵活地决定这里的a标签的个数，采用动态添加的方式-->
+			<!--<a href="###" name="p" style="background-color: orange;color: #FFFFFF;">1</a>
+			<a href="###" name="p">2</a>
+			<a href="###" name="p">3</a>
+			<a href="###" name="p">4</a>
+			<a href="###" name="p">5</a>-->
+			<a href="###" class="next">下一页>></a>
+			<a href="###" class="end">尾页</a>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 创建地图对象
+		var map = new AMap.Map('container', {
+			zoom: 10, //缩放10倍
+			center: [116.39, 39.9]
+		})
+		//========================
+		// 创建标记(先单独创建一个标记看一下效果，然后批量创建)
+		/*var marker = new AMap.Marker({
+			position: [116.480983, 39.989628], // 指定marker所在的位置
+			//在创建的时候直接赋予map属性值，即在上面的map地图中创建marker
+			// position就是marker的具体的位置
+			//map_longitude：经度；map_latitude：纬度
+			map: map
+		})*/
+		//=========================
+		// 存储marker的数组
+		var markerArr = []
+		// 总页数
+		var pageCount = 0
+		// 当前页码默认为1
+		var currentPageNo = 1
+		// 任务1：计算有多少页(以便初始化按钮)
+		function initBtn(){
+			// 通过jQ的getJSON方法获取数据
+			// 参数2：是连同请求发送到服务器的数据，null即无
+			$.getJSON("data/1.json", null, function(resultData){
+				// resultData是解析出来的Json对象
+				//console.log(resultData)
+				
+				pageCount = resultData.page_count
+				// 页码数(页码按钮个数) = 向上取整(数据总数 / 每页条目) (默认5条)
+				for(var i = pageCount; i >= 1; i--){
+					// 动态创建页码按钮
+					var $a = $('<a href="###" name="p">' + i +  '</a>')
+					if(i == 1){
+						$a.css({
+							background: 'orange',
+							color: '#fff'
+						})
+					}
+					$('.prev').after($a)
+				}
+				// 给所有的按钮绑定事件
+				$('.fenye a').on('click', fenyeFn)
+				// 默认显示第一页的数据
+				showData(currentPageNo)
+			})
+		}
+		// 函数调用
+		initBtn()
+		// 构建某一页的数据  pageNo = 3
+		function showData(pageNo){
+			$.getJSON('data/' + pageNo + '.json', null, function(resultData){
+				//console.log(resultData)
+				if(markerArr.length > 0){
+					for(var index in resultData.shop_data){
+						//console.log(index)
+						markerArr[index].setPosition([resultData.shop_data[index].map_longitude,
+						resultData.shop_data[index].map_latitude])
+					}
+					//每次修改下地图的中心点(以第0个元素为中心点)
+					map.setCenter([markerArr[0].getPosition().lng,
+						markerArr[0].getPosition().lat])
+				}else{
+					// markerArr为空数组
+					for(let tempObj of resultData.shop_data){
+						//console.log(tempObj)
+						// 创建marker对象
+						var marker = new AMap.Marker({
+							// 这里最好parseFloat()将字符串转化为浮点数
+							position: [parseFloat(tempObj.map_longitude), 
+								parseFloat(tempObj.map_latitude)],
+							//指定标记物设置到哪个地图中去
+							map: map
+						})
+						// 绑定单击事件，marker一旦被点击则弹出窗体信息
+						marker.on('click', function(){
+							// 打开窗体信息
+							openInfo(tempObj);
+						})
+						// 通过第一次创建之后，把标记存放到数组中
+						markerArr.push(marker)
+						console.log("🍎🍎")
+					}
+				}
+			})
+		}
+		// 任务2：分页按钮点击逻辑
+		function fenyeFn(){
+			// 得到元素的html的值
+			//console.log("按钮上的文字是：" + $(this).html())
+			// 1、处理页码数的逻辑：点击后，currentPageNo的值被改变了
+			switch($(this).html()){
+				case '首页':
+					currentPageNo = 1
+					break
+				case '&lt;&lt;上一页':
+					currentPageNo--
+					break
+				case '下一页&gt;&gt;':
+					currentPageNo++
+					break
+				case '尾页':
+					currentPageNo = pageCount
+					break
+				default:
+					currentPageNo = parseInt($(this).html())
+					break
+			}
+			//console.log("当前页是：" + currentPageNo)
+			//===========================
+			//2、首尾、上下按钮的隐藏显示逻辑
+			if(currentPageNo == 1){
+				$('.start').css('display', 'none')
+				$('.prev').css('display', 'none')
+			}else{
+				$('.start').css('display', 'inline-block')
+				$('.prev').css('display', 'inline-block')
+			}
+			// 如果是最后一页
+			if(currentPageNo == pageCount){
+				$('.end').css('display', 'none')
+				$('.next').css('display', 'none')
+			}else{
+				$('.end').css('display', 'inline-block')
+				$('.next').css('display', 'inline-block')
+			}
+			// 3、处理按钮颜色的逻辑
+			//获取全部页码按钮的数组
+			var $pageBtn = $('[name=p]')
+			//先把这几个按钮的样式还原成默认
+			$pageBtn.css({
+				background: "pink",
+				color: "#999"
+			})
+			// 然后再处理当前页码数对应的按钮样式
+			$pageBtn[currentPageNo - 1].style.background = 'orange'
+			$pageBtn[currentPageNo - 1].style.color = '#fff'
+			// 刷新数据
+			showData(currentPageNo)
+		}
+		// 打开窗体信息
+		function openInfo(shopObj){
+			var info = []
+			info.push("<div><div><img style=\"float:left;\" src=\"" + 
+				shopObj.shop_ico + "\"/></div>");
+			info.push("<div style=\"padding:0px 0px 0px 4px;\"><b>" + 
+			shopObj.shop_name + "</b>");
+			info.push("电话：010-84107000 邮编：10001");
+			info.push("地址：北京市朝阳区王井府10号手抖广场4层</div></div>");
+			// 创建窗体对象
+			infoWindow = new AMap.InfoWindow({
+				// 使用默认的信息窗体框样式，显示信息内容
+				// 信息使用换行符连接
+				content: info.join("<br/>")
+			})
+			// 使用infoWindow对象打开窗口
+			infoWindow.open(map, [shopObj.map_longitude,
+				+shopObj.map_latitude + 0.02])
+		}
+	</script>
+</html>

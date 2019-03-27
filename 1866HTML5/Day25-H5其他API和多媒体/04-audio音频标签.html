@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>audio音频标签</title>
+	</head>
+	<body>
+		<!--【归纳】controls="controls"属性表示默认的控制按钮UI
+			autoplay="autoplay"属性是自动播放。但是要遵循Chrome浏览器的
+			相关的政策。比如：媒体参与度
+		-->
+		<!--<audio src="source/薛之谦-演员.mp3" controls="controls"></audio>-->
+		<!--<audio src="source/薛之谦-演员.mp3" controls="true"></audio>-->
+		<!--<audio src="source/薛之谦-演员.mp3" controls="false"></audio>-->
+		<!--<audio src="source/薛之谦-演员.mp3" controls autoplay></audio>-->
+		
+		<!--<audio src="source/9.ogg" controls autoplay></audio>-->
+		
+		<audio controls autoplay>
+			<!--【归纳】可以准备多种音频格式供用户选择-->
+			<source src="source/终结者_Larry.MP4" type="audio/mp4"/>
+			<source src="source/9.ogg" type="audio/ogg"/>
+			<source src="source/电锯惊魂-HelloZepp.mp3" type="audio/mp3"/>
+		</audio>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>border-radius圆角边</title>
+		<style type="text/css">
+			#box{
+				width: 300px;
+				height: 300px;
+				background-color: red;
+				margin: 200px auto;
+				/*【归纳】当4个参数的时候，顺序为：上--右---下---左*/
+				/*border-radius: 20px 20px 20px 20px;*/
+				
+				/*【归纳】当3个参数的时候：顺序为：上----右左---下*/
+				/*border-radius: 20px 20px 20px;*/
+				
+				/*【归纳】当2个参数的时候，顺序为：上下-----右左*/
+				/*border-radius: 20px 40px;*/
+				
+				/*【归纳】当1个参数的时候：上下左右*/
+				/*border-radius: 30px;*/
+				
+				/*border-radius: 10%;*/
+				/*border-radius: 20%;*/
+				/*border-radius: 30%;*/
+				/*border-radius: 40%;*/
+				
+				/*【归纳】当百分比大于50%的时候，都是圆*/
+				/*border-radius: 50%;*/
+				/*border-radius: 60%;*/
+				/*border-radius: 70%;*/
+				/*border-radius: 80%;*/
+				/*border-radius: 90%;*/
+				/*border-radius: 100%;*/
+				/*border-radius: 200%;*/
+				/*========================*/
+				border-top-left-radius: 50px;
+				border-top-right-radius: 30px;
+				border-bottom-right-radius: 70px;
+				border-bottom-left-radius: 80px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+	</body>
+</html>

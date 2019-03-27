@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>H5新标签的使用</title>
+		<style type="text/css">
+			mark{
+				background-color: deeppink;
+			}
+		</style>
+	</head>
+	<body>
+		<time>2019-03-06</time>
+		<!--mark标签默认背景色是亮黄色-->
+		<h1>今天可能要<mark>下雨</mark>了!!!</h1>
+		播放进度：<progress max="100" value="10"></progress>
+		<form action="#" method="post">
+			颜色选择器：<input type="color" value="#ff6666"/><br />
+			数字：<input type="number" min="0" max="10"/><br />
+			搜索框：<input type="search" placeholder="请输入搜索的内容"/><br />
+			范围：<input type="range" max="100" min="0" value="0"/><br />
+			年月日: <input type="date" required="required"/><br />
+			年月:<input type="month" /><br />
+			第几周：<input type="week" /><br />
+			时间：<input type="time" /><br />
+			将夜：<input type="search" placeholder="输入喜欢的角色"
+				list="dataList"/>
+				<datalist id="dataList">
+					<option value="宁缺" label="Top1"></option>
+					<option value="桑桑" label="Top2"></option>
+					<option value="莫山山" label="Top2"></option>
+					<option value="颜瑟" label="Top3"></option>
+					<option value="朝小树" label="Top4"></option>
+					<option value="卫光明" label="Top5"></option>
+					<option value="夫子" label="Top6"></option>
+				</datalist>
+				<br />
+			邮箱：<input type="email" placeholder="请输入邮箱"
+				required="required" autofocus="autofocus" 
+				autocomplete="on" name="a"/>
+				<br />
+			地址：<input type="url" placeholder="请输入网址" required="required"/>
+			<br />
+			<select multiple="multiple" style="width: 200px;">
+				<option>宁缺</option>
+				<option>桑桑</option>
+				<option>山山</option>
+			</select>
+			<br />
+			<input type="hidden" />
+			<!--【注意】必须要submit才能看到required的现象-->
+			<input type="submit" value="提交"/>
+			<!--===================-->
+			<figure>
+				<img src="51.jpg" />
+				<figcaption>
+					<h1>这是一个美女!</h1>
+				</figcaption>
+			</figure>
+		</form>
+	</body>
+	<script type="text/javascript">
+		// 找到progress
+		var progress = document.querySelector("progress")
+		// 定时器
+		var timerId = setInterval(function(){
+			progress.value++
+			if(progress.value == progress.max){
+				clearInterval(timerId)
+			}
+		}, 100)
+		//===============
+		/**
+		 * 【目标】通过颜色选择器选择的颜色设置成背景色
+		 */
+		var color = document.querySelector('input[type=color]')
+		color.onchange = function(){
+			//console.log(this.value)
+			
+			// 即通过选择器改变背景色
+			document.body.style.backgroundColor = this.value
+		}
+	</script>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Proxy拦截读取属性</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//创建拦截器对象
+		var proxy = new Proxy({}, {
+			get: function(target, property){
+				return 8888
+			}
+		})
+		//【🐷】要使得Proxy起作用，必须针对Proxy实例操作
+		// 如果handler没有设置任何的拦截的话，那就等同于直接通向原对象
+		console.log(proxy.time) //8888
+		console.log(proxy.name) //8888
+		console.log(proxy.title) //8888
+		/**
+		 * 【归纳】构造函数Proxy接收两个参数：
+		 * 参数1：所要代理的目标对象，这里是一个空对象
+		 * 也就是说，如果没有Proxy的介入，操作原来要访问的就是这个对象
+		 * 参数2：是一个配置对象，对于每一个被代理的操作，需要提供一个
+		 * 对应的处理函数，该函数将拦截对应的操作。
+		 * 比如：上例子中  重写了get方法：用来拦截对目标对象属性的访问请求
+		 * get方法的两个参数：
+		 * 参数1：目标对象  参数2：所要访问的属性 
+		 */
+		//===================
+		var target = {}
+		var handler = {}
+		var proxy2 = new Proxy(target, handler)
+		proxy2.a = 'd'
+		console.log(target.a) //'d'
+		//====================
+		/**
+		 * 【技巧】将Proxy对象设置到Object对象上，从而可以使用
+		 * object进行拦截操作
+		 */
+		var object = {
+			proxy: new Proxy(target, handler)
+		}
+		// Proxy实例也可以作为其他对象的原型对象
+		var proxy3 = new Proxy({}, {
+			get: function(target, property){
+				return 55
+			}
+		})
+		let obj = Object.create(proxy3)
+		console.log(obj.time) //55
+		/**
+		 * 【proxy3对象】是obj对象的原型，obj对象本身没有time属性，
+		 * 所以根据原型链，会在proxy3对象上读取time属性，导致被拦截
+		 */
+		
+		// 同一个拦截器对象，可以设置多个拦截操作/函数
+		var handler = {
+			get: function(target, name){
+				if(name === 'prototype'){
+					return Object.prototype
+				}
+				return 'Hello, ' + name
+			},
+			apply: function(target, thisBinding, args){
+				return args[0]
+			},
+			construct: function(target, args){
+				return {
+					value: args[1]
+				}
+			}
+		}
+		//【归纳】当把fproxy对象作为函数调用的时候，拦截的是【apply方法】
+		var fproxy = new Proxy(function(x,y){
+			return x + y
+		}, handler)
+		console.log(fproxy(8,3)) //2
+		//当把fproxy对象作为【构造函数】调用的时候，拦截的是【construct方法】
+		console.log(new fproxy(3,7))
+		//拦截的是【get方法】
+		console.log(fproxy.prototype === Object.prototype) //true
+		//当fproxy访问普通的属性的是，拦截的是get方法
+		console.log(fproxy.foo)
+	</script>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>循环中的let</title>
+	</head>
+	<body>
+		<!--button{按钮$}*3-->
+		<button>按钮1</button>
+		<button>按钮2</button>
+		<button>按钮3</button>
+	</body>
+	<script type="text/javascript">
+		//btns是个数组
+		var btns = document.getElementsByTagName("button")
+		for(let i = 0; i < 3; i++){
+			btns[i].onclick = function(){
+				console.log(i)
+			}
+		}
+	</script>
+</html>
+<!--【归纳】使用let可以方便地解决闭包造成的影响
+	解决闭包问题：
+	1）使用函数的自执行  2）定义一个变量，将循环的变量存储一下
+	3）使用let更简洁、高效
+-->

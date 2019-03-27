@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>本地留言板</title>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#box{
+				width: 500px;
+				height: 500px;
+				margin: 100px auto;
+				border: 2px solid red;
+			}
+			#top{
+				width: 100%;
+				height: 50px;
+			}
+			#top input{
+				height: 50px;
+				font-size: 30px;
+				outline: none;
+			}
+			#top input:first-of-type{
+				width: 390px;
+				border: 1px solid darkgreen;
+			}
+			#top input:last-of-type{
+				width: 100px;
+				background-color: darkgreen;
+				color: white;
+			}
+			#bottom input{
+				width: 200px;
+				height: 50px;
+				background-color: darkgreen;
+				color: white;
+				font-size: 30px;
+				outline: none;
+			}
+			#middle ol li{
+				margin-left: 30px;
+				border: 1px dashed red;
+			}
+			#middle span{
+				padding: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="top">
+				<input type="text" id="msgInput" placeholder="请输入留言"/>
+				<input type="button" id="msgBtn" value="留言"/>
+			</div>
+			<!--=============-->
+			<div id="middle">
+				<ol></ol>
+			</div>
+			<!--=============-->
+			<div id="bottom">
+				<input type="button" id="clearAllBtn" value="全部清空"/>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 找到输入框
+		var msgInput = document.querySelector("#msgInput")
+		var msgBtn = document.querySelector("#msgBtn")
+		var msgOl = document.querySelector("ol")
+		var clearAllBtn = document.querySelector("#clearAllBtn")
+		// 点击【留言】按钮
+		msgBtn.onclick = function(){
+			console.log(msgInput.value)
+			console.log(msgInput.value.length)
+			//===============
+			// 清空字符串两端的空格
+			console.log(msgInput.value.trim())
+			console.log(msgInput.value.trim().length)
+			//清空字符串左边的空格
+			console.log(msgInput.value.trimLeft())
+			console.log(msgInput.value.trimLeft().length)
+			//清空字符串右边的空格
+			console.log(msgInput.value.trimRight())
+			console.log(msgInput.value.trimRight().length)
+			//===================
+			// 如果仅仅只有空格，则不提交
+			if(msgInput && msgInput.value.trim() != ''){
+				// 封装留言信息对象
+				var msgObj = {
+					//时间戳
+					date: new Date().getTime(),
+					/**
+					 * 【注意】escape()函数可以对字符串进行编码，这样就可以在
+					 * 所有的计算机上读取该字符串。可以使用unescape()对escape()
+					 * 编码的字符串进行解码。但是ECMAScript V3反对使用该方法，
+					 * 应用decodeURI()和decodeURIComponent()替换escape函数。
+					 */
+					msg: escape(msgInput.value.trim())
+				}
+				// 存储数据
+				window.localStorage.setItem('msg_' + msgObj.date, JSON.stringify(msgObj))
+				// 页面展示
+				msgOl.appendChild(createLi(msgObj))
+			}
+		}
+		//==============
+		// 创建Li标签
+		function createLi(msgObj){
+			var msgLi = document.createElement("li")
+			// 留言内容
+			var msgSpan = document.createElement("span")
+			// 设置span标签的innerHTML
+			msgSpan.innerHTML = unescape(msgObj.msg)
+			// 时间
+			var dateSpan = document.createElement("span")
+			//【toLocaleString()】函数把时间数组转换为本地字符串
+			dateSpan.innerHTML = new Date(msgObj.date).toLocaleString()
+			//删除按钮
+			var delBtn = document.createElement("input")
+			delBtn.type = 'button'
+			delBtn.value = '❌'
+			delBtn.onclick = function(){
+				// 删除当前留言
+				// this指当前按钮，msgObj是留言对象
+				delMsg(this, msgObj)
+			}
+			// 追加到li标签上
+			msgLi.appendChild(msgSpan)
+			msgLi.appendChild(dateSpan)
+			msgLi.appendChild(delBtn)
+			return msgLi
+		}
+		//============
+		// 删除某一条留言
+		function delMsg(ele, msgObj){
+			//console.log(ele)
+			//console.log(msgObj)
+			//================
+			if(confirm('确定要删除此条信息吗？')){
+				//删除本地数据
+				window.localStorage.removeItem('msg_' + msgObj.date)
+				// 页面删除
+				msgOl.removeChild(ele.parentNode)
+			}
+		}
+		//===============
+		// 全部清空
+		clearAllBtn.onclick = function(){
+			if(confirm('确定删除所有的留言吗？')){
+				//  删除数据
+				for(var tempKey in window.localStorage){
+					// 凡是找到以msg_开头的条目
+					if(/^(msg_)/.test(tempKey)){
+						// 全部删除localStorage中的以msg_开头的条目
+						window.localStorage.removeItem(tempKey)
+					}
+				}
+				// 页面清空
+				msgOl.innerHTML = ''
+			}
+		}
+		//=======================
+		//页面初始化读取数据显示留言信息
+		function initPage(){
+			for (var tempKey in window.localStorage) {
+				if(/^(msg_)/.test(tempKey)){
+					//JSON.parse()方法把一个JSON字符串解析成JS对象或者数组并返回
+					msgOl.appendChild(createLi(
+						JSON.parse(window.localStorage.getItem(tempKey))))
+				}
+			}
+		}
+		// 函数调用:执行页面初始化【读取数据显示留言信息】
+		initPage()
+	</script>
+</html>

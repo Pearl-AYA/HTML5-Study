@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>利用ES5手动实现迭代器</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var arr = ["a", "b", "c", "d", "e", "f"]
+		
+		//定义一个函数，功能：可以获取与arr数组关联的迭代器
+		function createIterator(a){
+			var done = false
+			var index = 0
+			//返回【迭代器对象】
+			return {
+				next: function(){
+					if(index >= a.length){
+						done = true
+					}
+					return {
+						done: done,
+						value: a[index++]
+					}
+				}
+			}
+		}
+		//函数的调用
+		var it = createIterator(arr)
+		var obj = it.next()
+		while(!obj.done){
+			console.log(obj.value)
+			obj = it.next()
+		}
+	</script>
+</html>

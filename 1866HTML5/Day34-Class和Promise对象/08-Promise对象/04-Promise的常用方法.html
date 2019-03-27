@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Promise的常用方法</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【Promise的常用方法】
+		 * 1、Promise.prototype.then()   【最核心】
+		 * 2、Promise.prototype.catch() 
+		 * 3、Promise.all()
+		 * 4、Promise.resolve()
+		 * 5、Promise.reject()
+		 */
+		// 定义getJSON函数
+		var getJSON = function(url){
+			// 创建Promise对象
+			var promise = new Promise(function(resolve, reject){
+				// 创建XMLHttpRequest对象
+				var client = new XMLHttpRequest()
+				// 指定以GET方式打开
+				client.open("GET", url)
+				// 监听状态改变
+				client.onreadystatechange = handler
+				client.responseType = "json"
+				client.setRequestHeader("Accept", "application/json")
+				client.send()
+				
+				//封装函数: handler
+				function handler(){
+					if(this.readyState !== 4){
+						return
+					}
+					//请求成功
+					if(this.status === 200){
+						//console.log(this.statusText) //OK
+						//console.log(this.response)
+						resolve(this.response)
+					}else{
+						//console.log(this.statusText) //Not Found
+						//请求失败
+						reject(new Error(this.statusText))
+					}
+				}
+			})
+			// 返回promise
+			return promise
+		}
+		// 函数调用
+		/**
+		 * 【归纳】Promise实例具有then()方法，也就是说，then()方法是定义在
+		 * 原型对象Promise.prototype上的。它的作用是为Promise实例添加状态
+		 * 改变时的回调函数。【注意】then()方法返回的是一个新的Promise实例
+		 * 不是原来的Promise实例。因此可以采用【链式表达式的写法】
+		 */
+		getJSON("./posts.json").then(function(json){
+			//console.log(json)
+			return json.products
+		}).then(function(products){
+			//XX
+			console.log(products)
+		}, function(error){
+			console.log(error)
+		})
+		/**
+		 * 【总结】第一个then函数完成以后将返回的结果传给第二个then()函数
+		 * 的参数函数的参数。采用then，可以指定一组按顺序调用的回调函数
+		 * 那么前面的then函数由可能返回的仍然是Promise对象(有异步操作)
+		 * 这个时候，后一个回调函数(then)就会等待上一个then函数的Promise
+		 * 对象发生状态改变，有状态改变才会被调用。
+		 */
+		
+		// 使用了箭头函数简化了上面的写法
+		getJSON("./posts.json").then(json => json.products)
+			.then(comments => console.log("Resolved:" + comments),
+			error => console.log("Rejected" + error))
+	</script>
+</html>

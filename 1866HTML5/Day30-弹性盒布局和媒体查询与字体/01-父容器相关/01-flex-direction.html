@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>flex-direction</title>
+		<link rel="stylesheet" type="text/css" href="../style.css"/>
+		<style type="text/css">
+			/*【flex-direction】 row | row-reverse | column | column-reverse;*/
+			/*主轴方向：左到右（默认） | 右到左 | 上到下 | 下到上*/
+			ul:nth-of-type(1){
+				/*设置弹性盒布局的方向：从左到右(默认也是这个row值)*/
+				flex-direction: row;
+			}
+			ul:nth-of-type(2){
+				/*从右到左*/
+				flex-direction: row-reverse;
+			}
+			ul:nth-of-type(3){
+				/*从上到下*/
+				flex-direction: column;
+			}
+			ul:nth-of-type(4){
+				/*从下到上*/
+				flex-direction: column-reverse;
+			}
+		</style>
+	</head>
+	<body>
+		<!--ul*4>li{$}*5-->
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+	</body>
+</html>

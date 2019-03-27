@@ -1,0 +1,438 @@
+html, body{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	/*background-color: red;*/
+	/*background-color: palegoldenrod;*/
+	background-color: white;
+	/*设置透视点*/
+	-webkit-perspective: 1500px;
+	perspective: 1500px;
+	/*字体设置*/
+	font-family: 'Asar', serif;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+/*卡片部分*/
+.card{
+	background-color: red;
+	width: 250px;
+	height: 300px;
+	margin: 100px auto;
+	border-radius: 20px;
+	-webkit-perspective: 1500px;
+	perspective: 1500px;
+	/*设置过渡(如果要做浏览器的兼容)*/
+	-webkit-transition: box-shadow 0.5s ease-in-out, 
+		         -webkit-transform 0.5s ease-in-out;
+	   -moz-transition: box-shadow 0.5s ease-in-out,
+		         -webkit-transform 0.5s ease-in-out;
+	    -ms-transition: box-shadow 0.5s ease-in-out,
+		         -webkit-transform 0.5s ease-in-out;
+	        transition: box-shadow 0.5s ease-in-out, 
+		         -webkit-transform 0.5s ease-in-out;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	/*弹性盒布局*/
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	/*设置垂直居中*/
+	align-items: center;
+	-ms-flex-pack: center;
+	-ms-flex-pack: center;
+	/*水平居中*/
+	justify-content: center;
+	/*设置方向*/
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	   -ms-flex-direction: column;
+		/*从上到下*/
+		flex-direction: column;
+	/*设置支持3D呈现*/
+	-webkit-transform-style: preserve-3d;
+			transform-style: preserve-3d;
+	box-shadow: 5px 5px 24px 0px rgba(0,0,0,0.2);
+}
+/*媒体查询*/
+@media (min-width: 600px) {
+	.card{
+		width: 400px;
+		height: 550px;
+	}
+}
+.card h2, .card h3, .card p{
+	-webkit-transform: translateZ(2px);
+	        transform: translateZ(2px);
+	color: white;
+	font-size: 30px;
+	font-weight: 300;
+	line-height: 30px;
+	/*去掉默认的内外边距*/
+	margin: 0;
+	padding: 0;
+	-webkit-transition: opacity 0.5s ease-in-out, 
+		      -webkit-transform 0.5s ease-in-out;
+		    transition: opacity 0.5s ease-in-out, 
+		      -webkit-transform 0.5s ease-in-out;
+		    transition: opacity 0.5s ease-in-out, 
+		              transform 0.5s ease-in-out;
+}
+@media screen and (min-width: 600px) {
+	.card h2, .card h3, .card p{
+		font-size: 40px;
+		line-height: 40px;
+	}
+}
+.card h2{
+	margin: 20px 0 0 0;
+}
+.card h3{
+	margin: 10px 0 40px 0;
+}
+/*媒体查询*/
+@media screen and (min-width: 600px) {
+	.card h3{
+		margin: 20px 0 40px 0;
+	}
+}
+.card p{
+	margin: 0 0 30px 0;
+	font-size: 16px;
+}
+@media screen and (min-width: 600px) {
+	.card p{
+		margin: 0 0 40px 0;
+		font-size: 21px;
+	}
+}
+/*=====================*/
+.card .chart{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	/*弹性盒布局*/
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	/*设置垂直居中*/
+	align-items: center;
+	-ms-flex-pack: center;
+	-ms-flex-pack: center;
+	/*水平居中*/
+	justify-content: center;
+	/*设置支持3D呈现*/
+	-webkit-transform-style: preserve-3d;
+			transform-style: preserve-3d;
+	/*设置形变*/
+	-webkit-transform: translateZ(2px);
+			transform: translateZ(2px);
+	-webkit-transition: -webkit-transform 0.5s ease-in-out;
+			transition: -webkit-transform 0.5s ease-in-out;
+			transition: transform 0.5s ease-in-out;
+			transition: transform 0.5s ease-in-out, 
+			-webkit-transform 0.5s ease-in-out;
+}
+.card .photo{
+	position: absolute;
+	-webkit-transform: translateZ(1px);
+			transform: translateZ(1px);
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: url("../image/600x600.jpg") no-repeat center center;
+	background-size: cover;
+	border-radius: 10px;
+	-webkit-transition: -webkit-transform 0.5s ease-in-out;
+			transition: -webkit-transform 0.5s ease-in-out;
+			transition: transform 0.5s ease-in-out;
+			transition: transform 0.5s ease-in-out,
+			-webkit-transform 0.5s ease-in-out;
+	overflow: hidden;
+}
+.card .photo:after{
+	position: absolute;
+	content: '';
+	display: block;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.2);
+	-webkit-transition: background-color 0.5s ease-in-out;
+			transition: background-color 0.5s ease-in-out;
+}
+.card .bar{
+	will-change: height;
+	width: 15px;
+	height: 1px;
+	background-color: red;
+	-webkit-transform: translateX(-7.5px) rotateX(-90deg) rotateY(-45deg);
+	transform: translateX(-7.5px) rotateX(-90deg) rotateY(-45deg);
+	-webkit-transform-origin: 100% 100%;
+			transform-origin: 100% 100%;
+	-webkit-transition: height 0.5s ease-in-out,
+		 margin 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+	transition: height 0.5s ease-in-out,
+		 margin 0.5s ease-in-out, transform 0.5s ease-in-out;
+	transition: height 0.5s ease-in-out,
+		 margin 0.5s ease-in-out, transform 0.5s ease-in-out,
+		 -webkit-transform 0.5s ease-in-out;
+	-webkit-transform-style: preserve-3d;
+			transform-style: preserve-3d;
+	margin: 6px;
+	position: relative;
+	background: -webkit-linear-gradient(top, #feffff 0%, #ddf1f9 0%,
+	#a0d8ef 100%);
+	background: linear-gradient(to bottom, #feffff 0%, #ddf1f9 0%,
+	#a0d8ef 100%);
+}
+@media (min-width: 600px) {
+	.card .bar{
+		margin: 10px;
+		width: 25px;
+		-webkit-transform: translateX(-12.5px) rotateX(-90deg) rotateY(-45deg);
+		transform: translateX(-12.5px) rotateX(-90deg) rotateY(-45deg);
+	}
+}
+.card .bar:after{
+	display: block;
+	content: '';
+	height: 100%;
+	width: 15px;
+	position: absolute;
+	top: 0;
+	right: -15px;
+	background-color: gray;
+	-webkit-transform: rotateY(90deg);
+	transform: rotateY(90deg);
+	-webkit-transform-origin: 0% 50%;
+	transform-origin: 0% 50%;
+	background: -webkit-linear-gradient(top, #feffff 0%, #85d7f7 0%,
+	#4c8596 100%);
+	background: linear-gradient(top, #feffff 0%, #85d7f7 0%,
+	#4c8596 100%);
+}
+@media (min-height: 600px) {
+	.card .bar:after{
+		width: 25px;
+		right: -25px;
+	}
+}
+.card .bar:before{
+	font-family: 'Oxygen', sans-serif;
+	display: block;
+	content: '';
+	height: 15px;
+	width: 15px;
+	position: absolute;
+	top: -15px;
+	left: 0;
+	background-color: white;
+	-webkit-transform: rotateX(90deg);
+	transform: rotateX(90deg);
+	-webkit-transform-origin: 0% 100%;
+	transform-origin: 0% 100%;
+	color: red;
+	text-align: center;
+	font-size: 14px;
+	line-height: 14px;
+	padding: 0;
+	-webkit-transition: color 0.3s ease-in-out;
+	transition: color 0.3s ease-in-out;
+}
+@media (min-height: 600px) {
+	.card .bar:before{
+		width: 25px;
+		height: 25px;
+		top: -25px;
+		font-size: 12px;
+		line-height: 18px;
+	}
+}
+.card .bar.bar1:before{
+	content: 'M';
+}
+.card .bar.bar2:before{
+	content: 'T';
+}
+.card .bar.bar3:before{
+	content: 'W';
+}
+.card .bar.bar4:before{
+	content: 'T';
+}
+.card .bar.bar5:before{
+	content: 'F';
+}
+.card .bar.bar6:before{
+	content: 'S';
+}
+.card .bar.bar7:before{
+	content: 'S';
+}
+/*=========================*/
+.card .bar span{
+	font-family: 'Oxygen', sans-serif;
+	position: absolute;
+	-webkit-transform: rotateZ(-90deg);
+	transform: rotateZ(-90deg);
+	border-radius: 2px;
+	-webkit-transform-origin: 0% 100%;
+	transform-origin: 0% 100%;
+	top: 20px;
+	white-space: nowrap;
+	text-align: right;
+	left: 18px;
+	padding: 5px;
+	color: blue;
+	font-size: 10px;
+	opacity: 0;
+	-webkit-transition: opacity 0.5s ease-in-out;
+	transition: opacity 0.5s ease-in-out;
+}
+@media (min-height: 600px) {
+	.card .bar span{
+		top: 25px;
+		left: 25px;
+		font-size: 13px;
+	}
+}
+/*===================*/
+/*这个details类通过JS动态添加*/
+.details .card{
+	-webkit-transform: rotateX(60deg) translateY(150px);
+			transform: rotateX(60deg) translateY(150px);
+	box-shadow: 0px 30px 40px 0px rgba(0,0,0,0.75);
+}
+.details .card .chart{
+	-webkit-transform: translateZ(40px) translateY(50px);
+			transform: translateZ(40px) translateY(50px);
+}
+.details .card .bar{
+	-webkit-transform: translateX(-7.5px) rotateX(-90deg) rotateY(-25deg);
+	transform: translateX(-7.5px) rotateX(-90deg) rotateY(-25deg);
+}
+@media (min-height: 600px) {
+	.details .card .bar{
+		-webkit-transform: translateX(-12.5px) rotateX(-90deg) rotateY(-25deg);
+		transform: translateX(-12.5px) rotateX(-90deg) rotateY(-25deg);
+	}
+}
+.details .card .bar.bar1{
+	height: 150px;
+	-webkit-transition-delay: 0.3s;
+			transition-delay: 0.3s;
+	margin-top: -150px;
+}
+.details .card .bar.bar2{
+	height: 75px;
+	-webkit-transition-delay: 0.2s;
+			transition-delay: 0.2s;
+	margin-top: -75px;
+}
+.details .card .bar.bar3{
+	height: 112.5px;
+	-webkit-transition-delay: 0.1s;
+			transition-delay: 0.1s;
+	margin-top: -112.5px;
+}
+.details .card .bar.bar4{
+	height: 180px;
+	-webkit-transition-delay: 0s;
+			transition-delay: 0s;
+	margin-top: -180px;
+}
+.details .card .bar.bar5{
+	height: 52.5px;
+	-webkit-transition-delay: 0.1s;
+			transition-delay: 0.1s;
+	margin-top: -52.5px;
+}
+.details .card .bar.bar6{
+	height:52.5px;
+	-webkit-transition-delay: 0.2s;
+			transition-delay: 0.2s;
+	margin-top: -52.5px;
+}
+.details .card .bar.bar7{
+	height: 75px;
+	-webkit-transition-delay: 0.3s;
+			transition-delay: 0.3s;
+	margin-top: -75px;
+}
+.details .card .bar span{
+	opacity: 1;
+	-webkit-transition-delay: 0.3s;
+	transition-delay: 0.3s;
+}
+.details .card .bar:before{
+	color: black;
+}
+.details  .card .photo{
+	-webkit-transform: translateZ(20px);
+	transform: translateZ(20px);
+}
+.details .card .photo:after{
+	background-color: rgba(0, 50, 100, 0.8);
+}
+.details .card h2{
+	opacity: 0;
+	-webkit-transform: translateZ(40px) translateY(-100px);
+	transform: translateZ(40px) translateY(-100px);
+}
+.details .card p{
+	opacity: 0;
+	-webkit-transform: translateZ(40px) translateY(-80px);
+	transform: translateZ(40px) translateY(-80px);
+}
+.details .card h3{
+	-webkit-transform: translateZ(60px) translateY(100px);
+	transform: translateZ(60px) translateY(100px);
+}
+/*=======================*/
+.background{
+	/*相对于它的父元素，即body*/
+	width: 100%;
+	height: 100%;
+	/*【display: box;】该属性会将此元素及其直系子代
+	 * 加入弹性框模型中（Flexbox 模型只适用于直系子代）*/
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	/*整个box居中*/
+	-webkit-box-align: center;
+	   -ms-flex-align: center;
+	   /*垂直方向居中*/
+	  	  align-items: center;
+	 -webkit-box-pack: center;
+	  -ms-flex-pack: center;
+	  /*设置水平方向居中*/
+	  justify-content: center;
+	  position: relative;
+	  background: -webkit-linear-gradient(330deg, rgba(50, 150, 100, 0.4),
+	  rgba(0,0,100, 0));
+	  background: linear-gradient(120deg, rgba(50, 150, 100, 0.4),
+	  rgba(0,0,100, 0));
+}
+.background:before, .background:after{
+	position: absolute;
+	content: "";
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: -webkit-linear-gradient(bottom, rgba(0,0,200,0.4),
+	rgba(0,0,200,0));
+	background: linear-gradient(0deg, rgba(0,0,200,0.4),
+	rgba(0,0,200,0));
+}
+.background:after{
+	background: -webkit-linear-gradient(210deg, rgba(150,50,50,0.4),
+	rgba(0,0,200,0));
+	background: linear-gradient(240deg, rgba(150,50,50,0.4),
+	rgba(0,0,200,0));
+}

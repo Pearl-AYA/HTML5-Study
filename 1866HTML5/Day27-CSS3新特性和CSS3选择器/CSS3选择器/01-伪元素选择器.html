@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>伪元素选择器</title>
+		<style type="text/css">
+			p:first-line{
+				color: red;
+			}
+			p:first-letter{
+				font-size: 30px;
+				color: blue;
+				font-weight: bold;
+			}
+			/*插入XXX内容在h1之前*/
+			h1:before{
+				content: "🇨🇳🇨🇳";
+			}
+			h1:after{
+				content: "Hong Kong";
+			}
+			/*【归纳】这里必须使用双冒号
+			 表示选中的时候的变化效果*/
+			h1::selection{
+				color: red;
+				background: green;
+			}
+		</style>
+	</head>
+	<body>
+		<p>Hello哈哈，广州你好!<hr />
+			嘿嘿，粤嵌我来了!
+		</p>
+		<h1>我是中国人</h1>
+	</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片拖拽的具体实现</title>
+		<style type="text/css">
+			div{
+				width: 300px;
+				height: 700px;
+				border: 1px dashed red;
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box1">
+			<!--拖拽元素-->
+			<!--【draggable】让元素可以拖动，默认是true可以拖动-->
+			<img src="img/drag.jpg" draggable="true" id="dragImg"/>
+			<img src="img/cardKingClub.png" draggable="true" id="cardKingClubImg"/>
+		</div>
+		<!--目标元素-->
+		<div id="box2"></div>
+	</body>
+	<script type="text/javascript">
+		var img = document.querySelector("#dragImg")
+		var img2 = document.querySelector("#cardKingClubImg")
+		var box1 = document.querySelector("#box1")
+		var box2 = document.querySelector("#box2")
+		// 【拖拽元素】相关事件
+		img.ondragstart = function(event){
+			console.log("=====开始拖拽=======")
+			//=======================
+			/**
+			 * 【注意】这里要设置一下抓的是谁
+			 * dataTransfer是事件event的数据转换对象，它有一个setData()方法
+			 * 可以将事件event的目标target的id，即dragImg赋值给dragId
+			 * 将来drop的时候方便找到到底是谁被拖拽了
+			 * 【注意】这里的target就是抓取的对象，setData也只是设置一个【键值对】
+			 * 如果想用class去找某个元素，则要访问event.target.className
+			 */
+			event.dataTransfer.setData("dragId", event.target.id)
+		}
+		img2.ondragstart = function(event){
+			event.dataTransfer.setData("dragId", event.target.id)
+		}
+		box2.ondragover = function(event){
+			console.log("=====拖拽元素位于目标元素上方持续触发======")
+			// 【🐷】在这个事件中，需要阻止默认行为才能触发ondrop事件
+			event.preventDefault()
+		}
+		box1.ondragover = function(event){
+			console.log("=====拖拽元素位于目标元素上方持续触发======")
+			// 【🐷】在这个事件中，需要阻止默认行为才能触发ondrop事件
+			event.preventDefault()
+		}
+		box2.ondrop = function(event){
+			console.log("====🍎🍎🍎当拖拽元素位于目标元素上方并且松开鼠标的时候触发=====")
+			//===================
+			// 在这里获取前面存起来的拖拽元素   dragId就相当于dragImg
+			var dragId = event.dataTransfer.getData("dragId")
+			//获取到dragId之后，通过这个id值寻找【被拖动的图片的img标签】
+			var dragEle = document.querySelector("#" + dragId)
+			this.appendChild(dragEle)
+		}
+		box1.ondrop = function(event){
+			console.log("====🍎🍎🍎当拖拽元素位于目标元素上方并且松开鼠标的时候触发=====")
+			//===================
+			// 在这里获取前面存起来的拖拽元素   dragId就相当于dragImg
+			var dragId = event.dataTransfer.getData("dragId")
+			//获取到dragId之后，通过这个id值寻找【被拖动的图片的img标签】
+			var dragEle = document.querySelector("#" + dragId)
+			this.appendChild(dragEle)
+		}
+	</script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--canvas下的一个库konva.js（类似 jquery ）-->
+		<script src="lib/konva.min.js"></script>
+	</head>
+	<body>
+		<!--在这个容器下进行绘制图形 container-->
+		<div id="container"></div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			// 获取窗口的宽
+			var w = window.innerWidth;
+			// 获取窗口的高
+			var h = window.innerHeight;
+			// 1-创建舞台
+			var stage = new Konva.Stage({
+				// 以container所在的容器为【舞台】
+				container: "container",
+				width: w,
+				height: h
+			})
+			// 2-创建层
+			var layer = new Konva.Layer();
+			// 3-原点坐标
+			var point = {
+				x0: 150,
+				y0: 500
+			}
+			//4-外部矩形
+			var outRect = new Konva.Rect({
+				x: point.x0,
+				y: point.y0,
+				width: 1200,
+				height: 50,
+				fill: "blue",
+				//cornerRadius: 25,
+				cornerRadius: 0,
+				stroke: "green",
+				strokeWidth: 15
+			})
+			// 5-内部形状
+			var innerRect = new Konva.Rect({
+				x: point.x0,
+				y: point.y0,
+				width: 0,
+				height: 50,
+				fill: "red",
+				cornerRadius: 25
+			})
+			// 层加载内外形状
+			layer.add(outRect);
+			layer.add(innerRect);
+			// 舞台加载【层】
+			stage.add(layer);
+			// 如何改变形状的属性值
+			var tween = new Konva.Tween({
+				// 指定哪个形状发生属性改变
+	            node: innerRect,
+	            duration: 2, // 完成从高度50到1200变化的时间 2秒钟
+	            width: 1200
+	        });
+	        // 正式执行这个改变
+	        tween.play();
+		}
+	</script>
+</html>

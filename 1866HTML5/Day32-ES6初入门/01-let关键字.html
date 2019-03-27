@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>let关键字</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		if(true){
+			//console.log(a)//undefined
+			//var a = 10
+			let a = 10
+			let a = 20
+		}
+		//console.log(a) //10
+	</script>
+</html>
+<!--【归纳】在JS中var出来的变量(变量的声明)是会提前的；
+	但是变量的初始化的赋值操作是不会提前的。
+	1) let声明的变量不会进行声明提前(没有声明提前的特性)
+	2) let声明的变量具有块级作用域(ES6新增)
+	3) 在同一个块中，let声明的变量不能重复声明
+-->

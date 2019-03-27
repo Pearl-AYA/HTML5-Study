@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Reflect对象修改了Object对象的返回结果</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【注意】修改某些Object方法的返回结果，让其变得更合理。
+		 * 比如，Object.defineProperty(obj, name, desc)在
+		 * 无法定义属性时，会抛出一个错误，而
+		 * Reflect.defineProperty(obj, name, desc)则会返回false。
+		 */
+		var target = {}
+		// 老写法
+		try{
+			Object.defineProperty(target, 'country', {})
+			// 成功
+			console.log("欢迎大家来到粤嵌科技")
+		}catch(e){
+			//TODO handle the exception
+			console.log(e)
+		}
+		//======================
+		// 新写法
+		if(Reflect.defineProperty(target, 'car', {})){
+			// success
+			console.log("我是凤姐！")
+		}else{
+			console.log("我是冠希!")
+		}
+	</script>
+</html>

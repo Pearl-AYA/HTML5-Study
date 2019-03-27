@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>类作为参数传递</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//声明函数：带有参数(参数的类型是【类】)
+		function createObject(clazz){
+			return new clazz()
+		}
+		
+		var methodName = "eat"
+		//声明【Person类】
+		class Person{
+			constructor(){}
+			sayHello(){
+				console.log("Hello")
+			}
+			//可以动态地给类添加方法
+			[methodName](){
+				console.log("Eat!")
+			}
+		}
+		// 可以把Person类作为参数传递给createObject函数
+		var person = createObject(Person)
+		person.sayHello()
+		//person[methodName]  <====> p.eat
+		person[methodName]()
+	</script>
+</html>

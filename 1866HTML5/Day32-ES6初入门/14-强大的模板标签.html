@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>模板标签</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		let name = '张三',
+			age = 20,
+			message = show`我来给大家介绍${name}的年龄是${age}.`;
+		/**
+		 * 【模板标签show】我们应该给它定义一个函数show
+		 * 参数1：一个字符串数组
+		 * 元素1：'我来给大家介绍'
+		 * 元素2：'的年龄是'
+		 * 元素3：'.'
+		 * 参数2和参数3：表示需要置换的字符串的值
+		 */
+		function show(stringArr, ...values){
+			console.log(stringArr)
+			console.log(values[0]) //张三
+			console.log(values[1]) //20
+			// show标签函数的返回值被message接收
+			return stringArr[0] + values[0] + stringArr[1]+
+			values[1] + stringArr[2]
+		}
+		console.log(message)
+	</script>
+</html>

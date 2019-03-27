@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>匿名类</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//声明了一个匿名类(匿名类表达式)
+		var Person = class {
+			constructor(name){
+				this.name = name
+			}
+			say(){
+				console.log(this.name)
+			}
+		}
+		// 使用匿名类
+		var person = new Person("张三")
+		person.say()
+		//======================
+		//使用匿名类去创建对象
+		//person2肯定是个【单例对象】
+		var person2 =  new class {
+			constructor(name){
+				this.name = name
+			}
+			say(){}
+		}("李四")
+		console.log(person2.name)
+	</script>
+</html>

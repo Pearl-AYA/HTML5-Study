@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>align-content</title>
+		<link rel="stylesheet" type="text/css" href="../style.css"/>
+		<style type="text/css">
+			/**
+			 * 【align-content】flex-start | flex-end | center | space-between | space-around | stretch;
+			 * 多主轴对齐：顶部对齐 | 底部对齐 | 居中对齐 | 上下对齐并铺满 | 均匀分布 | 轴线占满整个交叉轴（默认）
+			 */
+			ul:nth-of-type(1){
+				/*换行 + 顶部对齐*/
+				flex-wrap: wrap;
+				align-content: flex-start;
+			}
+			ul:nth-of-type(2){
+				flex-wrap: wrap;
+				align-content: flex-end;
+			}
+			ul:nth-of-type(3){
+				flex-wrap: wrap;
+				/*垂直居中*/
+				align-content: center;
+				/*水平居中*/
+				justify-content: center;
+			}
+			ul:nth-of-type(4){
+				flex-wrap: wrap;
+				/*上下两端对齐：空隙在中间*/
+				align-content: space-between;
+				/*左右居中对齐*/
+				justify-content: center;
+			}
+			ul:nth-of-type(5){
+				flex-wrap: wrap;
+				/*上下均匀分布：空隙在周围*/
+				align-content: space-around;
+				/*左右居中对齐*/
+				justify-content: center;
+			}
+			ul:nth-of-type(6){
+				flex-wrap: wrap;
+				/*即便不设置这个【align-content: stretch;】
+				 也默认是已经设置了的*/
+				align-content: stretch;
+				/*居中对齐*/
+				justify-content: center;
+			}
+		</style>
+	</head>
+	<body>
+		<!--ul*6>li{$}*10-->
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+		</ul>
+	</body>
+</html>

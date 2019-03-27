@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原生分页实现</title>
+		<link rel="stylesheet" type="text/css" href="../css/index.css"/>
+		<script src="../lib/baiduTemplate.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../lib/jquery.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<table id="my_table" border="1px">
+			<thead>
+				<tr>
+					<th></th>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>年龄</th>
+					<th>住址</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<div class="displayed_num">
+			<span>每页显示数据：</span>
+			<a href="#">4</a>
+			<a href="#">6</a>
+			<a href="#">8</a>
+		</div>
+		<!--================-->
+		<!--上面是表单部分，下面是分页控制部分-->
+		<div class="fenye">
+			<a href="###" class="start disabled">首页</a>
+			<a href="###" class="prev disabled"><<上一页</a>
+			<a href="###" class="next">下一页>></a>
+			<a href="###" class="end">尾页</a>
+			<script type="text/template" id="person_tpl">
+				<% for(var tempPerson of arr){ %>
+					<tr>
+						<td><input type="checkbox" /></td>
+						<td><%= tempPerson.name %></td>
+						<td><%= tempPerson.sex %></td>
+						<td><%= tempPerson.age %></td>
+						<td><%= tempPerson.addr %></td>
+					</tr>
+				<% } %>
+			</script>
+		</div>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【原生分页实现的思路(原理)】首先和产品经理确定一下每页显示多少条数据
+		 * 然后通过后天的数据接口获取某一页的数据(到底第哪一页需要给这个接口)
+		 * 传入一个表示页码的参数。然后考虑如何显示数据。
+		 * 术语：页码、每页显示条目、数据总数、每页数据列表
+		 * 其中每页显示条目是动态的（暂定5条）
+		 * 数据总数是接口提供的。页码数需要根据数据总数和每页显示的条目数去计算的
+		 * 总页码数 = 总数据条数 / 每页数据条数
+		 */
+		// 为了全局缓存所有的数据
+		var personsList = null
+		// 全局缓存数据总条数
+		var totalCount = 0
+		// 当前页码
+		var currentPageNo = 1
+		//当前页面显示数据的数量
+		var displayedNum = 4
+		// 任务1：计算有多少页(以便初始化按钮)
+		function initBtn(){
+			$("a[name=p]").remove()
+			$(".fenye a").off("click", fenyeFn)
+			// 通过jQ的getJSON方法获取数据
+			// 参数2：是连同请求发送到服务器的数据，null即无
+			$.getJSON("../data.json", null, function(resultData){
+				// resultData是解析出来的Json对象
+				//console.log(resultData)
+				
+				/**
+				 * 把获取到的数据缓存到本地：persons和totalCount
+				 */
+				personsList = resultData.persons
+				totalCount = resultData.totalCount
+//				ES6模板字符串
+				var str=``
+				// 页码数(页码按钮个数) = 向上取整(数据总数 / 每页条目) (默认5条)
+				for(var i = 1; i <= Math.ceil(totalCount / displayedNum); i++){
+					// 动态创建页码按钮
+					if(i == 1){
+						str += `<a href="###" name="p" class="active">${i}</a>`
+					}else{
+						str += `<a href="###" name="p">${i}</a>`
+					}
+				}
+				$(".prev").after(str)
+				// 给所有的按钮绑定事件
+				$('.fenye a').on('click', fenyeFn)
+				// 默认显示第一页的数据
+				showData(currentPageNo)
+			})
+		}
+		// 函数调用
+		initBtn()
+		
+		// 构建某一页的数据  pageNo = 3
+		function showData(pageNo){
+			/**
+			 * 第1页：0--4
+			 * 第2页：5--9
+			 * 第3页：10--14
+			 * 第4页：15--19
+			 * 第5页：20--22
+			 */
+			// arrayObject.slice(start, end)方法可以从已有的数组中返回选定的元素,返回一个新的
+			//数组，包含从start到end(不包括该元素)的arrayObject中的元素
+			// currentArr数组的每个元素tempPerson代表一个人的信息
+			var currentArr = personsList.slice((pageNo - 1) * displayedNum, pageNo * displayedNum)
+			//百度模板
+			var obj ={
+				arr: currentArr
+			}
+			var str = baidu.template("person_tpl", obj)
+			// 把$str作为tbody的html
+			$('tbody').html(str)
+			//选中行高亮
+			$("input:checkbox").each(function () {
+				$(this).click(function () {
+					if ($(this).prop("checked")) {
+						$(this).parent().parent().addClass("activeLi")
+					} else{
+						$(this).parent().parent().removeClass("activeLi")
+					}
+				})
+		})
+		}
+		// 任务2：分页按钮点击逻辑
+		function fenyeFn(){
+			// 得到元素的html的值
+			// 1、处理页码数的逻辑：点击后，currentPageNo的值被改变了
+			switch($(this).html()){
+				case '首页':
+					currentPageNo = 1
+					break
+				case '&lt;&lt;上一页':
+					currentPageNo--
+					break
+				case '下一页&gt;&gt;':
+					currentPageNo++
+					break
+				case '尾页':
+					currentPageNo = Math.ceil(totalCount / displayedNum)
+					break
+				default:
+					currentPageNo = parseInt($(this).html())
+					break
+			}
+			console.log(currentPageNo)
+			if (currentPageNo == 1) {
+				$(".start").addClass("disabled")
+				$(".prev").addClass("disabled")
+			}else{
+				$(".start").removeClass("disabled")
+				$(".prev").removeClass("disabled")
+			}
+			if (currentPageNo == Math.ceil(totalCount / displayedNum)) {
+				$(".end").addClass("disabled")
+				$(".next").addClass("disabled")
+			}else{
+				$(".end").removeClass("disabled")
+				$(".next").removeClass("disabled")
+			}
+			$("[class=active]").removeClass("active")
+			var $pageBtn=$("[name=p]")
+			$pageBtn[(currentPageNo-1)].setAttribute("class","active")
+			showData(currentPageNo)
+		}
+		//改变每页的数据条数
+		$(".displayed_num a").click(function () {
+			displayedNum = $(this).html()
+			currentPageNo = 1
+			initBtn()
+			$(".start").addClass("disabled")
+			$(".prev").addClass("disabled")
+			$(".end").removeClass("disabled")
+			$(".next").removeClass("disabled")
+		})
+	</script>
+</html>

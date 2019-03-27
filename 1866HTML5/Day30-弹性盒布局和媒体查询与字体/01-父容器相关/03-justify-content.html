@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>justify-content</title>
+		<link rel="stylesheet" type="text/css" href="../style.css"/>
+		<style type="text/css">
+			/**
+			 * 【justify-content】flex-start | flex-end | center | space-between | space-around;
+			 * 主轴对齐方式：左对齐（默认） | 右对齐 | 居中对齐 | 两端对齐 | 平均分布
+			 * 【注意】所谓的主轴对齐是针对li而言的，决定每个li怎么对齐，li可能会分散
+			 */
+			ul:nth-of-type(1){
+				/*左对齐(默认)*/
+				justify-content: flex-start;
+			}
+			ul:nth-of-type(2){
+				/*右对齐*/
+				justify-content: flex-end;
+			}
+			ul:nth-of-type(3){
+				/*居中*/
+				justify-content: center;
+			}
+			ul:nth-of-type(4){
+				/*两端对齐*/
+				justify-content: space-between;
+			}
+			ul:nth-of-type(5){
+				/*平均分布*/
+				justify-content: space-around;
+			}
+		</style>
+	</head>
+	<body>
+		<!--ul*5>li{$}*5-->
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+	</body>
+</html>

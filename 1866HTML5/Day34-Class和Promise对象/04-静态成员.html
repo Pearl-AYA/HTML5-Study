@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>静态成员</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 声明类
+		class Person{
+			constructor(name){
+				this.name = name
+			}
+			// 实例方法(属于对象所有)
+			say1(){
+				console.log("Hello...")
+			}
+			say2(){
+				//this表示将来要创建的对象，即person === this
+				this.say1()
+			}
+			//声明静态方法(属于Person类所有)
+			static eat1(){
+				console.log("吃。。。")
+			}
+			static eat2(){
+				// this就表示构造函数本身，即Person === this
+				this.eat1()
+			}
+		}
+		// 使用Person
+		Person.eat2()
+		// 创建对象person
+		var person = new Person()
+		person.say2()
+	</script>
+</html>

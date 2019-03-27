@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>对象解构</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var person = {
+			name: "李四",
+			age: 20,
+			sex: "男"
+		}
+		// {属性名： 变量名}
+		// 其实是将"李四"存储到了name1中
+		var {name: name1} = person
+		console.log(name1) //李四
+		//=======================
+		var {name, sex, age} = person
+		console.log(`${name} ${sex} ${age}`)
+		//=======================
+		var age = 10, name, a
+		// 使用【解构赋值表达式】   解构也可以有默认值
+		({age, name, a = 3} = person)
+		console.log(`${name} ${age} ${a}`)
+	</script>
+</html>
+<!--【归纳】解构可以非常方便地把对象的属性的值赋值给同名的变量-->

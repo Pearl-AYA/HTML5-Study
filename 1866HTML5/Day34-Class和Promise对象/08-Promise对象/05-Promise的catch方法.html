@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Promise的catch方法</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【Promise的常用方法】
+		 * 1、Promise.prototype.then()   【最核心】
+		 * 2、Promise.prototype.catch() 
+		 * 3、Promise.all()
+		 * 4、Promise.resolve()
+		 * 5、Promise.reject()
+		 */
+		// 定义getJSON函数
+		var getJSON = function(url){
+			// 创建Promise对象
+			var promise = new Promise(function(resolve, reject){
+				// 创建XMLHttpRequest对象
+				var client = new XMLHttpRequest()
+				// 指定以GET方式打开
+				client.open("GET", url)
+				// 监听状态改变
+				client.onreadystatechange = handler
+				client.responseType = "json"
+				client.setRequestHeader("Accept", "application/json")
+				client.send()
+				
+				//封装函数: handler
+				function handler(){
+					if(this.readyState !== 4){
+						return
+					}
+					//请求成功
+					if(this.status === 200){
+						//console.log(this.statusText) //OK
+						//console.log(this.response)
+						resolve(this.response)
+					}else{
+						//console.log(this.statusText) //Not Found
+						//请求失败
+						reject(new Error(this.statusText))
+					}
+				}
+			})
+			// 返回promise
+			return promise
+		}
+		/**
+		 * 【归纳】Promise.prototype.catch方法是then(null,rejection)
+		 * 的别名，用于指定发生错误的时候的回调函数
+		 */
+		getJSON("./posts.json").then(function(json){
+			//成功后的操作
+		}).catch(function(error){
+			// 处理getJSON和前一个回调函数运行发生的错误
+			console.log("发生错误!❌：", error)
+		})
+		//======================
+		//catch方法是then(null,rejection)的别名
+		getJSON("./posts.json").then((val)=>console.log('成功', val))
+			.catch((err)=>console.log('失败', err))
+		// 上述的写法等价于
+		getJSON("./posts.json").then((val)=>console.log('成功', val))
+			.then(null, (err)=>console.log('失败', err))
+		//======================
+		/*var p1,p2,p3
+		var p4 = Promise.all([p1, p2, p3])*/
+	</script>
+</html>

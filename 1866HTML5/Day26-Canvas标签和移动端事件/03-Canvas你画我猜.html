@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas你画我猜效果</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box{
+				width: 600px;
+				height: 500px;
+				margin: 100px auto;
+				border: 1px solid blue;
+			}
+			#box .control{
+				height: 100px;
+			}
+			#box .control div{
+				height: 50px;
+				line-height: 50px;
+			}
+			#box .control .changeColor{
+				padding-left: 60px;
+			}
+			#box .control .changeColor input{
+				width: 30px;
+				height: 30px;
+				margin: 0 15px;
+				font-size: 0;
+				/*background-color: red;*/
+				vertical-align: middle;
+			}
+			#box .control .changeColor input:nth-of-type(1){
+				background-color: black;	
+			}
+			#box .control .changeColor input:nth-of-type(2){
+				background-color: pink;	
+			}
+			#box .control .changeColor input:nth-of-type(3){
+				background-color: red;
+			}
+			#box .control .changeColor input:nth-of-type(4){
+				background-color: orange;	
+			}
+			#box .control .changeColor input:nth-of-type(5){
+				background-color: brown;	
+			}
+			#box .control .changeColor input:nth-of-type(6){
+				background-color: purple;	
+			}
+			#box .control .clear{
+				height: 50px;
+			}
+			#box .control .clear input{
+				width: 100px;
+				height: 50px;
+				margin: 0 15px;
+				font-size: 20px;
+				background-color: #FCF3DF;
+			}
+			#box .control .clear input:nth-of-type(1){
+				margin-left: 100px;
+			}
+			b{
+				font-size: 20px;
+			}
+			#canvas{
+				background-color: #FEE7BF;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div class="control">
+				<div class="changeColor">
+					选择画笔颜色：<input type="button" value="黑色"/>
+					<input type="button" value="粉色"/>
+					<input type="button" value="红色"/>
+					<input type="button" value="🍊色"/>
+					<input type="button" value="棕色"/>
+					<input type="button" value="紫色"/>
+				</div>
+				<div class="clear">
+					<input type="button" value="清空画布" id="clearAllBtn"/>
+					当前选中的颜色：<b>黑色</b>
+					<input type="button" value="橡皮檫" id="eraserBtn"/>
+				</div>
+			</div>
+			<canvas id="canvas" width="600" height="400"></canvas>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//找到canvas画布
+		var cvs = document.querySelector("#canvas")
+		// 全局的变量ctx(画笔)
+		var ctx = cvs.getContext("2d")
+		
+		// 找到【颜色button数组】
+		var colorBtns = document.querySelectorAll('.changeColor input')
+		// 找到橡皮檫
+		var eraserBtn = document.querySelector("#eraserBtn")
+		// 找到【清空画布】按钮
+		var clearAllBtn = document.querySelector("#clearAllBtn")
+		/**
+		 * 遍历颜色button，绑定点击事件. 一旦被点击，就执行changeColor方法
+		 */
+		for (var i = 0; i < colorBtns.length; i++) {
+			colorBtns[i].onclick = changeColor;
+		}
+		// 功能1：改变画笔的颜色/改变b标签的颜色和文字
+		function changeColor(){
+			//设置画笔的线的风格
+			ctx.strokeStyle = getComputedStyle(this, null).backgroundColor;
+			// 找到b标签
+			var b = document.querySelector("b")
+			// 设置b标签的颜色为ctx.strokeStyle和改变b标签的文字
+			b.style.color = ctx.strokeStyle
+			// 设置b标签的innerHTML
+			b.innerHTML = this.value
+			// 禁用橡皮檫功能
+			isEraser = false
+		}
+		// 定义一个全局空对象：用于记录坐标值
+		var pointerObj = {
+			//等待动态添加属性x和y
+		}
+		// 切换橡皮檫状态
+		var isEraser = false
+		//==================
+		// 功能2：监听按下事件
+		cvs.addEventListener('mousedown', function(event){
+			var x = event.offsetX
+			var y = event.offsetY
+			// 点击的位置坐标
+			//console.log(x + ":" + y)
+			
+			//刚按下的时候，即刻生成2个属性x和y并用于存储按下的坐标点
+			pointerObj.x = x
+			pointerObj.y = y
+			// 如果橡皮檫被激活
+			if(isEraser){
+				//执行橡皮檫功能
+				eraserFn(x,y)
+			}else{
+				//画画功能
+				draw(x,y)
+			}
+			/**
+			 * 监听移动和抬起
+			 */
+			this.addEventListener("mousemove", move)
+			document.addEventListener("mouseup", up)
+		})
+		// 功能3：画画功能
+		function draw(x,y){
+			ctx.beginPath()
+			ctx.lineWidth = 5
+			// 设置笔头样式为【圆头】
+			ctx.lineCap = "round"
+			//从x、y点开始
+			ctx.moveTo(x,y)
+			//经过点
+			ctx.lineTo(pointerObj.x,pointerObj.y)
+			//执行绘制操作
+			ctx.stroke()
+			//关闭路径
+			ctx.closePath()
+		}
+		// 功能4：移动
+		function move(e){
+			var x = e.offsetX
+			var y = e.offsetY
+			//console.log(x + " : " + y)
+			// 如果橡皮檫被激活
+			if(isEraser){
+				//执行橡皮檫功能
+				eraserFn(x,y)
+			}else{
+				//画画功能
+				draw(x,y)
+			}
+			// 在移动的时候把【之前的坐标位置】存储起来
+			pointerObj.x = x
+			pointerObj.y = y
+		}
+		// 功能5：抬起
+		function up(){
+			//cvs移除鼠标移动的监听
+			cvs.removeEventListener('mousemove', move)
+		}
+		// 功能6：橡皮檫功能
+		function eraserFn(x, y){
+			// 开始路径
+			ctx.beginPath()
+			// 裁剪之前先设置保存场景的原本(待恢复的原本)
+			ctx.save()
+			//裁剪区域：
+			ctx.arc(x,y,20, 0, Math.PI * 2, false)
+			// 裁剪出一个圆(此时的圆中可能有内容)
+			ctx.clip()
+			// 在裁剪之后画一个【清空矩形】这个矩形占画布的全部区域
+			// 但是根据【裁剪的原理】该清空矩形只有在上面的裁剪区域才生效
+			// 即会把上面裁剪出的圆中的内容清空
+			ctx.clearRect(0,0,cvs.width,cvs.height)
+			// 然后再还原之前的场景(裁剪出来的区域不会还原，保持清空状态)
+			// 如果ctx中原来有数据，则会被恢复出来。如果没有数据，则恢复一个
+			//空的功能完整的画布。恢复出来之后画的数据跟裁剪没有关系了。
+			ctx.restore()
+			// 关闭路径
+			ctx.closePath()
+		}
+		//功能7：点击橡皮檫按钮,激活橡皮檫
+		eraserBtn.onclick = function(){
+			// 开启橡皮檫功能
+			isEraser = true
+		}
+		// 功能8：全部清空
+		clearAllBtn.onclick = function(){
+			ctx.clearRect(0,0,cvs.width,cvs.height)
+		}
+	</script>
+</html>

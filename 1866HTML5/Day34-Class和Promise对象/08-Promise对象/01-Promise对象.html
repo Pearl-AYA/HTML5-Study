@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Promise对象</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【Promise对象】是异步编程的一种解决方案，比传统的解决方案
+		 * ——回调函数和事件——更合理和更强大。所谓Promise，简单说
+		 * 就是一个容器，里面保存着某个未来时刻才会结束的事件
+		 * （通常是一个异步操作）的结果。从语法上说，Promise 
+		 * 是一个对象，从它里面可以获取异步操作的消息。Promise 提供
+		 * 统一的 API(接口)，各种异步操作都可以用同样的方法进行处理。
+		 * 有了Promise对象，就可以将异步的操作以同步操作的流程表达出来
+		 * 避免了【回调函数的层层嵌套】ES6规定：Promise对象是一个构造函数
+		 * 用来生成Promise实例。
+		 */
+		// 创建Promise对象实例
+		var promise = new Promise(function(resolve, reject){
+			//console.log("这是其他的代码！。。。")
+			// true表示异步操作成功
+			if(true){
+				resolve(88)
+			}else{
+				reject(error)
+			}
+		})
+		//console.log(promise)
+		/**
+		 * 【归纳】Promise构造函数接受一个【函数】作为参数，
+		 * 该函数的两个参数分别是：resolve和reject。它们也是
+		 * 函数(由JavaScript引擎提供)，不用自己部署。
+		 * 【详解】resolve函数的作用：将Promise对象的状态从
+		 * “未完成”变为“成功”(即从Pending变成Resolved)。在
+		 * 异步操作成功的时候调用，并将异步操作的结果作为参数传递出去
+		 * reject函数的作用：将Promise对象的状态从“未完成”变成“失败”
+		 * (从Pending变成Rejected)，在异步操作失败的时候调用，并将
+		 * 异步操作报的错误作为参数传递出去。
+		 */
+		// Promise对象的实例被创建以后，可以用then()方法分别指定
+		// Resolved状态和Rejected状态的回调函数。
+		promise.then(function(value){
+			// 成功时执行的代码
+		}, function(error){
+			//失败的时候执行的处理
+		})
+		/**
+		 * 【总结】then()方法可以接受两个回调函数作为参数。
+		 * 第一个回调函数是Promise对象的状态变成Resolved时调用的
+		 * 第二个回调函数hisPromise对象的状态变成Rejected时调用的
+		 * 其中，第二个参数是可选的。这两个函数都接受Promise对象传出
+		 * 的值作为参数。
+		 */
+		//=================
+		//函数的声明
+		function myTimeout(ms){
+			return new Promise((resolve, reject) => {
+				setTimeout(resolve, ms, 'done')
+			})
+		}
+		// 函数的调用
+		myTimeout(100).then((value) => {
+			console.log(value)
+		})
+		/**
+		 * 【归纳】这里的myTimeout方法返回一个Promise对象(实例)。
+		 * 表示一段时间以后才会发生的结果。当过了指定的时间(100ms)
+		 * 以后，Promise实例的状态变为Resolved，就会触发then()方法
+		 * 中绑定的回调函数(参数1)。
+		 */
+		//Promise新建以后就会立即执行
+		let promise2 = new Promise(function(resolve, reject){
+			console.log("下载图片。。。。")
+			resolve()
+		})
+		//异步操作
+		promise2.then(function(){
+			console.log("吃饭去!")
+		})
+		console.log("粤嵌欢迎你!")
+	</script>
+</html>

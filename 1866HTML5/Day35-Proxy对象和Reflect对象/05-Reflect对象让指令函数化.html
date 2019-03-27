@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Reflect对象让指令函数化</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【目的】判断对象中是否有某个属性
+		 */
+		console.log('assign' in Object) //true   //命令式
+		var obj = {
+			age: 18
+		}
+		//【旧的命令式的写法】
+		// 删除name属性
+		//delete obj[age]
+		// 因为age属性已经被删除，所以会提示age属性没定义
+		//console.log('age' in obj)
+		//================
+		// 【Reflect对象新的写法】函数形式
+		console.log(Reflect.has(Object, 'assign')) //true
+		Reflect.deleteProperty(obj, 'age') 
+		console.log(Reflect.has(obj, 'age')) //fasle
+	</script>
+</html>

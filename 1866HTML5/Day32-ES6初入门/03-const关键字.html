@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>const关键字</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		if(true){
+			console.log(a)
+			//const声明变量的时候，必须初始化
+			//如果不初始化，那么定义的这个变量a将永远是undefined
+			//通常我们将const定义的变量称之为【const常量】
+			const a = 10
+			//const声明的变量a不能被修改
+			//a = 20
+			//const声明的常量具有【块级作用域】和let类似
+		}
+		console.log(a)
+	</script>
+</html>
+<!--【归纳】使用var声明的变量是window的属性，可以使用window.变量
+	访问。但是使用let和const声明的变量/常量不是window的属性。
+	所以，变量的声明不会提前。
+-->

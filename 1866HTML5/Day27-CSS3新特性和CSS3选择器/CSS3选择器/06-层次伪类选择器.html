@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>层次伪类选择器</title>
+		<style type="text/css">
+			/*后代选择器*/
+			div p{
+				background-color: burlywood;
+			}
+			/*子代选择器*/
+			div>div>p{
+				background-color: red;
+			}
+			/*和p相邻的h2元素(兄弟元素)*/
+			div p+h2{
+				background-color: pink;
+			}
+			/*p标签后面所有的h3元素(兄弟元素)*/
+			div p~h3{
+				background-color: deeppink;
+			}
+		</style>
+	</head>
+	<body>
+		<p>最外层的P元素</p>
+		<div>
+			<p>内层的P元素</p>
+			<h2>我是H2</h2>
+			<h2>我是H3</h2>
+			<h2>我是H4</h2>
+			<h2>我是H5</h2>
+			<h2>我是H6</h2>
+			<h3>我是H7</h3>
+			<h3>我是H8</h3>
+			<h3>我是H9</h3>
+			<div>
+				<p>最内层的P元素</p>
+			</div>
+		</div>
+	</body>
+</html>

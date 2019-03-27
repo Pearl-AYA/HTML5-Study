@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas绘制多个随机圆</title>
+</head>
+<body>
+	<canvas></canvas>
+</body>
+<script>
+	var canvas = document.querySelector("canvas");
+	//把画布设置等于窗口的宽
+	canvas.width = window.innerWidth;
+	//把画布设置等于窗口的高
+	canvas.height = window.innerHeight;
+	// 类
+	function Circle(obj){ 
+		//console.log(this) //this就是指new出来的对象
+		this.ctx = obj.getContext('2d');//获取画布的上下文对象
+		// 定义一个画圆的方法 参数：{key:value}
+		this.draw = function(options){
+			//console.log(this)
+			this.x = options.x; // 圆心的x坐标
+			this.y = options.y; // 圆心的y坐标
+			this.r = options.r; // 圆心的半径
+			this.s = options.s; // 开始的弧度
+			this.e = options.e;// 结束的弧度
+
+			this.red = options.red; // 定义颜色 0 ~ 255
+			this.green = options.green;
+			this.blue = options.blue;
+
+			this.isFlag = false; //是否顺时针方向 
+			this.ctx.beginPath(); //开始绘制
+			//绘制圆的api
+			this.ctx.arc(this.x, this.y, this.r, this.s, this.e, this.isFlag);
+			//填充圆的颜色
+			this.ctx.fillStyle = "rgba(" + this.red + "," + this.green + "," + this.blue + ",0.5)";
+			this.ctx.closePath();//结束绘制
+			this.ctx.fill();//填充圆的颜色
+		},
+		this.random = function(max,min){ // 指定范围的随机数 函数
+			return Math.floor(Math.random() * (max - min) + min);
+		}
+	}
+
+	var maxWidth = canvas.width; //画布的宽度 
+	var minWidth = 0;
+
+	var maxHeight = canvas.height;
+	var minHeight = 0;
+
+	//绘制50个圆形
+	for(var i = 0; i < 50; i++){
+		var circle = new Circle(canvas);
+		circle.draw({
+			x: circle.random(maxWidth,minWidth),
+			y: circle.random(maxHeight,minHeight),
+			r: circle.random(100,50),
+			s: 0,//开始的弧度
+			e: 360 * Math.PI/180,
+			isFlag: false,
+			red: circle.random(255,0),
+			green: circle.random(255,0),
+			blue: circle.random(255,0)
+		})
+	}
+</script>
+</html>

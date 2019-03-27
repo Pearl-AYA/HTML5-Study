@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>对象的新增属性</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 构造方法
+		function createPerson(name, age){
+			return {
+				name: name,
+				age: age
+			}
+		}
+		function createPerson2(name, age){
+			return {
+				// ES6对键值对的键和值同名的情况的简写方式
+				name,
+				age
+			}
+		}
+		var p = createPerson2("李四", 20)
+		console.log(p)
+	</script>
+</html>

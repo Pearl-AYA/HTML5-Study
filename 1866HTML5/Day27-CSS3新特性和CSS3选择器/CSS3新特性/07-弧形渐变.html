@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>弧形渐变</title>
+		<style type="text/css">
+			div{
+				width: 300px;
+				height: 300px;
+				margin: 100px auto;
+				/*border-radius: 50%;*/
+			}
+			div:nth-of-type(1){
+				background: radial-gradient(pink, green);
+			}
+			div:nth-of-type(2){
+				height: 150px;
+				background: radial-gradient(pink, green);
+			}
+			/*【归纳】最后一种颜色是【其余部分的颜色】
+			 如果设置成【border-radius: 50%;】状态则因为空间不够
+			 显示不出来；如果注释掉，则可以看到最外围的red色。
+			 最后一个颜色值表示背景色可以从第一个和第二个得到验证*/
+			div:nth-of-type(3){
+				background: radial-gradient(purple, yellow, 
+					black, red, white, blue, red);
+			}
+			div:nth-of-type(4){
+				background: radial-gradient(100px, blue, green);
+			}
+			div:nth-of-type(5){
+				/*background: radial-gradient(pink 50%, green 10%);*/
+				
+				/*【归纳】最后一种颜色是【其余部分的颜色】*/
+				/*background: radial-gradient(50% 10%, green, pink, red, blue, black);*/
+				/*【注意】参数1：表示宽度；参数2：表示高度*/
+				background: radial-gradient(30% 10%, green, pink, red, blue, black);
+			}
+			div:nth-of-type(6){
+				background: radial-gradient(at left bottom, blue, red);
+			}
+			div:nth-of-type(7){
+				background: radial-gradient(30px, blue, red);
+			}
+			div:nth-of-type(8){
+				/*参数1的30px表示white+red一个组合
+				 【repeating】表示重复*/
+				background: repeating-radial-gradient(30px, white, red);
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</body>
+</html>

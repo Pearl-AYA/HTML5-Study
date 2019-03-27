@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>文件上传</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<!--【🐷】multiple属性表示可支持上传多个文件-->
+		文件上传：<input type="file" multiple="multiple"/>
+		<ol></ol>
+	</body>
+	<script type="text/javascript">
+		// 【属性选择器】input[type=file]
+		var inputFile = document.querySelector("input[type=file]")
+		//console.log(inputFile)
+		
+		// 一旦检测到change事件则执行后面的函数
+		inputFile.onchange = function(){
+			//console.log(this.files)
+			// files是file元素的属性，this.files是FileList对象
+			
+			//可以利用【数组的slice方法】将含有length属性的特殊对象
+			//即FileList对象转化成数组
+			var fileArr = Array.prototype.slice.call(this.files)
+			//console.log(fileArr)
+			//================
+			//遍历数组
+			for(var tempFile of fileArr){
+				//数组里面的每一个元素也是对象
+				//console.log(tempFile);
+				/**
+				 * 【🐷】以上获取的仅仅只是每个上传文件对象，并不能获得
+				 * 文件内部的内容。我们需要通过FileReader对象读取文件对象
+				 * 的内容。FileReader对象读取文件内容的时候需要一个【Blob对象】
+				 * 经过观察File对象就是Blob对象
+				 */
+				(function(tempFile){
+					var fileReader = new FileReader()
+					/**
+					 * 两种读取方式：
+					 * 方式1：️以文本形式读取数据需要两个参数：Blob对象和
+					 * 读取时用的编码格式   utf-8
+					 * 方式2：读取数据以Base64的url格式，需要一个参数，即Blob对象
+					 * 这里所说的Blob对象即File对象，也就是这里的tempFile文件对象
+					 */
+					fileReader.readAsDataURL(tempFile)
+					// 读取文件是一个异步的过程，会触发3个事件
+					fileReader.onloadstart = function(){
+						console.log("===========开始读取=========")
+					}
+					fileReader.onprogress = function(){
+						console.log("=====读取过程中持续触发======")
+					}
+					fileReader.onloadend = function(){
+						console.log("=====读取结束的时候触发=======")
+						
+						// 这个this表示fileReader，而this.result表示fileReader获取到
+						// 的文件的全部数据(包括文件本身的信息和文件的内容信息)
+						console.log(this.result)
+						if(/^(image)/.test(tempFile.type)){
+							// 如果是图片，添加到body中
+							var img = document.createElement("img")
+							// 将文件给src属性
+							img.src = this.result
+							// 将img追加给body
+							document.body.appendChild(img)
+						}else{
+							//如果不是图片类型的文件，则追加到ol中
+							document.querySelector("ol").appendChild(createLi(tempFile))
+						}
+					}
+				})(tempFile)
+			}
+		}
+		//=====================
+		// 创建Li的方法
+		function createLi(file){
+			var li = document.createElement("li")
+			// 处理文件名字
+			var spanName = document.createElement("span")
+			spanName.innerHTML = file.name
+			//将spanName追加给li
+			li.appendChild(spanName)
+			//===============
+			// 处理文件的大小(显示的单位为kb)
+			 var spanSize = document.createElement("span")
+			 //size的单位是byte，即字节  1024byte = 1kb
+			 // toFixed(2)表示保留两位小数
+			 spanSize.innerHTML = (file.size / 1024).toFixed(2) + "kb"
+			 //将spanSize追加给li
+			 li.appendChild(spanSize)
+			 //=================
+			 //处理时间(我们要对时间进行格式化)
+			 var spanDate = document.createElement("span")
+			 spanDate.innerHTML = getDateFormatToString(file.lastModifiedDate)
+			 //将spanDate追加给li
+			 li.appendChild(spanDate)
+			 return li
+		}
+		//=================
+		// 自定义日期格式化处理函数  2019-03-05
+		function getDateFormatToString(date){
+			return date.getFullYear() + "年" + addZero(date.getMonth() + 1) + "月" +
+			addZero(date.getDate()) + "日" +
+			addZero(date.getHours()) + ":" + addZero(date.getMinutes()) + ":" + 
+			addZero(date.getSeconds()) + " " + weekMap.get(date.getDay())
+			// Map集合的get()方法，传入一个【键】得到【值】
+		}
+		// 补零处理
+		function addZero(num){
+			return num >= 10 ? num : "0" + num;
+		}
+		// Map集合
+		var weekMap = new Map([
+			[0, '星期日'],
+			[1, '星期一'],
+			[2, '星期二'],
+			[3, '星期三'],
+			[4, '星期四'],
+			[5, '星期五'],
+			[6, '星期六']
+		])
+	</script>
+</html>

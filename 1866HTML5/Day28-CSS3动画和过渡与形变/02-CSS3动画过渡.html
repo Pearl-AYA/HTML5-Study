@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>CSS3动画过渡</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+				/*怪异盒模型：把边框线包含在盒模型之内*/
+				box-sizing: border-box;
+			}
+			.container{
+				/*【注意】在box-sizing: border-box;属性下，这里的50%
+				 包含border的宽度*/
+				width: 50%;
+				height: 300px;
+				border: 1px solid black;
+				float: left;
+				/*子绝父相*/
+				position: relative;
+				/*支持3D空间呈现*/
+				/*transform-style: preserve-3d;*/
+			}
+			.box{
+				width: 100px;
+				height: 100px;
+				/*子绝父相*/
+				position: absolute;
+				background-color: orange;
+			}
+			#box1{
+				/*设置过渡动画:参数1表示规定应用过渡的CSS属性的名称
+				 参数2：过渡完成所需的时间*/
+				transition: margin-left 5s;
+			}
+			#box2{
+				margin: 100px 200px;
+				/*过渡动画*/
+				transition: all 2s ease-in;
+			}
+			#box3{
+				/*设置过渡动画*/
+				transition: all 2s;
+			}
+			/*使用hover伪类触发过渡*/
+			#box3:hover{
+				border-radius: 50%;
+				background-color: purple;
+				/*设置形变：平移和缩放*/
+				transform: translate(400px, 300px) scale(1.5, 1.5);
+			}
+			div.container:nth-of-type(4){
+				background-color: deepskyblue;
+				opacity: 0.99;
+			}
+			img{
+				width: 130px;
+				height: 200px;
+				position: absolute;
+				left: 185px;
+				top: 50px;
+				/*形变的初始值*/
+				transform: perspective(600px) rotate3d(1,1,1,45deg);
+				/*设置过渡动画*/
+				transition: all 2s;
+			}
+			/*hover触发过渡效果*/
+			img:hover{
+				transform: perspective(600px) rotate3d(1,1,1,360deg);
+			}
+		</style>
+	</head>
+	<body>
+		<!--div.container*3>div#box$.box-->
+		<div class="container">
+			<div id="box1" class="box"></div>
+		</div>
+		<div class="container">
+			<div id="box2" class="box"></div>
+		</div>
+		<div class="container">
+			<div id="box3" class="box"></div>
+		</div>
+		<div class="container">
+			<img src="img/cardKingClub.png"/>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 找到box1
+		var box1 = document.querySelector("#box1")
+		box1.onclick = function(){
+			this.style.marginLeft = '300px';
+		}
+		//=================
+		var box2 = document.querySelector("#box2")
+		//使用JS点击事件触发【过渡】
+		box2.onclick = function(){
+			this.style.width = "300px";
+			this.style.height = "300px";
+			this.style.marginLeft = "0px";
+			this.style.marginTop = "0px";
+			this.style.backgroundColor = "deeppink";
+		}
+	</script>
+</html>

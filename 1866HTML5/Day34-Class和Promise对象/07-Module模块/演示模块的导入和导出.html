@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>模块的导入和导出Demo</title>
+		<!--传统的导入方式-->
+		<!--<script src="a.js" type="text/javascript"></script>-->
+	</head>
+	<body>
+	</body>
+	<!--【注意】这里的script标签的type属性必须使用module-->
+	<script type="module">
+		import { multiply, sum, Rectangle, color, name, magicNumber } from "./a.js"
+		console.log(multiply(3, 8))
+		console.log(sum(3, 8))
+		var rectangle = new Rectangle(10, 8)
+		console.log(rectangle.length)
+		console.log(rectangle.width)
+		console.log(color)
+		console.log(name)
+		console.log(magicNumber)
+	</script>
+</html>

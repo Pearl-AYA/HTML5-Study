@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>迭代器的使用</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//Set集合
+		var set = new Set([3,4,5,6,7])
+		//调用Set集合默认的迭代器函数,返回迭代器对象
+		var it = set[Symbol.iterator]()
+		/*console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())*/
+		//====================
+		//Map集合
+		var map = new Map([
+			["name", "lisi"],
+			["age", 20]
+		])
+		//使用自带的迭代器
+		var it = map[Symbol.iterator]()
+		/*console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())*/
+		//===================
+		//字符串
+		var str = "abc"
+		var it = str[Symbol.iterator]()
+		/*console.log(it.next().value)
+		console.log(it.next().value)
+		console.log(it.next().value)
+		console.log(it.next().value)*/
+		//======================
+		// 数组的迭代
+		var arr = [1,2,3,4]
+		var it = arr[Symbol.iterator]()
+		/*console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())*/
+		
+		//对数组使用for...of进行遍历
+		/*for(var v of arr){
+			console.log(v)
+		}*/
+		//=======================
+		//字面量对象
+		var obj = {
+			"a": 1,
+			"b": 2,
+			//方法
+			say: function(){
+				
+			},
+			// 给obj对象手动添加迭代器
+			[Symbol.iterator]: function* (){
+				for(var a in this){
+					//for...in遍历出来的是键值对的【键】
+					if(!(this[a] instanceof Function))
+						yield this[a]
+				}
+			}
+		}
+		// 创建迭代器对象
+		/*var it = obj[Symbol.iterator]()
+		console.log(it.next())
+		console.log(it.next())
+		console.log(it.next())*/
+		
+		//【归纳】因为obj对象并没有内置迭代器对象，也就是说没有
+		// Symbol.iterator属性，所以不能使用for...of进行遍历
+		for(var v of obj){
+			console.log(v)
+		}
+	</script>
+</html>
+<!--【归纳】数组、Set、Map、字符串  天生已经实现了【迭代器】
+	凡是已经实现了迭代器的数据结构都可以直接使用for...of进行遍历
+	for...of其实是迭代器调用的一种简写方式。for...of可以直接获取到
+	value值。
+-->

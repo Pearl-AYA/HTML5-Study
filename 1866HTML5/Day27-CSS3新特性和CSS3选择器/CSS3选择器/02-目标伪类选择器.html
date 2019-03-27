@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>目标伪类选择器</title>
+		<style type="text/css">
+			div:target{
+				width: 300px;
+				height: 200px;
+				background-color: yellowgreen;
+			}
+		</style>
+	</head>
+	<body>
+		<a href="#first">打开第1个</a>
+		<div id="first"></div>
+		
+		<a href="#second">打开第2个</a>
+		<div id="second"></div>
+		
+		<a href="#third">打开第3个</a>
+		<div id="third"></div>
+	</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>align-self</title>
+		<link rel="stylesheet" type="text/css" href="../style.css"/>
+		<style type="text/css">
+			/**
+			 * 【align-self】auto | flex-start | flex-end | center | baseline | stretch;
+    			/*单独对齐方式：自动（默认） | 顶部对齐 | 底部对齐 | 居中对齐 | 文本基线对齐 | 上下对
+			 */
+			ul{
+				/*对ul进行设置：【align-items：flex-start】表示整体顶部对齐*/
+				align-items: flex-start;
+			}
+			/*【归纳】这里对li设置auto是为了演示stretch的效果*/
+			ul li{
+				height: auto;
+			}
+			ul li:nth-of-type(1){
+				/*默认也是顶部对齐*/
+				align-self: auto;
+			}
+			ul li:nth-of-type(2){
+				/*顶部对齐*/
+				align-self: flex-start;
+			}
+			ul li:nth-of-type(3){
+				/*底部对齐*/
+				align-self: flex-end;
+			}
+			
+			ul li:nth-of-type(4){
+				/*居中对齐*/
+				align-self: center;
+			}
+			ul li:nth-of-type(5){
+				/*文本基线对齐*/
+				align-self: baseline;
+			}
+			ul li:nth-of-type(6){
+				/*文本基线对齐*/
+				align-self: baseline;
+			}
+			ul li:nth-of-type(7){
+				/*【归纳】如果没有设置heigth值或者设置为auto，则填充满全部*/
+				align-self: stretch;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li  style="line-height: 80px;">5</li>
+			<li style="line-height: 200px;">6</li>
+			<li>7</li>
+		</ul>
+	</body>
+</html>

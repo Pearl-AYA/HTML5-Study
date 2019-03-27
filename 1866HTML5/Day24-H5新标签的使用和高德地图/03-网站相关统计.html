@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>网站相关统计</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			h1{
+				text-align: center;
+				margin: 10px;
+			}
+			h1 span{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>【本地该web页面总访问人数】：<span id="localSpan"></span></h1>
+		<h1>【本机该web页面当前会话人数】：<span id="sessionSpan"></span></h1>
+	</body>
+	<script type="text/javascript">
+		var localSpan = document.querySelector("#localSpan")
+		var sessionSpan = document.querySelector("#sessionSpan")
+		/**
+		 * 【本机总访问人数】如果window.localStorage.pageCount属性存在
+		 * 则在此基础上+1；如果不存在，则默认为1
+		 */
+		if(window.localStorage.pageCount){
+			// Number()方法是将字符串转化成数字
+			// window.localStorage.pageCount得到的是个字符串，需要转化
+			window.localStorage.pageCount = 
+				Number(window.localStorage.pageCount) + 1
+		}else{
+			// 如果不存在
+			// 这样赋值是可以给localStorage对象新增一个叫做pageCount的属性的
+			window.localStorage.pageCount = 1
+		}
+		// 统计当前会话人数
+		if(window.sessionStorage.pageCount){
+			window.sessionStorage.pageCount = 
+				Number(window.sessionStorage.pageCount) + 1
+		}else{
+			// 默认为1
+			window.sessionStorage.pageCount = 1
+		}
+		// 设置innerHTML
+		localSpan.innerHTML = window.localStorage.pageCount
+		sessionSpan.innerHTML = window.sessionStorage.pageCount
+	</script>
+</html>

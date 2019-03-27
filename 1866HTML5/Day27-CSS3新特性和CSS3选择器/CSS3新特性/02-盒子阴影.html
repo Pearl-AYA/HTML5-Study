@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>盒子阴影</title>
+		<style type="text/css">
+			#box{
+				width: 200px;
+				height: 200px;
+				margin: 200px auto;
+				background-color: deeppink;
+				/*CSS3新特性：盒子阴影*/
+				/*【box-shadow：参数1表示X轴的偏移；参数2表示Y轴偏移；
+				 * 参数3表示模糊度半径;参数4：阴影的大小；参数5表示颜色】*/
+				/*box-shadow: -10px -10px 10px darkorchid inset;*/
+				box-shadow: 10px 10px 10px 20px darkorchid;
+				/*box-shadow: 10px 10px 10px darkorchid;*/
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+	</body>
+	<!--【归纳】box-shadow属性可以设置一个或者多个下拉阴影的框。
+		box-shadow属性把一个或者多个下拉阴影添加到框上。该属性是
+		一个可以用逗号分隔阴影的列表，每个阴影由2--4个长度值、一个可选的
+		颜色值和一个可选的inset关键字来决定。省略长度的值为0.
+		语法格式：box-shadow：h-shadow v-shadow blur spread color inset;
+		h-shadow：必选属性。水平阴影的位置。允许负值。
+		v-shadow：必选属性。垂直阴影的位置。允许负值。
+		blur：可选属性。模糊距离。
+		spread: 可选属性。阴影的大小。
+		color：可选属性。阴影的颜色。
+		inset：可选属性。设置成内侧阴影。
+	-->
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.colorSelector{
+				width: 250px;
+				height: 150px;
+				background-color: #f8f8f8;
+			}
+			.colorSelector div{
+				margin: 10px auto;
+				height: 30px;
+				width: 250px;
+				text-align: center;
+				float: left;
+			}
+			.colorSelector>div>*{
+				vertical-align: middle;
+			}
+			.colorSelector input[type=range]{
+				height: 30px;
+				width: 128px;
+				margin: 0 5px;
+			}
+			.colorSelector b{
+				width: 30px;
+				margin-right: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="colorSelector">
+			<div>
+				<b>R:</b>
+				<input type="range" min="0" max="255" value="255" id="redRange" />
+				<span>255</span>
+			</div>
+			<div>
+				<b>G:</b>
+				<input type="range" min="0" max="255" value="255" id="greenRange" />
+				<span>255</span>
+			</div>
+			<div>
+				<b>B:</b>
+				<input type="range" min="0" max="255" value="255" id="blueRange" />
+				<span>255</span>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var body = document.querySelector("body")
+		var ranges = document.querySelectorAll("input")
+		for (var i = 0;i < ranges.length;i++) {
+			ranges[i].oninput=changeColor
+		}
+		function changeColor () {
+			for (var i=0;i<ranges.length;i++) {
+				ranges[i].nextElementSibling.innerHTML=ranges[i].value
+			}
+		}
+	</script>
+</html>

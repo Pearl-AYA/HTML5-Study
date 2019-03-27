@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>更多background相关属性</title>
+		<style type="text/css">
+			.box{
+				width: 300px;
+				height: 300px;
+				/*background-color: red;*/
+				margin: 200px auto;
+				background: linear-gradient(to right, red, blue);
+				background-repeat: no-repeat;
+				background-image: url(../img/image.png);
+				/*background-size: auto 100%;*/
+				
+				/*【cover取宽高里面的最大值】cover会完全填充满div的尺寸，
+				 如果图片的尺寸和div的尺寸不一致，则以图片的宽高中的最大值
+				 完全显示出来为止，最小值则等比例缩放*/
+				background-size: cover;
+				/**
+				 * 【contain取宽高里面的最小值】contain  如果图片的尺寸和div
+				 * 的尺寸不一致，则以图片的宽高中的最小值完全显示出来为止，最
+				 * 大值则等比例缩放。不一定填充满div的尺寸。
+				 * */
+				/*background-size: contain;*/
+				
+				/*【归纳】坐标系y轴相反，默认文档流从上到下从左到右*/
+				/*background-position: left center;*/
+				/*background-position: 10px -50px;*/
+				
+				/*背景图是否随文档流滚动：fixed表示固定
+				 【注意】可以注释掉margin: 200px auto;后观察效果*/
+				/*background-attachment: fixed;*/
+				
+				padding: 20px;
+				border: 20px dashed blue;
+				
+				/*【注意】从内容处开始算原点，否则从边框的中心开始*/
+				background-origin: content-box;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box"></div>
+	</body>
+</html>

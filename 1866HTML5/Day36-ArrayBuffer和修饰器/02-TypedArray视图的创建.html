@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>TypedArray视图的创建</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【TypedArray数组提供9种构造函数】用来生成相应类型数组实例
+		 * TypeArray视图的每一种具体视图都是一个【构造函数】
+		 * 1、Int8Array：8位有符号整数   长度：1个字节
+		 * 2、Uint8Array：8位无符号整数  长度：1个字节
+		 * 3、Uint8ClampedArray： 8位无符号整数  长度：1个字节  溢出处理不同
+		 * 4、Int16Array：16位有符号整数  长度：2个字节
+		 * 5、Uint16Array：16位无符号整数  长度：2个字节
+		 * 6、Int32Array：32位有符号整数   长度：4个字节
+		 * 7、Uint32Array：32位无符号整数  长度：4个字节
+		 * 8、Float32Array：32位浮点数  长度：4个字节
+		 * 9、Float64Array：64位浮点数  长度：8个字节
+		 */
+		// 基本语法结构：TypedArray(buffer, byteOffset=0, length)
+		//对于同一个ArrayBuffer对象，可以根据不同的数据类型，建立多个【视图】
+		
+		// 创建一个8个字节的ArrayBuffer对象   Buffer：缓冲区
+		var buffer = new ArrayBuffer(8) //64个bit
+		
+		// Int32Array的视图：从0字节开始，到缓冲区的末尾
+		var v1 = new Int32Array(buffer) //可以存2个数字  1个数字占4个字节
+		// 创建了Uint8Array的视图：从字节2开始，到缓冲区的末尾
+		var v2 = new Uint8Array(buffer, 2)
+		// 创建一个指向buffer的Int16Array视图：开始于字节2，长度为2
+		var v3 = new Int16Array(buffer, 2, 2)
+		/**
+		 * 【归纳】视图构造函数可以接收3个参数：
+		 * 参数1：必需。视图对应的底层ArrayBuffer对象
+		 * 参数2：可选。视图开始的字节序号。默认从0开始
+		 * 参数3：可选。视图包含的数据个数，默认直到本段内存区域的末尾
+		 * 所以，v1 v2 v3是重叠的。v1[0]是一个32位的整数
+		 * 整数8：0  0000000   00000000   00001000
+		 * 整数-8：1  0000000   00000000   00001000
+		 * v2[0]是一个8位无符号整数   指向字节2
+		 * 整数8：00001000  可以存8个数字  
+		 * v3[0]是一个16位有符号整数    可以存4个整数
+		 * 指向字节2---字节3
+		 * 【注意】只要任何一个视图中对内存有修改，就会在另外两个视图上
+		 * 反应出来。
+		 */
+		//==========================
+		/**
+		 * 【注意】byteOffset必须与所要建立的数据类型一致，否则会报错
+		 */
+		var buffer = new ArrayBuffer(8)
+		/**
+		 * RangeError: start offset of Int16Array should be
+		 * a multiple of 2
+		 */
+		var i16 = new Int16Array(buffer, 1)
+		/**
+		 * 【归纳】上述代码中，新生成了一个8个字节的ArrayBuffer对象
+		 * 然后在这个对象的第一个字节建立了带符号的16位整数视图
+		 * 结果报错：原因：带符号的16位整数需要两个字节
+		 * 所以，byteOffset参数必须能够被2整除。如果想让byteOffset
+		 * 从任意字节位置开始解读ArrayBuffer对象，必须使用DataView视图
+		 * 因为TypedArray视图只提供了9种固定的解读格式。
+		 */
+	</script>
+</html>

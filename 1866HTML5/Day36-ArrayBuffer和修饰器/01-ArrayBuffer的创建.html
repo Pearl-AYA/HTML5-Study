@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ArrayBuffer的创建</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// ArrayBuffer是一个构造函数，可以分配
+		//一段可以存放数据的连续内存区域(二进制)
+		var buf = new ArrayBuffer(32)
+		/**
+		 * 【注意】这里的参数32表示申请了32个字节(1 Byte = 8bit)的内存区域
+		 * 每个字节的的值默认是0. ArrayBuffer的参数是所需要的内存大小
+		 */
+		//console.log(buf)
+		// 为了读写这段内容，需要为它指定【视图】
+		// 创建视图对象
+		var dataview = new DataView(buf)
+		//【Uint8】  表示Unsigned int 8
+		console.log(dataview.getUint8(0)) //0
+		/**
+		 * 【归纳】上面的代码对一段32位的内存建立了DataView视图
+		 * 然后以不带符号的8位整数格式读取第一个元素,结果是0
+		 */
+		//=======================
+		/**
+		 * 【TypedArray视图】是一组构造函数，而不是一个构造函数
+		 * 代表不同的数据格式
+		 */
+		var buffer = new ArrayBuffer(12)
+		// 将buffer创建成TypedArray视图(具体地说是Int32Array视图)
+		var x1 = new Int32Array(buffer)
+		x1[0] = 3
+		var x2 = new Uint8Array(buffer)
+		x2[0] = 8
+		console.log(x1[0]) //8
+		/**
+		 * 【归纳】上述是对同一段内存，分别建立了两种不同的视图
+		 * 32位带符号的整数(Int32Array)和8位不带符号的整数(Uint8Array)
+		 * 由于两个视图对应是同一段内存，一个视图修改了底层的内存，会
+		 * 影响到另一个视图。
+		 */
+		//======================
+		/**
+		 * 【TypedArray视图】的创建方式：
+		 * 1、接收一个ArrayBuffer实例
+		 * 2、接受普通数组作为参数，直接分配内存，生成底层的ArrayBuffer实例
+		 * 同时完成对这段内存的赋值
+		 * 【注意】Uint8Array的原型是TypedArray
+		 */
+		var typedArray = new Uint8Array([0, 1, 2])
+		console.log(typedArray.length) //长度为3
+		
+		typedArray[0] = 6
+		console.log(typedArray) //Uint8Array(3) [6, 1, 2]
+	</script>
+</html>

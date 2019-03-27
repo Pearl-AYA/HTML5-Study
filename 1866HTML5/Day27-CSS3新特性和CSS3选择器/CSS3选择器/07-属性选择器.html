@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>属性选择器</title>
+		<style type="text/css">
+			/*只要有name属性*/
+			input[name]{
+				background-color: orange;
+			}
+			/*同时又name属性和value属性的*/
+			input[name][value]{
+				background-color: red;
+			}
+			input[value='我是一个提交按钮']{
+				background-color: yellowgreen;
+			}
+			/*【注意】这里选中了第一个input和第三个input标签
+			 但是因为第三个inut标签有其他的【背景设置】而且优先级比
+			 当前选择器的优先级高，所以第三个input并没有显示成blue
+			 而是red。可以认为两个属性去找标签的优先级高*/
+			input[name |= 'inner']{
+				background-color: blue;
+			}
+			/*====================*/
+			/*理由同上：只要有name属性，而且包含ne字符即可选中*/
+			input[name *= 'ne']{
+				background-color: lightseagreen;
+			}
+			/*理由同上：只要有name属性而且以inner开头即可选中*/
+			input[name ^= 'inner']{
+				background-color: deepskyblue;
+			}
+			/*有name属性，而且以ab结尾即可选中*/
+			input[name $= 'ab']{
+				background-color: yellow;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" name="inner"/><br />
+		<input type="text" name="inner ab"/><br />
+		<input type="button" value="我是一个按钮" name="inner-hehe"/><br />
+		<input type="submit" value="我是一个提交按钮"/>
+	</body>
+</html>

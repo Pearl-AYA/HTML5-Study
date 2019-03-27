@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Symbol数据作属性名</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//在ES6之前，属性名只能是字符串；把对象作为属性名的时候，其实
+		//是把对象的toString方法的返回值作为属性名
+		var sym = Symbol()
+		var p = {
+			name: "李四",
+			//Symbol数据作为属性名的时候必须加中括号
+			[sym]: "我是新增的Symbol类型"
+		}
+		console.log(p.name)
+		//symbol作为对象的属性的时候，只能使用 [ ] 去访问，
+		//不能使用点语法去访问。
+		console.log(p[sym])
+		//=====================
+		/**
+		 * 【注意】symbol作为对象的属性名使用的时候，该属性
+		 * 还是【公开属性】，【不是私有属性】。但是这个时候使用for... in
+		 * 和for...of  时无法遍历到这个symbol属性的。
+		 */
+		for(var v in p){
+			//for...in循环无法遍历到属性名是Symbol类型的属性
+			console.log(v) //name
+		}
+		//======================
+		// 返回对象中所有的Symbol类型的属性名构成的数组
+		var ss = Object.getOwnPropertySymbols(p)
+		console.log(ss[0])
+		//======================
+		//[归纳]Reflect.ownKeys()方法可以获取到所有类型的属性名
+		//包括Symbol和普通类型的属性名
+		var keys = Reflect.ownKeys(p)
+		console.log(keys)
+	</script>
+</html>

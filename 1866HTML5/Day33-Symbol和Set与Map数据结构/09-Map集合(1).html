@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Map集合(1)</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//创建【Map集合】Map意思是【映射】键值对
+		//JS对象也有键值对：JS对象中的键值对的【键】只能是【字符串】
+		//在ES6中引入了Map数据结构：键值对的【键】可以是任意类型
+		var map = new Map()
+		//console.log(map)
+		
+		//map集合提供了set(key，value)方法来给map添加键值对
+		map.set("1", "a")
+		   .set("2", "b")
+		   .set(1, "c")
+		   .set({}, {})
+		   
+		console.log(map.get(1))
+		console.log(map) //"1" => "a"
+		console.log(map.size) //4
+	</script>
+</html>

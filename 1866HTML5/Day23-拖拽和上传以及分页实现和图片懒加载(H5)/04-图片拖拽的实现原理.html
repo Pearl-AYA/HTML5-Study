@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片拖拽的实现原理</title>
+		<style type="text/css">
+			div{
+				width: 300px;
+				height: 700px;
+				border: 1px dashed red;
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box1">
+			<!--拖拽元素-->
+			<!--【draggable】让元素可以拖动，默认是true可以拖动-->
+			<img src="img/drag.jpg" draggable="true" id="dragImg"/>
+			<img src="img/cardKingClub.png" draggable="true" id="cardKingClubImg"/>
+		</div>
+		<!--目标元素-->
+		<div id="box2"></div>
+	</body>
+	<script type="text/javascript">
+		var img = document.querySelector("#dragImg")
+		var img2 = document.querySelector("#cardKingClubImg")
+		var box2 = document.querySelector("#box2")
+		// 【拖拽元素】相关事件
+		img.ondragstart = function(){
+			console.log("=====开始拖拽=======")
+		}
+		img.ondragend = function(){
+			console.log("======拖拽完成的时候触发========")
+		}
+		// 【目标元素】相关事件
+		box2.ondragenter = function(){
+			console.log("====拖拽元素位于目标元素上方(鼠标进入的时候)触发========")
+		}
+		box2.ondragover = function(event){
+			console.log("=====拖拽元素位于目标元素上方持续触发======")
+			// 【🐷】在这个事件中，需要阻止默认行为才能触发ondrop事件
+			event.preventDefault()
+		}
+		// 在ondragover中执行event.preventDefault()阻止默认事件
+		//阻止的就是这个【ondragleave】事件
+		box2.ondragleave = function(){
+			console.log("====🍌🍌🍌拖拽元素离开目标元素的时候触发=====")
+		}
+		box2.ondrop = function(){
+			console.log("====🍎🍎🍎当拖拽元素位于目标元素上方并且松开鼠标的鼠标的时候触发=====")
+		}
+	</script>
+</html>

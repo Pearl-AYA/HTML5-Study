@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>JQ插件实现图片懒加载</title>
+		<script src="lib/jquery.js" type="text/javascript"></script>
+		<script src="lib/jquery.lazyload.min.js" type="text/javascript"></script>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul{
+				list-style: none;
+				width: 440px;
+				margin: 0 auto;
+			}
+			li{
+				width: 440px;
+				height: 300px;
+			}
+			li img{
+				width: 440px;
+				height: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<!--li*16>img[data-original=img/美女/$.jpg]-->
+			<li><img src="" alt="" data-original="img/美女/0.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/1.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/2.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/3.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/4.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/5.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/6.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/7.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/8.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/9.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/10.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/11.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/12.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/13.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/14.jpg" /></li>
+			<li><img src="" alt="" data-original="img/美女/15.jpg" /></li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		$("img").lazyload({
+			effect: 'fadeIn'
+		})
+	</script>
+</html>

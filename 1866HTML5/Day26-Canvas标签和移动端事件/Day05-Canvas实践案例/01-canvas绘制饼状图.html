@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas绘制饼状图</title> 
+</head>
+<body>
+	<canvas id="canvas" width="900" height="900" style="background-color: pink;"></canvas>
+</body>
+<script type="text/javascript">
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	var data = [
+		{"role":"警察","money":"4500","value":"0.15","color":"red"},
+		{"role":"老师","money":"4500","value":"0.1","color":"green"},
+		{"role":"演员","money":"45000","value":"0.3","color":"gray"},
+		{"role":"科学家","money":"7000","value":"0.25","color":"orange"},
+		{"role":"文员","money":"5000","value":"0.2","color":"yellow"}
+	]
+	// 圆心坐标
+	var point = {
+		x0: 400,
+		y0: 400
+	}
+	// 半径
+	var radius = 100;
+	//1、画圆函数
+	function circle(radius,start,end,color){
+		ctx.beginPath();
+		ctx.moveTo(point.x0,point.y0);
+		ctx.arc(point.x0, point.y0, radius, start, end, false);
+		ctx.fillStyle = color;
+		ctx.closePath();
+		ctx.fill();
+	}
+	// 2、划线 绘制文字
+	function drawLine(x,y,txt){
+		ctx.beginPath();
+		ctx.moveTo(point.x0,point.y0);
+		ctx.lineTo(x,y);
+		ctx.closePath();
+		ctx.stroke();
+		ctx.fillText(txt,x,y)//参数1.文本 参数2.x  参数3.y
+	}
+	//3、循环遍历数据
+	var start = 0; // 记录开始的弧度
+	var end = 0;// 记录结束的弧度
+	
+	//循环绘制
+	for(var i = 0; i < data.length; i++){
+		// 记录上一个圆弧的结束弧度
+		start = end;
+		// 记录当前圆弧的结束弧度
+		end = 360 * data[i].value * Math.PI / 180 + start; 
+		circle(radius, start, end, data[i].color);
+		//=====================
+		var x1 = Math.cos(end) * (radius + 200) + point.x0;
+		var y1 = Math.sin(end) * (radius + 200) + point.y0;
+		//=====================
+		drawLine(x1, y1, data[i].role);
+	}
+</script>
+</html>

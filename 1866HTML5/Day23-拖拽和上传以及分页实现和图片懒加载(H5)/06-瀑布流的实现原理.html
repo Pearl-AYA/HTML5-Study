@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>瀑布流的实现原理</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#box{
+				width: 90%;
+				margin: 20px auto;
+				background: pink;
+			}
+			#box ul{
+				width: 24%;
+				margin: 5px;
+				float: left;
+				list-style: none;
+			}
+			#box li img{
+				width: 100%;
+				margin: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--div#box>ul*4-->
+		<div id="box">
+			<ul></ul>
+			<ul></ul>
+			<ul></ul>
+			<ul></ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 获取所有的ul
+		var ulArr = document.querySelectorAll("ul")
+		// 初始化图片数量
+		function initImg(index, count){
+			// 递归结束条件
+			if(index === count){
+				return
+			}
+			var img = document.createElement("img")
+			// 设置图片的src
+			img.src = './img/美女/' + index + '.jpg'
+			// 需要判断哪个ul最短，就把li放进去
+			// 定义一个临时最短的ul的变量   假设某个ul最短
+			var shortUrl = ulArr[0]
+			// 异步加载图片，保证offsetHeight计算的时候图片已经加载完毕
+			img.onload = function(){
+				var li = document.createElement("li")
+				// 追加img标签到li标签下
+				li.appendChild(this)
+				for(let j = 0; j < ulArr.length; j++){
+					if(shortUrl.offsetHeight >= ulArr[j].offsetHeight){
+						shortUrl = ulArr[j]
+					}
+				}
+				// 找到最短的ul之后，把li(含图片)放进去
+				shortUrl.appendChild(li)
+				// 
+				initImg(++index, count)
+			}
+		}
+		// 执行
+		initImg(0, 120)
+	</script>
+</html>

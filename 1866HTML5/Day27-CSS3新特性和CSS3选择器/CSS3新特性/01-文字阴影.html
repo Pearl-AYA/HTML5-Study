@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>文字阴影</title>
+		<style type="text/css">
+			#box{
+				width: 400px;
+				height: 100px;
+				margin: 200px auto;
+				font-size: 50px;
+				font-weight: bold;
+				text-align: center;
+				/*CSS3新增的文字阴影*/
+				/*【语法】参数1表示X方向的偏移，参数2表示Y方向的偏移
+				 参数3表示模糊度，参数4表示颜色*/
+				/*text-shadow: 5px 5px 5px red, 10px 10px 10px greenyellow;*/
+				text-shadow: 5px 5px 5px red;
+				/*【归纳】box-shadow有表示阴影大小的可选属性;
+				 但是text-shadow没有这个属性值*/
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">皮皮虾，我们走!然并卵!</div>
+	</body>
+</html>

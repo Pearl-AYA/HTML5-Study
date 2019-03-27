@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>CSS3形变transform</title>
+		<style type="text/css">
+			.container{
+				width: 200px;
+				height: 200px;
+				margin: 50px;
+				float: left;
+				border: 1px solid gray;
+				/*【flat】表示所有的子元素在2D平面呈现(默认值)*/
+				/*transform-style: flat;*/
+				
+				/*支持3D空间呈现*/
+				/*transform-style: preserve-3d;*/
+			}
+			.box{
+				width: 100%;
+				height: 100%;
+				opacity: 0.75;
+			}
+			/*2D平移: translate*/
+			#div_1 .box{
+				background-color: red;
+				/*【transform】表示形变；【translate】表示平移*/
+				/*transform: translateX(30px);*/
+				/*transform: translateY(30px);*/
+				/*transform: translateY(-30px);*/
+				transform: translate(30px, -30px);
+			}
+			/*2D缩放：scale*/
+			#div_2 .box{
+				background-color: deeppink;
+				/*transform: scaleX(0.5);*/
+				/*transform: scaleY(0.5);*/
+				/*transform: scaleY(2);*/
+				transform: scale(0.5, 0.8);
+			}
+			/*2D旋转：rotate*/
+			#div_3 .box{
+				background-color: yellowgreen;
+				/*改变旋转的中心的位置：transform-origin*/
+				transform-origin: bottom center;
+				/*顺时针旋转45度*/
+				/*transform: rotate(45deg);*/
+				/*混合使用*/
+				transform: rotate(45deg) scaleX(1.2) scaleY(0.5);
+			}
+			/*2D倾斜*/
+			#div_4 .box{
+				background-color: darkblue;
+				/*transform: skewX(30deg);*/
+				/*transform: skewY(30deg);*/
+				transform: skew(30deg, 45deg);
+			}
+			/*3D平移*/
+			#div_5 .box{
+				background-color: darkblue;
+				/*【注意】先设置透视点perspective，在transform中设置是对当前
+				 元素生效，如果设置在属性中，比如：【perspective:600px】则设置
+				 在父元素中(舞台元素/容器元素)中*/
+				transform: perspective(600px) translate3d(50px, 50px, 100px)
+			}
+			/*3D旋转*/
+			#div_6 .box{
+				background-color: red;
+				/*transform: perspective(600px) rotateX(45deg);*/
+				/*transform: perspective(600px) rotateY(45deg);*/
+				/*transform: perspective(600px) rotateZ(45deg);*/
+				transform: perspective(600px) rotate3d(1,1,1,45deg);
+			}
+			/*3D缩放：scale*/
+			#div_7 .box{
+				background-color: orange;
+				/*transform: perspective(600px) scaleX(0.8);*/
+				/*transform: perspective(600px) scaleY(0.8);*/
+				transform: perspective(600px) scaleZ(5) rotateX(45deg);
+			}
+		</style>
+	</head>
+	<body>
+		<!--div#div_$.container*7>div.box-->
+		<div id="div_1" class="container">
+			<div class="box"></div>
+		</div>
+		<div id="div_2" class="container">
+			<div class="box"></div>
+		</div>
+		<div id="div_3" class="container">
+			<div class="box">3</div>
+		</div>
+		<div id="div_4" class="container">
+			<div class="box"></div>
+		</div>
+		<div id="div_5" class="container">
+			<div class="box"></div>
+		</div>
+		<div id="div_6" class="container">
+			<div class="box">6</div>
+		</div>
+		<div id="div_7" class="container">
+			<div class="box"></div>
+		</div>
+	</body>
+</html>

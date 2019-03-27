@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数组解构</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/*var arr = [1, 2, 3, 4]
+		let [first, second] = arr
+		console.log(first + " " + second)*/
+		//====================
+		/*let [,,third] = arr
+		console.log(third)*/
+		//=====================
+		/**
+		 * 【交换两个变量的值】
+		 * 1、中间变量法   杯子temp   杯子a   杯子b
+		 * temp = a
+		 * a = b
+		 * b = temp
+		 * 2、加减法
+		 * 3、异或法
+		 * 4、解构法
+		 */
+		//加减法
+		var a = 3; //苹果
+		var b = 8; //梨子
+		console.log("a = " + a + " b = " + b);
+		/*a = a + b
+		b = a - b
+		a = a - b*/
+		//异或法
+		/*a = a ^ b
+		b = a ^ b
+		a = a ^ b*/
+		// 数组解构
+		//[a,b]是数组的解构赋值，而[b,a]是数组
+		//相当于a = b；b = a;
+		[a, b] = [b, a];
+		console.log("a = " + a + " b = " + b);
+	</script>
+</html>

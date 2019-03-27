@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!--让项目支持移动端:屏幕尺寸多样化-->
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>viewport和rem单位</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			/*以后不会写死，而且不会写这么大，会分成10份来计算*/
+			/*html{
+				font-size: 320px;
+			}*/
+			/*【归纳】400px是一个绝对单位，在移动端在建议使用
+			 相对单位：rem   【rem布局】默认1rem  = 根元素的字体大小
+			 html默认的font-size="16px",以这个字体大小作为其他元素
+			 尺寸的标准。在工具>选项>HBuilder>代码助手设置中【启动】
+			 px转rem的比例：64px ===> 1rem(以工具设置为标准)
+			 rem转px的比例：1rem ===> 16px(以根元素的html的font-size的值)
+			 * */
+			#box{
+				width: 5rem;
+				height: 5rem;
+				background-color: red;
+				font-size: 100px;
+				margin: 100px auto;
+			}
+			#box2{
+				width: 320px;
+				height: 320px;
+				background-color: greenyellow;
+				margin: 100px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<div id="box2"></div>
+	</body>
+	<!--【flexible.js】是阿里巴巴公司淘宝写的一个框架【手淘框架】
+		用于计算rem单位-->
+	<script src="lib/flexible.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		/**
+		 * 自己写一个监听屏幕宽度大小改变的js代码并执行
+		 * 相当于【自己简单实现的flexible.js框架】当导入手淘框架，
+		 * 那么自己写的这个就不需要了。
+		 */
+		(function(){
+			// 确定一个初始化的尺寸
+			size()
+			// 监听尺寸变化并重新设置
+			window.onresize = function(){
+				size()
+			}
+			// 计算根元素字体大小(也就是1rem所代表的大小)
+			function size(){
+				var winW = document.documentElement.clientWidth ||
+				document.body.clientWidth
+				console.log(winW)
+				// 我们一般把font-size分成10份来计算，这样比较方便
+				document.documentElement.style.fontSize = winW / 10 + 'px'
+			}
+		})(); 
+	</script>
+</html>

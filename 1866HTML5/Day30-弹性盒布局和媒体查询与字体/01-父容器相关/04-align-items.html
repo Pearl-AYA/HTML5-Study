@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>align-items</title>
+		<link rel="stylesheet" type="text/css" href="../style.css"/>
+		<style type="text/css">
+			/**
+			 * 【align-items】flex-start | flex-end | center | baseline | stretch;
+			 * 交叉轴对齐方式：顶部对齐 | 底部对齐 | 居中对齐 | 文本基线对齐 | 如果项目未设置高度
+			 * 或设为auto，将占满整个容器的高度（默认）
+			 * 【stretch】伸展、张开   如果子元素未设置高度或者设为auto，
+			 * 将占满整个容器的高度(默认)
+			 * 【归纳】所谓的交叉轴对齐方式是针对交叉轴而言的，而且以行为单位进行
+			 * 对齐(不是以li为单位)
+			 */
+			ul:nth-of-type(1){
+				/*默认顶部对齐*/
+				align-items: flex-start;
+			}
+			ul:nth-of-type(2){
+				align-items: flex-end;
+			}
+			ul:nth-of-type(3){
+				align-items: center;
+			}
+			ul:nth-of-type(4){
+				/*【注意】baseline表示文本基线对齐*/
+				align-items: baseline;
+			}
+			/*【归纳】在设置了子元素li的height为auto的情况下，
+			 【align-items: stretch;】将使得ul占满整个容器的高度*/
+			ul li{
+				height: auto;
+			}
+			ul:nth-of-type(5){
+				align-items: stretch;
+			}
+		</style>
+	</head>
+	<body>
+		<!--ul*4>li{$}*5-->
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<!--在这里添加一个属性style，设置高为80px-->
+			<li style="line-height: 80px;">3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+	</body>
+</html>

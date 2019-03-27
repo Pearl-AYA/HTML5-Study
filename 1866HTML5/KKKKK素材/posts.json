@@ -1,0 +1,14 @@
+{
+	"products":[
+		{"id":"1","name":"商品1","description":"苹果","category":"水果类","price":100},
+		{"id":"2","name":"商品2","description":"梨子","category":"水果类","price":110},
+		{"id":"3","name":"商品3","description":"香蕉","category":"水果类","price":210},
+		{"id":"4","name":"商品4","description":"桃子","category":"水果类","price":50},
+		{"id":"5","name":"商品5","description":"橘子","category":"水果类","price":30},
+		{"id":"6","name":"商品6","description":"土豆","category":"蔬菜类","price":20},
+		{"id":"7","name":"商品7","description":"西红柿","category":"蔬菜类","price":55},
+		{"id":"8","name":"商品8","description":"白菜","category":"蔬菜类","price":60},
+		{"id":"9","name":"商品9","description":"猪肉","category":"肉类","price":500},
+		{"id":"10","name":"商品10","description":"鸡肉","category":"肉类","price":350}
+	]
+}

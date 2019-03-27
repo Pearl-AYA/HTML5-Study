@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>移动端手势</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box{
+				width: 300px;
+				height: 300px;
+				background-color: pink;
+				margin: 200px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<h1></h1>
+			<h1></h1>
+			<h1></h1>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var box = document.querySelector("#box")
+		//PC端的click事件
+		box.addEventListener('click', function(event){
+			//console.log("======click======")
+			console.log(event) //MouseEvent事件对象
+		})
+		// 手势   手指按下
+		box.addEventListener('touchstart', function(event){
+			console.log("=====touchstart======")
+			//console.log(event) //TouchEvent事件对象
+			// 函数调用
+			fn(event)
+		})
+		// 手指抬起
+		box.addEventListener('touchend', function(event){
+			console.log("====touchend=====")
+			fn(event)
+		})
+		// 手指移动
+		box.addEventListener('touchmove', function(event){
+			console.log("====touchmove=====")
+			fn(event)
+		})
+		// 被打断(比如电话)的时候触发
+		box.addEventListener("touchcancel", function(event){
+			console.log("======来电话了☎️☎️☎️️=====")
+		})
+		// 找到h1数组
+		var touchesH1 = document.querySelector("#box h1:nth-of-type(1)")
+		var targetTouchesH1 = document.querySelector("#box h1:nth-of-type(2)")
+		var changedTouchesH1 = document.querySelector("#box h1:nth-of-type(3)")
+		// 定义一个函数
+		function fn(event){
+			// 记录你有几个手指在屏幕上
+			touchesH1.innerHTML = "touches: " + event.touches.length;
+			// 记录DOM元素上有几根手指
+			targetTouchesH1.innerHTML = "targetTouches: " + 
+				event.targetTouches.length;
+			// 记录你有几根手指发生的状态改变
+			changedTouchesH1.innerHTML = "changedTouches: " + 
+				event.changedTouches.length;
+		}
+	</script>
+</html>

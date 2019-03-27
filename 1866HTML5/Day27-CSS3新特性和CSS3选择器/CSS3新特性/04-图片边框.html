@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图片边框</title>
+		<style type="text/css">
+			#box{
+				width: 300px;
+				height: 300px;
+				margin: 200px auto;
+				background-color: deepskyblue;
+				/*【提前先】设置border为transparent，否则会有显示不出的问题*/
+				border: 1px solid transparent;
+				/*引入图片路径*/
+				border-image-source: url(img/border.png);
+				border-image-width: 30px;
+				/*将图片拆分成九宫格*/
+				border-image-slice: 27 27 27 27;
+				/*设置重复效果：拉伸显示(默认也是拉伸)*/
+				/*border-image-repeat: stretch;*/
+				/*重复显示，不拉伸*/
+				/*border-image-repeat: round;*/
+				
+				/*重复显示，平铺(不拉伸)
+				 【注意】观察repeat和round的区别*/
+				border-image-repeat: repeat;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+	</body>
+</html>
+<!--【border-image-slice】作用把边框图像切成9个区域：4个角，4条边和中间部位
+	一般称作【九宫格】它可以指定边框图像顶部、右侧、底部、左侧的内偏移量
+	fill为可选择属性，假如指定，则中间部分不是透明状态；否则，中间(第9块区域)
+	透明。这个border-image-slice就是切片的作用，把图像直接切开，中间不留痕迹
+	被切割的图像只能在边框宽度内活动。slice不允许设置负值。设置负值和设置
+	大于盒子的高度或者宽度都被100%。slice切过的区域有可能会重叠。比如：
+	右切和左切的值之和>=盒子的宽度，那么顶部的区域（5号区）和底部（7号区）为空白
+-->

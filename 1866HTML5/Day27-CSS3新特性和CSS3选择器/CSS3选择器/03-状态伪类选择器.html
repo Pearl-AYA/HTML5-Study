@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>状态伪类选择器</title>
+		<style type="text/css">
+			/*禁用*/
+			input:disabled{
+				background-color: gray;
+			}
+			/*不禁用*/
+			input:enabled{
+				background-color: orange;
+			}
+			/*只读*/
+			input:read-only{
+				background-color: green;
+			}
+			/*【注意】这个特性放最后面演示，因为非禁用的情况
+			 都有可能获取到焦点*/
+			input:focus{
+				background-color: greenyellow;
+			}
+			/*选中后*/
+			input:checked{
+				height: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		获得焦点：<input type="text" /><br />
+		禁用：<input type="text" disabled="disabled"/><br />
+		非禁用：<input type="text" /><br />
+		只读：<input type="text" readonly="readonly"/><br />
+		选中：<input type="checkbox" />
+	</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>类的继承</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//声明Father类
+		class Father{
+			constructor(name){
+				this.name = name
+			}
+			say(){
+				console.log("父类的say方法")
+			}
+		}
+		//声明Son类
+		class Son extends Father{
+			constructor(age, name){
+				// 【🐷】super和this类似的是它也是一个指针
+				// 不同的是：super指向父类(的构造函数)/父对象；this指向当前类/当前对象的
+				//显式地去调用父类的构造函数，这个时候的super后面不要加点
+				//【super()的调用】必须是在构造函数的起始位置(第一行)调用
+				super(name)
+				//【super(name)】是在调用父类的构造方法。
+				//功能：相当于之前的【构造函数借调】Father.call(this, name);
+				this.age = age
+			}
+			//eat方法是子类特有的方法
+			eat(){
+				console.log("子类的方法...")
+			}
+			//子类中的say方法会屏蔽到父类中的同名say方法。
+			say(){
+				//显式地调用父类的方法，这个是一定要加点
+				//如果在子类中确实需要调用父类中已经被屏蔽掉的方法
+				//则需要使用super.xxx()进行调用
+				super.say()
+				console.log("子类的say方法")
+			}
+		}
+		var son = new Son(20, "李四")
+		son.say()
+		son.eat()
+		// 继承到Father的属性
+		console.log(son.name)
+		console.log(son.age)
+	</script>
+</html>
+<!--function Father(name) {
+        this.name = name;
+    }
+    Father.prototype.sayName = function () {
+        console.log(this.name);
+    }
+
+    function Son(name,age) {
+        Father.call(this, name);
+        this.age = age;
+    }
+    Son.prototype = new Father();
+    Son.prototype.constructor = Son;
+    Son.prototype.sayAge = function () {
+        console.log(this.age);
+    }
+
+    var son1 = new Son("儿子", 20);
+    son1.sayAge();  //20
+    son1.sayName(); //儿子-->

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>3D旋转图</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-grid.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	</head>
+	<body>
+		<div class="demo">
+			<div class="container">
+				<div class="row">
+					<!--=============-->
+					<!--使用Bootstrap的栅格系统-->
+					<div class="col-md-4 col-sm-6">
+						<div class="box">
+							<div class="box-img">
+								<img src="images/1.jpg"/>
+							</div>
+							<div class="box-content">
+								<h4 class="title">Duends</h4>
+								<p class="decription">欢迎来到粤嵌</p>
+							</div>
+						</div>
+					</div>
+					<!--==============-->
+					<div class="col-md-4 col-sm-6">
+						<div class="box">
+							<div class="box-img">
+								<img src="images/2.jpg"/>
+							</div>
+							<div class="box-content">
+								<h4 class="title">Duends</h4>
+								<p class="decription">欢迎来到粤嵌</p>
+							</div>
+						</div>
+					</div>
+					<!--===============-->
+					<div class="col-md-4 col-sm-6">
+						<div class="box">
+							<div class="box-img">
+								<img src="images/3.jpg"/>
+							</div>
+							<div class="box-content">
+								<h4 class="title">Duends</h4>
+								<p class="decription">欢迎来到粤嵌</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<!--【归纳】单位em是什么？
+	【答】em和rem相同的是，都是一个相对单位；px是绝对单位。
+	相对单位的计算必须要有参考物，其中em的参考物是它的父元素的font-size的值
+	rem的参考物是根元素(即html)的font-size的值。比如，某个div的font-size的值
+	为"16px", 此时这个div的后代元素将继承它的这个字体大小，除非重新在其后代
+	元素中进行了显式的设置。比如：此时将其子元素设置为"0.75em"
+	那么其字体大小计算出来就相当于【0.75 * 16px = 12px】
+	【归纳】使用em的好处：如果用户通过浏览器的UI控件改变了文字的大小，那么
+	我们整个的页面也会进行放大(或缩小)，不至于用户改变了浏览器的字体后会
+	致使整个页面崩溃。
+-->

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>更多background相关属性</title>
+		<style type="text/css">
+			.icon1{
+				width: 64px;
+				height: 64px;
+				background-color: orange;
+				background-image: url(../img/un_ico_localnav_v7.12@2x.png);
+				background-repeat: no-repeat;
+				/*设置图片的位置是0 0*/
+				background-position: 0px 0px;
+			}
+			.icon2{
+				width: 64px;
+				height: 64px;
+				background-color: orange;
+				background-image: url(../img/un_ico_localnav_v7.12@2x.png);
+				background-repeat: no-repeat;
+				background-position: 0px -64px;
+			}
+			.box{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				background-image: url(../img/image.png);
+				background-repeat: no-repeat;
+				/*【cover】等比例缩放到完全覆盖容器，背景图像有可能超出容器*/
+				/*background-size: cover;*/
+				
+				/*【contain】表示完全包含图片，一端完全撑开，另一端等比例缩放
+				 【归纳】contain取宽高里面的最小值；cover取宽高里面的最大值*/
+				/*background-size: contain;*/
+				
+				/*设置撑开的宽度和高度为100px*/
+				background-size: 100px auto;
+				/*设置位置从100px和100px的点的位置开始*/
+				background-position: 100px 100px;
+				padding: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="icon1"></div>
+		<hr />
+		<div class="icon2"></div>
+		<div class="box"></div>
+	</body>
+</html>

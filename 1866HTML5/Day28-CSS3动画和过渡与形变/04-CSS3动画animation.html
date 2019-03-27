@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>CSS3动画animation</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			.container{
+				width: 50%;
+				height: 300px;
+				position: relative;
+				float: left;
+				border: 1px solid black;
+			}
+			.container2{
+				border: none;
+			}
+			.box{
+				width: 100px;
+				height: 100px;
+				background-color: orange;
+				position: absolute;
+			}
+			#box1{
+				/*设置animation动画*/
+				/*animation: moveRect 2s linear infinite alternate forwards;*/
+				/**
+				 * 【归纳】alternate表示原路返回；infinite表示无限循环；
+				 * linear表示匀速运动；
+				 */
+				/*animation: moveRect 2s linear infinite alternate forwards;*/
+				/*【归纳】none表示动画结束以后迅速回到初始帧处；
+				 forwards表示动画结束以后停留在最后一帧的位置*/
+				/*animation: moveRect 2s linear none;*/
+				/*animation: moveRect 2s linear backwards;*/
+				animation: moveRect 2s linear forwards;
+			}
+			/*设置关键帧动画：moveRect*/
+			@keyframes moveRect{
+				from{
+					/*初始状态*/
+					transform: translate(0,0);
+				}
+				to{
+					/*目标状态*/
+					transform: translate(500px, 200px);
+				}
+			}
+			/*===================*/
+			#box2{
+				/*animation: moveRect2 8s infinite alternate linear;*/
+				/*【注意】alternate-reverse表示相反的动画，即动画的行为与@keyframes中
+				 定义的参数相反；也会原路返回*/
+				animation: moveRect2 8s infinite alternate-reverse linear;
+			}
+			@keyframes moveRect2{
+				0%{
+					transform: translate(0,0);
+				}
+				25%{
+					transform: translate(400px, 0);
+				}
+				50%{
+					transform: translate(400px, 400px) scale(2,2);
+					border-radius: 50%;
+					background-color: greenyellow;
+				}
+				75%{
+					transform: translate(0, 400px);
+				}
+				100%{
+					transform: translate(0,0);
+				}
+			}
+			/*====================*/
+			#box3{
+				border-radius: 50%;
+				margin: 100px auto;
+				border: 2px solid brown;
+				position: relative;
+				animation: moveCircle 2s linear infinite;
+			}
+			/*伪类*/
+			#box3:before{
+				content: "";
+				display: block;
+				width: 10px;
+				height: 10px;
+				position: absolute;
+				background-color: greenyellow;
+				left: 50px;
+				top: -6px;
+				border-radius: 50%;
+				border: 1px solid brown;
+			}
+			@keyframes moveCircle{
+				from{
+					transform: rotate(0);
+				}
+				to{
+					transform: rotate(360deg);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!--div.container*3>div#box$.box-->
+		<div class="container">
+			<div id="box1" class="box"></div>
+		</div>
+		<div class="container container2">
+			<div id="box2" class="box"></div>
+		</div>
+		<div class="container">
+			<div id="box3" class="box"></div>
+		</div>
+	</body>
+</html>
