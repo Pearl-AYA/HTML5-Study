@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>全局作用域下的绑定</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// "use strict" // 严格模式
+		console.log(this) //Window
+		function foo(){
+			// 在严格模式下，这个a没有使用var定义是会报错的
+			// 但是在默认的非严格模式下，能正常使用
+			// 只有ES5和之前的版本才有严格模式和非严格模式之分
+			// 在ES6中只有严格模式
+			a = 10
+		}
+		foo();
+		console.log(a) // 10 变量a为全局变量
+		//=================
+		// 构造函数
+		function Person(){
+			this.name = "李四"
+			console.log(this)
+			// return this // 构造方法会默认隐式返回this，即当前对象
+			
+			//如果人为地修改构造函数的返回值，那么结果也会修改
+			//return []
+		}
+		// 当做普通函数调用的时候，this表示调用者
+		// 这里调用者为Window，所以this指代window
+		Person();
+		
+		// 当执行new Person()的时候，会打印一次this，此时this指代当前对象
+		// 即Person；当new Person()的返回值被打印的时候
+		//new Person(); // Person
+		console.log(new Person());
+	</script>
+</html>

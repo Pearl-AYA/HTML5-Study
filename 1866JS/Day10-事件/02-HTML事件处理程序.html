@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body onload="show();">
+		<!--<button onclick="show();">按钮</button>-->
+		<button>按钮</button>
+	</body>
+	<script type="text/javascript">
+		function show(){
+			alert("你踩到我的尾巴了!")
+		}
+		// HTML和JS的耦合性小
+		document.querySelector("button").onclick = show
+		// 删除事件处理程序
+		document.querySelector("button").onclick = null
+		//============
+		// 匿名函数的写法
+		document.querySelector("botton").onclick = function(){
+			
+		}
+	</script>
+</html>

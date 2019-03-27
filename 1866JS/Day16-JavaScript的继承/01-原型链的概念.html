@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原型链的概念</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// Father本来有一个默认的原型
+		function Father(name){
+			this.name = name;
+		}
+		//这里打印的是浏览器默认创建的原型对象
+		console.log(Father.prototype)
+		// Father的原型修改成【{}对象】
+		Father.prototype = {}
+		console.log(Father.prototype)
+		// 给原型对象中添加speak方法
+		Father.prototype.speak = function(){
+			console.log("我是父类型中的方法")
+		}
+		// Son构造方法
+		// 儿子有自己的默认的原型
+		function Son(age){
+			this.age = age
+		}
+		// Son的原型重设为Father的一个具体的对象
+		Son.prototype = new Father("麻子")
+		// 让Father的constructor属性指向Son
+		Son.prototype.constructor = Son
+		// Son对象继承到了Father的原型中的speak()方法
+		var son = new Son(1)
+		son.speak()
+		console.log(son.name)
+	</script>
+</html>

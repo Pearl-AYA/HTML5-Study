@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>宰相的麦子</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var count = 0
+		var sum = 0
+		var wheat = 1
+		
+		function countSum(count, sum, wheat){
+			count++
+			console.log(count)
+			// 【递归结束条件】如果64个格子全部放满了就退出
+			if(count == 65){
+				alert("宰相的麦子一共" + wheat + "颗")
+				return
+			}
+			// 计算前n格的麦子总数
+			sum += wheat
+			// 计算下一格的麦子数
+			wheat *= 2
+			countSum(count, sum, wheat)
+		}
+		// 函数的调用
+		countSum(count,sum,wheat)
+	</script>
+	<!--【题目】宰相的麦子。。。
+		题目模拟：1 + 2 + 4 + 8 + ...+ n + 2n
+	-->
+</html>

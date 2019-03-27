@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>字符串逆序</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var str = "iOS Android HTML5 Java"
+		function reverse_01(str){
+			var newStr = ''
+			for (var i = str.length - 1; i >= 0; i--) {
+				newStr += str.charAt(i)
+			}
+			return newStr
+		}
+		function reverse_02(str){
+			return str.split('').reverse().join('')
+		}
+		alert(reverse_01(str))
+		alert(reverse_02(str))
+	</script>
+</html>

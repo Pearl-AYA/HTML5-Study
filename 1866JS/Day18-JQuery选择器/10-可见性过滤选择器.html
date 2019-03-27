@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>可见性过滤选择器</title>
+		<style type="text/css">
+			div{
+				width: 200px;
+				height: 200px;
+				background-color: deeppink;
+			}
+		</style>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div></div>
+		<div hidden="hidden"></div>
+		<input type="text" hidden/>
+		<div style="display: none;"></div>
+		<div style="visibility: hidden;"></div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 选取所有【不显示】的元素。包括input的type属性是hidden
+			// 以及包括display=none。但是【style="visbility:hidden"】的
+			// 是不会被选中的，因为这个visbility:hidden表示可见性为hidden
+			// 即已经显示出来了，并不是不显示，只是显示的效果眼睛看不到而已
+			var $all =$(":hidden")
+			// 共计9个：head  meta title  style  script  script div input  div
+			// 
+			console.log($all)
+			//====================
+			var $show = $(":visible")
+			console.log($show)
+			// 共计4个：分别是html  body   div  div
+			/**
+			 * 【归纳】这个style="visibility:hidden"属性是属于可见的
+			 * 表面上看起来含有hidden字样，但是并不是:hidden，而是遵循
+			 * :visible
+			 */
+		})
+	</script>
+</html>

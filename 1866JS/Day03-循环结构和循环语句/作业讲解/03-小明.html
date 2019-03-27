@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		请输入小明的考试名次：<input type="text" id="examResult"/>
+		<input type="button" id="submit" value="提交"/>
+	</body>
+	<script type="text/javascript">
+		var examResult = document.getElementById("examResult")
+		var submit = document.getElementById("submit")
+		submit.onclick = function(){
+			// 【注意】这个examResult.value的值的获得必须要在submit.onclick
+			// 函数里面得到，否则获取到的是空字符串
+			// 只有【提交】后拿到的结果才是输入的结果
+			var result = Number(examResult.value)
+			console.log(result)
+			if(result){
+				switch(result){
+					case 1:
+						alert("奖励IP8")
+						break
+					case 2:
+						alert("奖励IP7")
+						break
+					case 3:
+						alert("奖励IP6")
+						break
+					case 4:
+						alert("奖励IP5")
+						break
+					default:
+						alert("努力吧，骚年!")
+						break
+				}
+			}else{
+				alert("输入错误，请输入一个非零数字!")
+			}
+		}
+	</script>
+</html>

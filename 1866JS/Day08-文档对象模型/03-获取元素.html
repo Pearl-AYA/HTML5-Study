@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<h1 id="myH1" class="h1_class">我是A级标题</h1>
+		<h1 id="myH2" class="h1_class">我是B级标题</h1>
+		<h1 id="myH3" class="h1_class">我是C级标题</h1>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【document.getElementById(id)】通过ID查找元素
+		 * 1、使用该方法一定不要查找多个id
+		 * 2、如果有多个相同的id，则只会返回一个元素
+		 * 3、在低于IE8的版本，对匹配元素的ID不区分大小写
+		 */
+		var h1 = document.getElementById("myH1")
+		console.log(h1)
+		console.log(h1.id)
+		console.log(h1.className)
+		console.log(h1.innerHTML)
+		
+		//================
+		/**
+		 * E-le-me
+		 * 【document.getElementsByTagName()】通过标签名查找元素节点
+		 * 因为一个文档中可能出现多个标签。所以该方法返回的是多个Element
+		 * 元素组成的集合。平常不太推荐大家使用该方法。尽量使用：getElementById
+		 */
+		var h1s = document.getElementsByTagName("h1")
+		console.log(h1s)
+		for (var i = 0; i < h1s.length; i++) {
+			//console.log(h1s[i].id)
+			console.log(h1s.item(i).id)
+		}
+	</script>
+</html>

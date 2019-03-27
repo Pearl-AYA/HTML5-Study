@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>子元素过滤选择器</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<ul>
+			<p></p>
+			<li>li的内容1</li>
+			<li>li的内容2</li>
+			<li>li的内容3</li>
+			<li>li的内容4</li>
+			<li>li的内容5</li>
+			<li>li的内容6</li>
+			<li>li的内容7</li>
+			<li>li的内容8</li>
+			<p></p>
+		</ul>
+		<ul>
+			<li>li的内容1</li>
+			<li>li的内容2</li>
+			<li>li的内容3</li>
+			<li>li的内容4</li>
+		</ul>
+		<ul>
+			<p></p>
+			<li>我是假独生子</li>
+			<p></p>
+		</ul>
+		<li>wghq</li>
+		<a href=""></a>
+		<ul>
+			<li>呵呵</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 匹配li的父元素的第一个孩子，要求它的标签名
+			// 必须为li，如果第一个儿子的标签名不为li，那么不匹配
+			/*$("li:first-child").css({
+				backgroundColor: "pink"
+			})*/
+			//==============
+			// 匹配li的父元素的最后一个孩子，要求它的标签名
+			//必须为li，如果最后一个孩子的标签名不为li，那么不匹配
+			/*$("li:last-child").css({
+				backgroundColor: "blue"
+			})*/
+			//==============
+			// 如果父类元素仅仅有一个子元素，而且该子元素的标签名为li
+			// 那么就能匹配到该子元素；如果有其他的元素存在，即便不是
+			//li元素，那么也不算是独生子。这种情况找不到任何的元素
+			/*$("li:only-child").css({
+				backgroundColor: "red"
+			})*/
+			//=================
+			// 基于1的数字。匹配其li的父元素下的第2个子元素，而且这个元素的
+			// 标签名必须为li
+			// 【注意】这个计数是从1开始的。不是从0开始的。和eq()有一些
+			// 类似，但是起始值不同。eq()是从下标0开始的。
+			/*$("li:nth-child(2)").css({
+				backgroundColor: "yellow"
+			})*/
+			//================
+			// 匹配li的父元素中倒数第2个名为li的子元素
+			/*$("li:nth-last-child(2)").css({
+				backgroundColor: "deeppink"
+			})*/
+			//=================
+			// 选中倒数3的倍数的元素
+			/*$("li:nth-last-child(3n)").css({
+				backgroundColor: "red"
+			})*/
+			// 选中li的父元素的子元素中前两个元素中标签名为li的元素
+			/*$("li:nth-child(-n+2)").css({
+				backgroundColor: "red"
+			})*/
+			//===============
+			// 选中li的父元素的子元素中末尾两个元素中的标签名为li的元素
+			/*$("li:nth-last-child(-n+2)").css({
+				backgroundColor: "red"
+			})*/
+			//===============
+			// 不选li的父元素的子元素的前两个元素，从第三个开始选
+			// 条件：标签名必须为li
+			$("li:nth-child(n+3)").css({
+				backgroundColor: "red"
+			})
+		})
+	</script>
+</html>

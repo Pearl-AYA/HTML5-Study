@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>蚤动的小球</title>
+    <style>
+        html, body{
+            height: 100%;
+            /*这样可以使得边界全屏化*/
+            margin: 0;
+        }
+        .area{
+            height: 100%;
+            margin: auto;
+            background-color: #000;
+            position: relative;
+            /*可以使得边界超出部分无闪烁感*/
+            overflow: hidden;
+        }
+        .circle{
+            border-radius: 50%;
+            position: absolute;/*子绝父相*/
+        }
+    </style>
+</head>
+<body>
+<div class="area">
+</div>
+<script>
+	/**
+	 * 创建小球的构造方法
+	 * @param {Object} parent
+	 */
+    function Circle(parent) {
+        /*球的运动速度(也是0--3之间的随机数)
+         使用Math.random() > 0.5 ? 1 : -1;来控制
+         小球的速度的方向，以便小球一开始的时候并不是全部往一个方向移动的
+         加1是为了小球的速度不为0，即没有静止的小球*/
+        this.speedX = (Math.random() * 3 + 1) * (Math.random() > 0.5 ? 1 : -1);
+        this.speedY = (Math.random() * 3 + 1) * (Math.random() > 0.5 ? 1 : -1);
+        /*球的半径(随机数10---39)*/
+        this.r = parseInt(Math.random() * 30 + 10);
+        /*球的颜色(随机颜色)   
+         rgba()方法是放在反引号里面的，
+         参数分别表示红、绿、蓝和透明度*/
+        this.color = `rgba(${parseInt(Math.random()*255)}, 
+        ${parseInt(Math.random()*255)}, 
+        ${parseInt(Math.random()*255)}, 
+        ${Math.random() + 1.0})`;
+        /*在屏幕初始化绘制div*/
+        this.draw = function (){
+        		//创建一个div元素
+            var div = document.createElement("div");
+            //给Circle【添加一个div属性】，表示这个球的DOM元素
+            this.div = div;
+            //尺寸为半径的2倍
+            var size = this.r * 2;
+            //设置div的宽
+            div.style.width = size + "px";
+            //设置div的高
+            div.style.height = size + "px";
+            //设置div的颜色
+            div.style.backgroundColor = this.color;
+            //设置className(目的是为了在样式中可以进行使用)
+            div.className = "circle";
+            /**
+             * 【小球产生的位置】
+             * 【parent.offsetWidth】表示父级元素的宽，减去一个size意思是小球
+             * 不能超出父级div元素的右边界，其中的size是小球的直径。
+             * 【parent.offsetHeight - size】表示父级元素的高。同理size是小球
+             * 的直径。因为小球不能超出父级div的下边界。
+             */
+            div.style.left = parseInt(Math.random() * (parent.offsetWidth - size)) + "px";
+            div.style.top = parseInt(Math.random() * (parent.offsetHeight - size)) + "px";
+            //将创建的div元素添加给parent元素
+            parent.appendChild(div);
+        }
+        /*让球动起来*/
+        this.run = function () {
+            //var that = this;
+            //每10ms让小球运动一次
+            setInterval(function () {
+            		//上一次的【left值】
+                var lastLeft = this.div.offsetLeft;
+                //上一次的【top值】
+                var lastTop = this.div.offsetTop;
+                //设置小球的left值(如果left值小于等于0或者大于等于不超出右边界的值)
+                if(lastLeft <= 0 || lastLeft >= parent.offsetWidth - this.div.offsetWidth){
+                   //X轴的速度改变方向
+                   this.speedX *= -1;
+                }
+                //设置小球的top值(如果top值小于等于0或者大于等于不超出下边界的值)
+                if(lastTop <= 0 || lastTop >= parent.offsetHeight - this.div.offsetHeight){
+                    //Y轴的速度改变方向
+                    this.speedY *= -1;
+                }
+                //当前的left值
+                var currentLeft = lastLeft + this.speedX;
+                //当前的top值
+                var currentTop = lastTop + this.speedY;
+                //设置left值
+                this.div.style.left = currentLeft + "px";
+                //设置top值
+                this.div.style.top = currentTop + "px";
+            }.bind(this), 10);
+            /**
+             * 【注意】这里的setInterval方法是window调用的，所以如果
+             * 不做处理的话，那么内部的this表示window。但是这并不是我们
+             * 想要的效果。我们需要内部的this表示【小球】所以在这里将内部
+             * 的this通过bind(this)方法进行绑定。bind中的this指的就是
+             * 【小球】因为整个Circle构造方法中的this指的都是【小球】
+             */
+        }
+    }
+    //找到parent元素
+    var parent = document.querySelector(".area");
+    //循环创建10个小球
+    for(var i = 0; i < 10; i++){
+    		//创建一个小球
+        var c1 = new Circle(parent);
+        //在屏幕绘制这个球
+        c1.draw();
+        //让小球跑起来
+        c1.run();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>getScript和getJson</title>
+		<script src="libs/jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 加载一个js文件，并且立即执行js文件，执行结束之后会调用
+			// 回调函数。加载到的内容会自动赋给回调函数的参数text
+			/*$.getScript("js/test.js", function(text){
+				console.log("返回的内容：" + text)
+			})*/
+			//=================
+			// 用来加载资源的函数：load  get  post getScript  getJSON
+			$.getJSON("data1.json", function(obj, statusMsg, xhr){
+				console.log(obj)
+			})
+		})
+	</script>
+</html>

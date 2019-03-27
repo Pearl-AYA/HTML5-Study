@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>焦点事件</title>
+	</head>
+	<body>
+		<input type="text" id="input1"/>
+	</body>
+	<script type="text/javascript">
+		// 获取焦点
+		input1.onfocus = function(){
+			input1.style.outline = "none"
+			input1.style.border = "1px solid red"
+		}
+		// 失去焦点
+		input1.onblur = function(){
+			input1.style.border = "2px dashed green"
+		}
+	</script>
+</html>

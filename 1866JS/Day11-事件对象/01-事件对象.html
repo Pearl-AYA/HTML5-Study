@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件对象</title>
+	</head>
+	<body>
+		<button>按钮1</button>
+		<button>按钮2</button>
+		<a href="htttp://www.baidu.com">百度</a>
+		<div id="div">
+			<p id="p">abc</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【事件处理程序】的第一个采纳数就是我们的【事件对象】
+		 * //当点击事件发生的时候，浏览器会把发生的这次点击封装
+		 * 成一个事件对象，通过事件处理程序的参数传进来。
+      	//在处理程序内部就可以使用这个事件对象了。
+		 */
+		var show = function(event){
+			console.log(event)
+			// 判断这个事件是否冒泡：bubbles
+			//console.log(event.bubbles) //true
+			console.log(event.type) //click
+		}
+		function click(event){
+			console.log(event.cancelable) //true
+		}
+		document.querySelectorAll("button")[0].onclick = show
+		document.querySelector("a").onclick = click
+		//=================
+		p.onclick = function(event){
+			console.log(event.bubbles)
+			//console.log(event)
+			console.log(event.target.id + " " + event.currentTarget.id +
+			" " + event.type)
+			/**
+			 * 【eventPhase】表示调用事件处理程序的阶段：
+			 * 1、表示捕获阶段
+			 * 2、表示【处于目标】阶段
+			 * 3、表示冒泡阶段
+			 */
+			console.log(event.eventPhase) // 2 处于目标阶段
+			//event.stopPropagation() //阻止冒泡
+		}
+		//=============
+		div.onclick = function(event){
+			console.log(event.target.id + " " + event.currentTarget.id)
+			console.log(event.eventPhase) //3 冒泡阶段
+		}
+	</script>
+</html>

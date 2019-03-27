@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>构造函数深入理解</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 构造方法（构造函数）
+		function Person(name, age, sex){
+			console.log(this)
+			this.name = name
+			this.age = age
+			this.sex = sex
+			//return 111 // 显式地返回基本数据类型
+			//return {} //显式地返回对象
+			//return this // 隐式地返回的this对象
+		}
+		// 创建对象
+		//谁调用，this就指代哪个对象
+		// 这里是window在调用Person函数，所以Person内部的this指代window
+		var p = Person("lisi", 20, "女")
+		console.log(p) //undefined
+		console.log(window.age) //20
+		console.log(window.sex) //女
+		//==============
+		var p2 = new Person("张三", 30, "男")
+		console.log(p2)
+	</script>
+	<!--【归纳】1、如果在构造函数内部没有添加return语句，则
+		构造函数会自动的把新创建的对象返回。
+		2、如果在构造函数内部【显式地】返回一个简单数据类型的数据
+		比如：number  string boolean 仍然会返回this
+		3、如果显式地返回一个对象，则不再默认返回this
+		【this的三种用法】
+		1、对象.方法()  方法中的this指的是前面的对象
+		2、new 构造方法(): 构造函数中的this指的是新创建的那个对象
+		3、方法()：方法中的this指的是window
+	-->
+</html>

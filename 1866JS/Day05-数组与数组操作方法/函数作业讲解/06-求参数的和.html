@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>求参数的和</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 产生0--9的随机数
+		var randNum = parseInt(Math.ceil(Math.random() * 100) % 10)
+		alert(randNum)
+		var countNum = 0
+		var arrNum = []
+		
+		do{
+			var num = parseInt(prompt("请输入参数："))
+			countNum++
+			arrNum.push(num)
+		}while (randNum != countNum);
+		
+		// 求和函数  
+		/**
+		 * 1、 Math.random  获取随机数
+		 * 2、Math.ceil  向上取整的值
+		 * 3、Math.floor  向下取整的值
+		 * 4、Math.max  求最大值
+		 * 【注意】Math并没有sum函数
+		 * @param {Object} arrNum
+		 */
+		function sumArguments(arrNum){
+			var sumNum = 0
+			for (var i = 0;i < arrNum.length; i ++) {
+				sumNum += arrNum[i]
+			}
+			return sumNum
+		}
+		// 函数的调用
+		alert("参数的和为：" + sumArguments(arrNum))
+	</script>
+</html>

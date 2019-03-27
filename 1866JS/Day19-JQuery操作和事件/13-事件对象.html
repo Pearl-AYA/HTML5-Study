@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件对象</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			button{
+				width: 200px;
+				height: 200px;
+				margin-left: 200px;
+				background-color: deeppink;
+			}
+		</style>
+	</head>
+	<body>
+		<div><button>我是阿牛</button></div>
+		<input type="text" />
+	</body>
+	<script type="text/javascript">
+		// 传统的JS中的【事件对象】
+		// 原生的事件绑定
+		$("button")[0].onclick = function(event){
+			console.log(event)
+		}
+		//=============
+		// JQ中的【事件对象】
+		$("button").on("click", function(event){
+			// JQ事件对象和JS事件对象是不同的对象类型
+			//JQ事件对象相当于在JS事件对象的基础上做了一层封装
+			console.log(event)
+			console.log(event.offsetX)
+			console.log(event.pageX)
+			console.log(event.clientX)
+			console.log(event.which)
+		})
+		$("input").keydown(function(event){
+			// 如果是键盘，则which表示按键所代表的值
+			console.log(event.which)
+		})
+	</script>
+</html>

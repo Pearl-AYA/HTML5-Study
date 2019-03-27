@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件代理</title>
+		<style type="text/css">
+			ul{
+				list-style: none;
+			}
+			ul li{
+				float: left;
+				width: 100px;
+				height: 50px;
+				font: 2em/50px arial, sans-serif;
+				text-align: center;
+				background-color: gray;
+			}
+			ul li:hover{
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li id="li1">张三</li>
+			<li id="li2">李四</li>
+			<li id="li3">王二</li>
+			<li id="li4">麻子</li>
+			<li id="li5">凤姐</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 事件委托的原理：
+		假设现在要处理多个具有并列关系元素的click事件，当我点击这些元素
+		中的任何一个元素，则事件一定会通过冒泡的方式，冒泡到他的上层的
+		父节点元素然后一直冒到window，所以这个时候我们就可以在他的上层
+		元素中添加事件处理程序，来统一处理这些事件，在处理的过程中可以
+		通过获取target的id来知道具体点击的是哪个元素。这种方式就称之
+		为【事件委托】也叫【事件代理】。
+		 */
+		document/*.querySelector("ul")*/.addEventListener("click", function(event){
+			console.log(event.target)
+			switch(event.target.id){
+				case "li1":
+					alert("我是张三")
+					break
+				case "li2":
+					alert("我是李四")
+					break
+				case "li3":
+					alert("我是王二")
+					break
+				case "li4":
+					alert("我是麻子")
+					break
+				case "li5":
+					alert("我是你的最爱")
+					break
+				default:
+					alert("你谁都不点，钱白花了")
+					break
+			}
+		}, false)
+	</script>
+</html>

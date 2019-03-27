@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>exec方法</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var reg = /box/gi
+		var str = "BoxsadgsajBOXfdhsjhfbox"
+		
+		var result = reg.exec(str)
+		console.log(result) // Array(1)实例  Box
+		// 关键字instanceof用于判断某个对象是否是某个类的实例
+		console.log(result instanceof Array) //true
+		console.log(reg.exec(str)) //BOX
+		console.log(reg.exec(str)) //box
+		console.log(reg.exec(str)) //null
+		
+		// 玄幻输出
+		while(result = reg.exec(str)){
+			console.log(result[0])
+		}
+	</script>
+</html>

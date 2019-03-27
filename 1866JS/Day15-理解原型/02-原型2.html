@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原型2</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 构造方法
+		function Person(){
+			this.age = 10
+			this.name = "冠希"
+		}
+		
+		Person.prototype.sex = "男"
+		Person.prototype.girls = ["柏芝", "阿娇", "凤姐"]
+		var p1 = new Person()
+		var p2 = new Person()
+		
+		console.log(p1.sex)
+		//给p1本身添加了一个sex属性，原型中的sex=”男“
+		p1.sex = "女"
+		console.log(p1.sex)
+		console.log(Person.prototype.sex)
+		//==============
+		// 这样写是在原型中添加一个元素【XX】
+		p1.girls.push("马蓉")
+		console.log(p1.girls.length) //4
+		console.log(p2.girls.length) //4
+		console.log(p2.sex)
+		//==============
+		// 这样写就是给p1对象添加一个属性girls
+		p1.girls = []
+		console.log(p1.girls.length) //0
+	</script>
+	<!--【归纳】通过对象只能访问原型中的属性值，不能去修改原型中的属性值-->
+</html>

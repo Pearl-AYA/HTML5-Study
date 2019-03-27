@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原型</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 构造方法
+		function Person(){
+			this.age = 30
+		}
+		Person.prototype.name = "李四"
+		var p1 = new Person()
+		console.log(p1.age)
+		console.log(p1.name)
+		/**
+		 * 【hasOwnProperty()】判断一个属性是不是属于这个对象本身
+		 * 不会去原型中查找。如果返回true，我们肯定一定存在对象本身上
+		 */
+		console.log(p1.hasOwnProperty("age")) //true
+		console.log(p1.hasOwnProperty("name")) //fasle
+		//================
+		// 操作符  【in】 可以判断一个属性是否存在于这个对象的整个原型链上
+		console.log("name" in p1) // true
+		console.log("age" in p1) // true
+		//================
+		/**
+		 * 判断一个属性存在的位置
+		 * 返回值：
+		 * 0：代表不存在
+		 * 1：代表在对象本身上
+		 * 2：代表在对象的原型链上
+		 */
+		// 判断属性来源位置的函数
+		function judgePropertyPosition(obj, pro){
+			if(!(pro in obj)){
+				return 0
+			}else if(obj.hasOwnProperty(pro)){
+				return 1
+			}else{
+				return 2
+			}
+		}
+		//================
+		/**
+		 * for...in循环：可以遍历到本身和原型链中的所有属性
+		 */
+		for(var pro in p1){
+			console.log(pro)
+		}
+	</script>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数字次数统计</title>
+	</head>
+	<body>
+		
+	</body>
+	<script type="text/javascript">
+		// 生成一个[m，n]范围内的随机整数
+		function generateNumber(m, n){
+			// 3--5  [0,1) * 3 ===> [0,3）+ 3===> [3,6)
+			return parseInt(Math.random() * (n - m + 1) + m)
+		}
+		// 创建一个400个元素的数组
+		var arr = new Array(400)
+		for (var i = 0; i < arr.length; i ++) {
+			arr[i] = generateNumber(10, 50)
+		}
+		// 遍历每一种可能的数字情况，统计每个数字出现的次数
+		for (var num = 10; num <= 50; num++) {
+			var count = 0
+			arr.forEach(function(e, i){
+				if(e === num){
+					count++
+				}
+			})
+			document.write(num + "出现了" + count + "次<br/>")
+		}
+	</script>
+</html>

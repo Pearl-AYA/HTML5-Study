@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>可手控的轮播图</title>
+		<style type="text/css">
+			.div_1{
+				width: 700px;
+				height: 400px;
+				margin: 0 auto;
+				position: relative;
+				overflow: hidden;
+			}
+			.div_2{
+				width: 4900px;
+				height: 400px;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			img{
+				width: 700px;
+				height: 400px;
+				float: left;
+			}
+			.div_3{
+				position: absolute;
+				height: 40px;
+				line-height: 40px;
+				width: 700px;
+				background: rgba(0, 0, 0, 0.5);
+				top: 360px;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				text-align: center;
+			}
+			li{
+				display: inline-block;
+				height: 24px;
+				width: 24px;
+				background-color: chartreuse;
+				border-radius: 50%;
+				color: blue;
+				line-height: 24px;
+				font-weight: bold;
+			}
+			.div_4{
+				width: 50px;
+				height: 70px;
+				position: absolute;
+				background: rgba(0,0,0,0.4);
+				top: 140px;
+				left: 0;
+				color: white;
+				font-size: 40px;
+				font-weight: 900;
+				text-align: center;
+				cursor: pointer;
+				display: none;
+			}
+			.div_5{
+				width: 50px;
+				height: 70px;
+				position: absolute;
+				background: rgba(0,0,0,0.4);
+				top: 140px;
+				left: 650px;
+				color: white;
+				font-size: 40px;
+				font-weight: 900;
+				text-align: center;
+				cursor: pointer;
+				display: none;
+			}
+			.div_1:hover .div_4{
+				display: block;
+			}
+			.div_1:hover .div_5{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<!--div.div_1>div.div_2>img[src=img/$_1.jpg]*6-->
+		<div class="div_1">
+			<div class="div_2"
+				onmouseover="Mouse()"
+				onmouseout="Mout()">
+				<img src="img/1_1.jpg" alt="" />
+				<img src="img/2_1.jpg" alt="" />
+				<img src="img/3_1.jpg" alt="" />
+				<img src="img/4_1.jpg" alt="" />
+				<img src="img/5_1.jpg" alt="" />
+				<img src="img/6_1.jpg" alt="" />
+				<img src="img/1_1.jpg" alt="" />
+			</div>
+			<!--=============-->
+			<ul class="div_3">
+				<li onmouseover="mouse(0)" onmouseout="out()">1</li>
+				<li onmouseover="mouse(1)" onmouseout="out()">2</li>
+				<li onmouseover="mouse(2)" onmouseout="out()">3</li>
+				<li onmouseover="mouse(3)" onmouseout="out()">4</li>
+				<li onmouseover="mouse(4)" onmouseout="out()">5</li>
+				<li onmouseover="mouse(5)" onmouseout="out()">6</li>
+			</ul>
+			<!--================-->
+			<div class="div_4" onclick="leftMove()"
+				onmouseover="ON()"
+				onmouseout="OUT()"><<</div>
+			<div class="div_5" onclick="rightMove()"
+				onmouseover="ON()"
+				onmouseout="OUT()">>></div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var div = document.getElementsByClassName("div_2")[0]
+		var li = document.getElementsByTagName("li")
+		var left = 0
+		var time
+		var timer
+		var timeOut
+		var j = 0
+		time = setTimeout(function(){
+			timer = setInterval(output, 5)
+		}, 2000)
+		// 先初始化第一个li的颜色
+		li[0].style.background = "red"
+		/**
+		 * 输出
+		 */
+		function output(){
+			if(left == -4200){
+				left = 0
+			}
+			// 向左轮播
+			Left()
+			if(left % 700 == 0){
+				j = Math.abs(left / 700)
+				Li(j)
+				console.log("j = " + j)
+				clearInterval(timer)
+				timeOut = setTimeout(function(){
+					timer = setInterval(output, 5)
+				}, 2000)
+			}
+		}
+		/**
+		 * 显示li表格的函数
+		 */
+		function Li(j){
+			for (var i = 0; i < 6; i++) {
+				li[i].style.background = "chartreuse"
+			}
+			if(j == 6){
+				j = 0
+			}
+			li[j].style.background = "red"
+		}
+		// 向左轮播
+		function Left(){
+			left -= 10
+			div.style.left = left + 'px'
+		}
+		//==============
+		/**
+		 * 鼠标放上去的时候
+		 */
+		function Mouse(){
+			clearInterval(timer)
+			clearTimeout(timeOut)
+			clearTimeout(time)
+			console.log("🍎")
+			// 鼠标放上去的时候，显示整张图片，而不是有些移动了
+			// 半张的图片
+			left = j * -700
+			div.style.left = left + 'px'
+		}
+		// 鼠标离开的时候
+		function Mout(){
+			timer = setInterval(output, 5)
+		}
+		/**
+		 * 鼠标放到表格上的时候的效果
+		 * 首先停止各种定时器
+		 */
+		function mouse(x){
+			clearInterval(timer)
+			clearInterval(time)
+			clearInterval(timeOut)
+			
+			left = x * -700
+			for(var i = 0; i < 6; i ++){
+				li[i].style.background = "chartreuse"
+			}
+			li[x].style.background = "red"
+			div.style.left = left + 'px'
+		}
+		// 鼠标离开表格的时候的效果
+		function out(){
+			for(var i = 0; i < 6; i++){
+				li[i].style.background = "chartreuse"
+			}
+			timer = setInterval(output, 5)
+		}
+		//==============
+		// 鼠标点击左移的方法
+		function leftMove(){
+			if(left == 0){
+				left = -3500
+			}else{
+				left += 700
+			}
+			div.style.left = left + 'px'
+			j = Math.abs(left / 700)
+			for (var i = 0; i < 6; i++) {
+				li[i].style.background = "chartreuse"
+			}
+			if(j == 6){
+				j = 0
+			}
+			li[j].style.background = "red"
+		}
+		// 鼠标点击左移的方法
+		function rightMove(){
+			if(left == -4200){
+				left = -700
+			}else{
+				left -= 700
+			}
+			div.style.left = left + 'px'
+			j = Math.abs(left / 700)
+			for (var i = 0; i < 6; i++) {
+				li[i].style.background = "chartreuse"
+			}
+			if(j == 6){
+				j = 0
+			}
+			li[j].style.background = "red"
+		}
+		// 鼠标一放上去，立即停止各种定时器
+		function ON(){
+			clearInterval(timer)
+			clearInterval(time)
+			clearInterval(timeOut)
+		}
+		// 鼠标一离开，立即开启各种定时器
+		function OUT(){
+			timer = setInterval(output, 5)
+		}
+	</script>
+</html>

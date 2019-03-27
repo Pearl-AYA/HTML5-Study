@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>内容过滤选择器</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div>hao are you</div>
+		<div></div>
+		<p>zs hao ls</p>
+		<a href="#">百度</a>
+		<p>百度一下<a href="" class="abc"></a></p>
+		<p><a href="" class="abc">你好</a></p>
+		<p></p>
+		<input type="text" value="abc"/>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 选择文本内容包含hao的div元素
+			$("div:contains(hao)").css({
+				color: "red"
+			})
+			// empty空元素,即没有子元素或者文本的元素【单标签也算】
+			$(":empty").css({
+				width: "100px",
+				height: "100px",
+				backgroundColor: "red"
+			})
+			console.log($(":empty"))
+			// 共找到5个  分别是：meta  script  a  p  input
+			// p里面的无文本的那个a元素和p远古三以及input元素
+			// 其中的mata、script不显示；而p的宽高位0, 所以里面的
+			// a标签显示不出来   但是实际上这个a标签的属性确实已经
+			// 被设置成上面的属性了   剩下的两个可以显示出来
+			//=================
+			// 找到p元素，并且p元素中有标签的class是abc的这个的p
+			$("p:has(.abc)").css({
+				width: "100px",
+				height: "100px",
+				backgroundColor: "pink"
+			})
+			// 找到有子元素或者文本的div元素
+			$("div:parent").css({
+				width: "100px",
+				height: "100px",
+				backgroundColor: "yellow"
+			})
+		})
+	</script>
+</html>

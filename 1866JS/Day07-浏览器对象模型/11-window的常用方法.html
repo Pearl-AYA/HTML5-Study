@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Window的常用方法</title>
+		<link rel="shortcut icon" href="bitbug_favicon.ico" />
+		<style type="text/css">
+			div{
+				width: 300px;
+				height: 20000px;
+				background-color: yellowgreen;
+			}
+		</style>
+	</head>
+	<body>
+		<div>哈哈</div>
+	</body>
+	<script type="text/javascript">
+		/*window.onload = function(){
+			alert("页面加载完成会触发该事件")
+		}*/
+		window.onscroll = function(){
+			 console.log("开始滚动...")
+			 
+			 // 获取滚动的距离
+			 //这样就可以兼容不同的浏览器。
+	        console.log(document.documentElement.scrollTop ||
+	        	document.body.scrollTop);
+		}
+	</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>常用属性操作</title>
+		<!--内部样式-->
+		<style type="text/css">
+			div{
+				width: 200px;
+				height: 100px;
+			}
+			.box1{
+				background-color: green;
+			}
+			.box2{
+				background-color: red;
+			}
+			.size{
+				width: 400px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box" class="box1"></div>
+		<button>一键换肤</button>
+		<input type="text" id="input1" value="🍎"/>
+		<br />
+		<input type="checkbox" id="input2"/>
+	</body>
+	<script type="text/javascript">
+		var box = document.getElementsByTagName("div")[0]
+		console.log(box.tagName)
+		//==============
+		var att = "id"
+		console.log(box[att])
+		//==============
+		document.querySelector("button").onclick = function(){
+			// 如果box的className是box1，则将它换成box2
+			if(box.className == "box1"){
+				box.className = "box2"
+			}else{
+				// 否则如果是box2，则换成box1
+				box.className = "box1"
+			}
+			box.className += " size"
+		}
+		//=================
+		/**
+		 * 如果一个元素有id，则浏览器会自动创建一个同名的变量
+		 * 表示这个dom元素。如：input1
+		 * 【🐷】在实际开发中，不建议这么用。
+		 */
+		alert(input1.value)
+		alert(input2.checked)
+		// 监听改变
+		input2.onchange = function(){
+			alert(input2.checked)
+		}
+	</script>
+</html>

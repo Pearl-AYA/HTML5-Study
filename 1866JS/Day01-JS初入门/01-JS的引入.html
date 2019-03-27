@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--外部引入JS-->
+		<script src="first.js" type="text/javascript">
+			// 注意不要在script标签中再添加代码，即使添加了代码也不会执行
+			alert("欢迎来到粤嵌！")
+		</script>
+		<!--script标签内部的type是必选的属性
+			推荐使用：text/javascript  传统的写法,兼容性很好
+			type其他可书写的属性：
+			application/javascript  标准写法，但是存在兼容性问题
+			text/x-javascript x是实验性的标志
+			不是标准的类型
+		-->
+	</head>
+	<body>
+		<a href="javascript:alert('粤嵌欢迎你！')">点击说欢迎</a>
+		<a href="javascript:alert('粤嵌欢迎你！')">点击说欢迎</a>
+	</body>
+	<!--内部使用-->
+	<script type="text/javascript">
+		// 普通字符串
+		console.log("欢迎来到粤嵌教育欢迎来到粤嵌\
+		教育欢迎来到粤嵌教育欢迎来到粤嵌教育欢迎来到\
+		粤嵌教育欢迎来到粤嵌教育欢迎来到粤嵌教育欢迎\
+		来到粤嵌教育欢迎来到粤嵌教育欢迎来到粤嵌教育\
+		欢迎来到粤嵌教育欢迎来到粤嵌教育")
+		// ES6模板字符串
+		console.log(`fdhfhfjdghjfnbcvbnbfdfgfdgd
+			jfdbmgfd__BROWSERTOOLS_CONSOLE_BREAKMODE_FUNC
+		gbfmnbgfmdbgdfmgdfm,`)
+	</script>
+</html>

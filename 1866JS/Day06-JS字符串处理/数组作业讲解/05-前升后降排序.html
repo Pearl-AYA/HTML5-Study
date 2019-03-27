@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var arr = [1,2,3,10,11,12,13,4,5,6,7,8,9,16,17,18,14,15,19,20]
+		// 从第0个元素开始截取，截取到第10个(不包含第10个元素)
+		var arr1 = arr.slice(0,10)
+		// 从第10个开始截取到最后
+		var arr2 = arr.slice(10)
+		console.log(arr)
+		console.log(arr1)
+		console.log(arr2)
+		
+		// 降序函数的比较函数
+		function compareDown(num1, num2){
+		  	return num2 - num1; //num1 > num2 就返回负数
+		}
+		// 升序排序的比较函数
+		function compareUp(num1, num2){
+			return num1 - num2;   //num1 > num2 就返回正数
+		}
+		
+		var newArr1 = arr1.sort(compareUp)
+		console.log(newArr1)
+		var newArr2 = arr2.sort(compareDown)
+		console.log(newArr2)
+		
+		// 再把两个数组拼接成一个数组，更新原数组
+		var newArr3 = newArr1.concat(newArr2)
+		console.log(newArr3)
+		
+		// 然后更新原数组
+		arr.splice(0, 20)
+		console.log(arr)
+		
+		// 使用ES6中的...展开运算符展开数组
+		arr.push(...newArr3)
+		console.log(arr)
+	</script>
+</html>

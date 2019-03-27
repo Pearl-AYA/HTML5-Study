@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>typeof</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var a = 10
+		console.log(typeof a)
+		var b = "10"
+		console.log(typeof b)
+		
+		/**
+		 * 【typeof】用于判断当前基本数据的具体类型
+		 * undefined： undefined
+		 * null: object
+		 * true/false
+		 * Number： number
+		 * String：string
+		 * function： function
+		 */
+		console.log(typeof null)
+		console.log(typeof true)
+		console.log(typeof isNaN)
+		console.log(typeof undefined)
+		console.log(typeof NaN) // number
+		
+		var arr = ["1", "123"]
+		console.log(typeof arr) // object
+	</script>
+</html>

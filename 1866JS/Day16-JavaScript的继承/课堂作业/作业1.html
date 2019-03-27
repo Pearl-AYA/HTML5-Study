@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// Farmer构造方法
+		function Farmer(baseSalary){
+			this.baseSalary = baseSalary
+		}
+		// Teacher的构造方法
+		function Teacher(baseSalary, classSalary){
+			// 借调【Farmer】的baseSalary工资属性
+			Farmer.call(this, baseSalary)
+			this.classSalary = classSalary
+		}
+		// 将老师的原型设置为Farmer
+		Teacher.prototype = new Farmer(3000)
+		// 现在老师的原型是Farmer了，即Farmer的constructor指向Teacher
+		Teacher.prototype.constructor = Teacher
+		// 计算老师的全部工资的方法
+		Teacher.prototype.allSalary = function(){
+			return this.baseSalary + this.classSalary
+		}
+		// 创建Teacher对象
+		var t1 = new Teacher(10000, 5000)
+		console.log("老师的平均月薪：" + t1.allSalary())
+		//==============
+		// 科学家除基本工资外还有年终奖
+		function Scientist(baseSalary, yearSalary){
+			// 借调Farmer的baseSalary的方法
+			this.yearSalary = yearSalary
+		}
+		Scientist.prototype = new Farmer(3000)
+		Scientist.prototype.constructor = Scientist
+		Scientist.prototype.allSalary = function(){
+			return this.baseSalary + this.yearSalary
+		}
+		var s3 = new Scientist(6000, 1200000 / 12)
+		console.log("科学家的平均月薪" + s3.allSalary())
+	</script>
+	<!--1、有农民(farmer),教师(teacher),科学家(scientist),服务生(attendant) 
+   a: 其中农民,服务生只有基本工资.
+   b: 教师除基本工资外,还有课酬(元/天)
+   c: 科学家除基本工资外,还有年终奖
+   D: 使用原型继承的方式完成上面的功能。-->
+</html>

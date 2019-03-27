@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>parentNode属性</title>
+	</head>
+	<body>
+		<div id="div">
+			<a href="###">搜狐</a><div id="div1" class="box" width="50px"></div>
+			<div>
+				<a href=""></a>
+			</div>
+			<input type="text" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【parentNode属性】
+		 * 获取一个元素的父节点
+		 */
+		var div = document.getElementById("div")
+		var node_1 = div.parentNode
+		console.log(node_1)
+		console.log(node_1.nodeName)
+		//===============
+		var html = document.getElementsByTagName("html")[0]
+		var node_2 = html.parentNode
+		console.log(node_2)
+		console.log(node_2.nodeName)
+		//==============
+		// 【🐷】document节点没有父节点或者说它的父节点为null
+		console.log(document.parentNode)
+		//===============
+		/**
+		 * 【previousSibling属性：获取一个元素的上一个兄弟节点】
+		 */
+		var div1 = document.getElementById("div1")
+		var previousSibling = div1.previousSibling
+		console.log(previousSibling)
+		console.log(previousSibling.nodeName)
+		//===============
+		/**
+		 * 【nextSibling属性：获取一个元素的下一个节点】
+		 * 
+		 */
+		var nextSibling = div1.nextSibling
+		console.log(nextSibling)
+		console.log(nextSibling.nodeName)
+		//=================
+		/**
+		 * 【拓展】获取一个节点所在的文档的根节点
+		 * 元素节点名称.ownerDocument  主人文档====> 所在文档节点
+		 * 实际上相当于整个文档节点
+		 */
+		console.log(div1.ownerDocument) // #document
+		console.log(html.ownerDocument) // #document
+		//===================
+		/**
+		 * 获取当前节点所有的属性节点
+		 * 元素节点名称.attributes
+		 */
+		//console.log(div1.attributes)
+		var attributes = div1.attributes
+		for (var i = 0; i < attributes.length; i++) {
+			console.log(attributes[i].nodeName)
+		}
+	</script>
+</html>

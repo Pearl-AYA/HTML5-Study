@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>复杂js对象</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var school = {
+			schoolName: "粤嵌",
+			addr: "广州",
+			clazzs: [
+				{
+					clazzName: "1866",
+					students: [
+						{
+							name: "李四",
+							age: 20
+						},
+						{
+							name: "麻子",
+							age: 24
+						}
+					]
+				},
+				{
+					clazzName: "1820",
+					students: [
+						{
+							name: "凤姐",
+							age: 28
+						},
+						{
+							name: "冠希",
+							age: 30
+						}
+					]
+				}
+			]
+		}
+		// 通过名字找学生对象的方法
+		function getInfoByName(name){
+			var clazzs = school.clazzs
+			// 使用for...of遍历数组
+			for (var clazz of clazzs) {
+				var students = clazz.students
+				for (var student of students) {
+
+					if(name == student.name){
+						var s = {}
+						s.name = name
+						s.age = student.age
+						s.addr = school.addr
+						s.clazzName = clazz.clazzName
+						s.schoolName = school.schoolName
+						s.showInfo = function(){
+							alert("我的名字是：" + this.name + "，我喜欢" +
+							this.schoolName)
+						}
+						temp = s
+						return s
+					}
+				}
+			}
+		}
+		// 调用函数
+		var student = getInfoByName("凤姐")
+		student.showInfo()
+	</script>
+</html>

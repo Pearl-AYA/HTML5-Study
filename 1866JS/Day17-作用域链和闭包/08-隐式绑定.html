@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>隐式绑定</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var p = {
+			name: "李四",
+			foo: function(){
+				console.log(this.name)
+			}
+		}
+		var p1 = {
+			name: "张三",
+			foo: p.foo
+		}
+		// p1调用foo函数，执行的是p.foo，但是【大老板】是p1
+		// 所以foo函数中的this.name值的this其实是p1，也就是说
+		// this.name == p1.name == "张三"
+		p1.foo() // 张三
+		//===========
+		var name = "麻子"
+		var p = {
+			name: "赵本山",
+			foo: function(){
+				return function(){
+					return this.name
+				}
+			}
+		}
+		var f = p.foo()
+		// 这里的f()相当于window.f(),具体执行p.foo()
+		// 所以其中的this.name中的this其实是指window，即window.name == "麻子"
+		console.log(f()) //麻子
+		//===========
+		// p.foo()就是f，所以p.foo()()和f()是相同的，本质上都是window在调用
+		// 所以this.name == "麻子"
+		console.log(p.foo()()) // 麻子
+		//===========
+		var age = 10
+		function foo(){
+			console.log(this.age)
+		}
+		function Person(){
+			this.age = 20
+			this.foo = foo
+		}
+		// new Person()的返回值是Person，Person在调用foo()函数
+		// 即foo()中的this.age指的是Person的age，即20
+		new Person().foo() // 20
+	</script>
+	<!--【归纳】隐式绑定  通过   对象.方法()  
+		this总是绑定在方法前面的【对象上】的
+	-->
+</html>

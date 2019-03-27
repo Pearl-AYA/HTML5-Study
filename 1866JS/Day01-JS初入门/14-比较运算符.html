@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>比较运算符</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		console.log(1 == 1) // true
+		// 值相等，类型不同(==不判断类型，只判断值)
+		console.log("1" == 1) // true
+		// ===判断类型和值
+		console.log("1" === 1) // false
+		console.log(1 != 1) // false
+		console.log("1" != 1) // false
+		console.log("1" !== 1) // true
+		
+		/**
+		 * 比较运算符：
+		 * ==： 等于
+		 * ===：判断数值和类型是否都相同
+		 */
+		console.log(NaN == false) //false
+		console.log(NaN == true) //false
+		console.log(NaN == 1) //false
+		console.log(NaN == NaN) //false
+		// NaN和任何数据都不相等，和自己也不相等
+		console.log(NaN != NaN) // true
+		
+		console.log(null == null) // true
+		console.log(undefined == undefined) // true
+		// null和任何非null都不相等
+		console.log(0 == null) // false
+		console.log(0 == false) // true
+		//=============
+		console.log(Infinity == Infinity) // true
+		console.log(Number.MAX_VALUE == Number.MAX_VALUE) // true
+		/**
+		 * 最大界限：
+		 * 由于JS中是以浮点数的形式记录数据
+		 * 最大的数: 在内部计算的时候是存在误差的。
+		 * 并不是说Number.MAX_VALUE + 1就超出界限，而是要+一个很大的数
+		 */
+		console.log(Number.MAX_VALUE + 1)
+		// 1.7976931348623157e+308
+	</script>
+</html>

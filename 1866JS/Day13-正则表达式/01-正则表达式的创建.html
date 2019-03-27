@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>正则表达式的创建</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【正则表达式】的创建：
+		 * 【方式1】使用new + RegExp
+		 * 参数1：模式
+		 * 参数2：模式修饰符
+		 * 【g】表示global  全局匹配 【i】表示不区分大小写
+		 * 【方式2】使用正则表达式直接量
+		 */
+		var reg = new RegExp("box", "gi")
+		var str = "aBoxb"
+		// 进行匹配
+		var result = reg.test(str)
+		console.log(result)
+		console.log(reg) // 【/box/gi】
+		//=================
+		var reg2 = '/box/gi'
+		console.log(reg2) ///box/gi
+		console.log(typeof reg2) //object
+		var result2 = reg2.test(str)
+		console.log(result2)
+	</script>
+</html>

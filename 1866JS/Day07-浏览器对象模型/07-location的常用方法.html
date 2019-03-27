@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>location的常用方法</title>
+	</head>
+	<body>
+		<button onclick="openNewURL()">打开新的文档</button>
+		<button onclick="reload()">重新加载文档</button>
+		<button onclick="replaceDoc()">替换当前文档</button>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【location的常用方法】
+		 * 1、assign(url) 加载新的文档
+		 */
+		function openNewURL(){
+			location.assign("http://www.baidu.com")
+		}
+		function reload(){
+			// 参数为true，绕过缓存，直接从服务器加载
+			// 参数为false，优先从缓存加载；如果缓存中没有，则从服务器加载
+			location.reload(true)
+		}
+		function replaceDoc(){
+			location.replace("https://www.1688.com/")
+		}
+	</script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			var arr=[];
+			function showarray(){
+				document.getElementById("show").innerHTML=""
+				for (var i=0;i<20;i++) {
+					arr[i]=parseInt(Math.random()*101);
+					document.getElementById("show").innerHTML+=arr[i]+"&nbsp;&nbsp;"
+				}
+				console.log(arr)
+			}
+			function sorting(){
+				var arr1=arr.slice(0,10);
+				var arr2=arr.slice(10);
+				arr1.sort(descendingup);
+				arr2.sort(descendingdown);
+				console.log(arr1)
+				console.log(arr2)
+				arr=arr1.concat(arr2);
+				document.getElementById("show").innerHTML=""
+				for (var i=0;i<20;i++) {
+					document.getElementById("show").innerHTML+=arr[i]+"&nbsp;&nbsp;"
+				}
+				
+			}
+			function descendingup(num1,num2){
+				return num1-num2;
+			}
+			function descendingdown(num1,num2){
+				return num2-num1;
+			}
+		</script>
+	</head>
+	<body>
+		<h1>20个整数，前10个升序排序，后10个降序排序</h1>
+		<button onclick="showarray()">打印数组</button>
+		<p id="show"></p>
+		<button onclick="sorting()">排序</button>
+	</body>
+</html>

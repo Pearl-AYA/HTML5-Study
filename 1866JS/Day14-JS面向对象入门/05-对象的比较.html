@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>对象的比较</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var r = ({} == {})
+		console.log(r) // fasle
+		
+		console.log({}.toString())
+		console.log({} == "[object Object]") // true
+		console.log([] == false) // true
+	</script>
+	<!--【🐷】如果是两个对象进行比较，不管是== 还是===
+		他们比较的永远是地址。
+		2、如果比较的双方有一个不是对象，则会先把对象转化为字符串
+		即会先调用toString()方法，然后再去比较。
+	-->
+</html>

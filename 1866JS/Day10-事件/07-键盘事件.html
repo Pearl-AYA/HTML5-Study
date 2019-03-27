@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>键盘事件</title>
+	</head>
+	<body>
+		<input type="text" />
+	</body>
+	<script type="text/javascript">
+		var input = document.getElementsByTagName("input")[0]
+		// 按下任意键都会触发这个事件
+		/*input.onkeydown = function(e){
+			console.log("你按下了一个键")
+			// option或者alt键
+			if(e.keyCode == 18){
+				console.log(e.keyCode)
+			}
+		}*/
+		// 按下字符键会触发  a--z  A---Z 0--9  标点符号  return  空格
+		input.onkeypress = function(event){
+			console.log("你按下了字符键")
+		}
+		// 
+		input.onkeyup = function(){
+			console.log("你松开了我")
+		}
+	</script>
+</html>

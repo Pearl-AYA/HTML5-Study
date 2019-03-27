@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#div1{
+				width: 1200px;
+				margin: 0 auto;
+			}
+			#small{
+				width: 350px;
+				height: 350px;
+				border: solid 1px;
+				position: relative;
+				float: left;
+			}
+			#pop{
+				width: 70px;
+				height: 70px;
+				background-color: #FFA500;
+				opacity: 0.3;
+				position: absolute;
+				left: 0;
+				top: 0;
+				display: none;
+			}
+			#show{
+				width: 480px;
+				height: 480px;
+				float: left;
+				border: solid 1px;
+				overflow: hidden;
+				position: relative;
+				display: none;
+			}
+			#show img{
+				position: absolute;
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1">
+			<div id="small">
+				<img src="img/small.jpg"/>
+				<div id="pop">
+				</div>
+			</div>
+			<div id="show">
+				<img src="img/big.jpg" width="800" height="800"/>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var small=document.getElementById("small")
+		var pop=document.getElementById("pop")	
+		var show=document.getElementById("show")
+		var img=document.getElementsByTagName("img")[1]
+		var maxLeft,maxTop;
+		small.addEventListener("mouseover",function(){
+			pop.style.display="block"
+			show.style.display="block"
+			maxLeft=small.offsetWidth-pop.offsetWidth;
+			maxTop=small.offsetHeight-pop.offsetHeight;
+		},false);small.addEventListener("mouseout",function(e){
+			pop.style.display="none";
+			show.style.display="none";
+		},false)
+		small.addEventListener("mousemove",function(e){
+			var popLeft=e.clientX-small.offsetLeft-pop.offsetWidth/2;
+			var popTop=e.clientY-small.offsetTop-pop.offsetHeight/2;
+			popLeft=popLeft<=0?0:popLeft;
+			popTop=popTop<=0?0:popTop;
+			popLeft=popLeft>=maxLeft?maxLeft:popLeft;
+			popTop=popTop>=maxTop?maxTop:popTop;
+			pop.style.left=popLeft+"px";
+			pop.style.top=popTop+"px";
+			img.style.left= -popLeft/maxLeft*400+"px"
+			img.style.top= -popTop/maxTop*400+"px"
+		},false)
+	</script>
+</html>

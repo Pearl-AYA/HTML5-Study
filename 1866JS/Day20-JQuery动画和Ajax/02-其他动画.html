@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>其他动画</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			div{
+				width: 200px;
+				height: 200px;
+				background-color: deeppink;
+			}
+		</style>
+	</head>
+	<body>
+		<button>toggle</button>
+		<button>fadeToggle</button>
+		<button>slideToggle</button>
+		<button>fadeTo</button>
+		<div></div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			var div = $('div')
+			// 切换【显示和隐藏】
+			$("button:eq(0)").click(function(){
+				div.toggle()
+			})
+			// 切换【淡入和淡出】
+			$("button:eq(1)").click(function(){
+				div.fadeToggle(3000)
+			})
+			// 切换【展开和收起】
+			$("button:eq(2)").hover(function(){
+				div.slideToggle()
+			})
+			// fadeTo()表示透明度变成某种状态
+			$("button:eq(3)").click(function(){
+				// 在规定的时间内到指定的透明度
+				// 动画结束的时候会回调函数
+				div.fadeTo(5000, .5, function(){
+					alert("半透明了!")
+				})
+			})
+		})
+	</script>
+</html>

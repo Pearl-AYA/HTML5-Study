@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>BOM核心</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * BOM的核心对象是 window对象 ，它表示浏览器的一个实例。
+		 * 在浏览器中， window 对象有双重角色。它既是通过 
+		 * JavaScript 访问浏览器窗口的一个接口，又是 
+		 * ECMAScript 规定的 Global 对象。通过window可以
+		 * 操作整个浏览器。
+		 * 【拓展】Global对象   是ECMAScript中非常特殊的一个对象。
+		 * 因为这个对象其实根本不存在。之所以说它不存在是因为Global
+		 * 对象无法通过new关键字创建。但是Global对象却拥有自己的
+		 * 属性、方法。甚至还有【全局对象】
+		 * 一般来说，Global对象是默认在浏览器引擎启动的时候，自动
+		 * 初始化化完成的。一般来说，window对象是Global对象的一个
+		 * 子对象。但是在浏览器环境下，Global对象就是指【window对象】
+		 */
+		
+		/**
+		 * window对象就是BOM的核心对象。所有的对象全部是由window对象
+		 * 延伸出来的。也可以说它们是【window的子对象】
+		 */
+		
+		// 全局变量
+		var age = 18
+		// 全局方法
+		function sayAge(){
+			console.log(window.age)
+			console.log(age)
+		}
+		sayAge()
+		window.sayAge()
+		console.log(age)
+	</script>
+</html>

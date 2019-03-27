@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>CSS操作之position</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			div{
+				width: 200px;
+				height: 200px;
+				background-color: pink;
+				margin-left: 200px;
+				margin-top: 300px;
+				position: absolute;
+			}
+			p{
+				width: 100px;
+				height: 100px;
+				background-color: gray;
+				position: absolute;
+				/*left:0*/
+				top: 1300px;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<p></p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 获取的定位元素的left和top值，只能获取不能设置
+			// 相当于原生的offsetLeft和offsetTop
+			// 返回的是一个对象Object
+			var posi = $("p").position()
+			console.log(posi)
+		})
+	</script>
+</html>

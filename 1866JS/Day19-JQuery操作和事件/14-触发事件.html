@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>触发事件</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			div{
+				width: 200px;
+				height: 200px;
+				background-color: pink;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<button>触发自定义事件</button>
+		<input type="text" />
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 手动实现颜色的变化
+			/*$("div").hover(function(){
+				$(this).css({
+					"background-color": "red"
+				})
+			}, function(){
+				$(this).css({
+					"background-color": "gray"
+				})
+			})*/
+			//============
+			// 点击事件
+			/*$("div").click(function(){
+				$(this).toggle()
+			})*/
+			//=============
+			/*setInterval(function(){
+				// 【trigger】触发某个方法
+				$("div").trigger("click")
+			}, 1000)*/
+			//==============
+			// 绑定自定义事件
+			/*$("div").on("myClick", function(){
+				alert("自定义函数被执行了")
+			})*/
+			/*$("button").click(function(){
+				// 自定义的事件
+				$("div").trigger("myClick")
+			})*/
+			//=============
+			// 既触发了focus方法获得了焦点，同时也触发了浏览器的默认的方法
+			// 比如：input的边缘变色
+			$("input").focus(function(event){
+				console.log("我获得了焦点")
+			})
+			// 使用triggerHandler触发focus获取焦点不会触发
+			//input输入框的边缘变色的浏览器默认方法
+			$("button").click(function(){
+				$("input").triggerHandler("focus")
+			})
+		})
+	</script>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		语文：<input type="text" id="Chinese"/><br />
+		数学：<input type="text" id="Math"/><br />
+		英语：<input type="text" id="English"/><br />
+		<input type="button" value="确定" id="submit"/>
+	</body>
+	<script type="text/javascript">
+		/*var Chinese = document.getElementById("Chinese")
+		var Math = document.getElementById("Math")
+		var English = document.getElementById("English")
+		console.log(typeof Chinese.value) */
+		
+		document.getElementById("submit").onclick = function(){
+			if (Chinese.value < 0 || Math.value < 0 || English.value < 0 ||
+			Chinese.value > 100 ||  Math.value > 100 || English.value > 100 ) {
+				alert("输入错误！请重新输入!")
+				Chinese.value = ''
+				Math.value = ''
+				English.value = ''
+			}else if(Chinese.value >= 90 && Math.value >= 90 &&
+			English.value >= 90){
+				alert("奖励钢琴一架")
+			}else{
+				alert("打屁股!")
+			}
+		}
+	</script>
+</html>

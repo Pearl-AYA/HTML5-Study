@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>工厂模式创建对象</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 生产人的工厂
+		function createPerson(name, age, sex){
+			var p = {}
+			p.name = name
+			p.age = age
+			p.sex = sex
+			p.sayHello = function(){
+				alert("我的名字是" + this.name)
+			}
+			return p
+		}
+		var p1 = createPerson("lisi", 30, "男")
+		p1.sayHello()
+		var p2 = createPerson("lisi2", 1, "女")
+		p2.sayHello()
+		var p3 = createPerson("lisi3", 10, "男")
+		p3.sayHello()
+		var p4 = createPerson("lisi4", 20, "男")
+		p4.sayHello()
+	</script>
+</html>

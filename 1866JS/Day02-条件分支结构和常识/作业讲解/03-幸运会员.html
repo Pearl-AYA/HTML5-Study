@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>幸运会员</title>
+	</head>
+	<body>
+		<p>请输入一个4位数的会员号</p>
+		<input type="text" id="num"/>
+		<input type="button" id="submit" value="确定"/>
+	</body>
+	<script type="text/javascript">
+		var num = document.getElementById("num")
+		document.getElementById("submit").onclick = function(){
+			// 获取输入框中的值
+			var v = num.value // 1234
+			var ge, shi, bai, qian
+			ge = parseInt(v % 10)
+			shi = parseInt((v / 10) % 10)
+			bai = parseInt((v / 100) % 10)
+			qian = parseInt(v / 1000)
+			
+			if(parseInt(v) !== Number(v)){
+				alert("输入错误，请重新输入")
+			}else if(ge + shi + bai + qian > 20){
+				alert("恭喜你成为幸运会员!")
+			}else{
+				alert("滚!")
+			}
+		}
+	</script>
+</html>

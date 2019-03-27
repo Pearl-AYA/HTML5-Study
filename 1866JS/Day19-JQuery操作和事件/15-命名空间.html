@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>命名空间</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div>
+			<button>按钮1</button>
+			<button>按钮2</button>
+			<button>按钮3</button>
+			<button>按钮4</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			/*function foo(){
+				console.log("你点击了按钮")
+			}
+			$("button").on("click.my", foo)
+			$("button").on("mouseenter.my", foo)
+			$("button").on("click", function(){
+				console.log("我不在命名空间，所以还在")
+			})
+			
+			$("button").off(".my")*/
+			//==================
+			//【2n+1】表示奇数项
+			// 参数1：需要委托的元素  对特定的元素进行事件委托
+			$("div").delegate("button:nth-child(2n+1)", "click", function(event){
+				console.log(event.target)
+			})
+			//解除指定标签的委托事件
+//			$("div").undelegate("button:nth-child(2n+1)", "click")
+			// 解除所有的div标签的委托事件
+//			$("div").undelegate()
+		})
+	</script>
+</html>

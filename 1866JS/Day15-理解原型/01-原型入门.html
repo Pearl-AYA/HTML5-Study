@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原型入门</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 定义一个函数
+		function Person(){
+			this.age = 10
+			this.name = "凤姐"
+		}
+		// 给Person的原型对象中添加sex属性
+		Person.prototype.sex = "女"
+		// 创建对象p
+		var p = new Person()
+		// p中并无constructor属性，但是p的原型中有这个属性，所以可以访问
+		console.log(p.constructor === Person) //true
+		console.log(p.age) // 10
+		console.log(p.sex) // 访问原型中的sex，得到【女】
+		
+		console.log(Person.prototype === p.__proto__) //true
+		console.log(p.__proto__)
+	</script>
+	<!--一切皆对象！！！
+		对象.属性名
+		任何一个函数，只要一杯声明，就有一个默认的
+		属性prototype表示函数的原型。指向的那个对象就是函数的原型对象
+		如果一个函数被当做构造函数使用的时候，则这个对象会有一个不可见
+		的属性[[protype]]，这个属性指向了一个对象：构造函数的原型对象。
+		可以使用：p.__proto__访问。
+	-->
+</html>

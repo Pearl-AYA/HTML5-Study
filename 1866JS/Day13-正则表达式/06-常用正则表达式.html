@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>正则</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 判断一个手机号码是否合法
+		// /1[345789]\d{9}$/g
+		var reg = /1[345789]\d{9}$/g
+		console.log(reg.test("18928831255")) //true
+		console.log(reg.test("12928831255")) //false
+		console.log(reg.test("08928831255")) //false
+		//==================
+		// 邮箱检测
+		// lichaozheng.g@163.com
+		// @gmail   .cn
+		//var reg2 = /\w+@.+[.](com|cn)$/gi
+		//var reg2 = /\w+@.+[.](com)$/gi
+		//var reg2 = /\w+@.+[.](cn)$/gi
+		var reg2 = /^([a-zA-Z0-9_\.\-]+)@([a-zA-Z0-9_\.\-]+)\.([a-zA-Z]{2,4})$/;
+		//【|】表示或者
+		console.log(reg2.lastIndex) //0
+		console.log(reg2.test("aaaaa@abc.com.cn")) //true
+		console.log(reg2.lastIndex) //20
+		//console.log(reg2.test("lichaozheng.g@163.com"))
+	</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>混合式创建对象</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 构造方法
+		function Person(name, age){
+			// 属性定义到构造方法中：目的：不共享
+			this.name = name;
+			this.age = age;
+		}
+		// 把方法定义到原型上：目的：为了可以共享
+		Person.prototype.speak = function(){
+			alert(this.name)
+		}
+		Person.prototype.eat = function(){
+			alert(this.age + " 这是年龄！")
+		}
+		var p1 = new Person("李四", 20)
+		var p2 = new Person("张三", 10)
+		
+		p1.speak()
+		p1.eat()
+		//=========
+		p2.speak()
+		p2.eat()
+	</script>
+	<!--组合式：属性在构造函数中添加，方法添加在原型中
+		但是仍然【封装性太差】
+	-->
+</html>

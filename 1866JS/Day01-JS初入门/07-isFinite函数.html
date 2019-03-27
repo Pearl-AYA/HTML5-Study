@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>isFinite函数</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【isFinite()】用于判断一个数  是否是NaN或者Infinity
+		 * 如果是NaN或者是Infinity，则返回fasle
+		 * 其他返回true
+		 */
+		console.log(isFinite(Infinity)) // false
+		console.log(isFinite(NaN)) // false
+		console.log(isFinite(1)) // true
+		console.log(isFinite("\u597d")) // false
+		console.log("\u597d") // 好
+		console.log(null == undefined) // true
+		console.log(null === undefined) // false
+		
+		//Undefined
+		var ha
+		console.log(ha)
+	</script>
+</html>

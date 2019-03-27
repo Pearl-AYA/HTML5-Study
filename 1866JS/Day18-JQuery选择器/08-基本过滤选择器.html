@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>基本过滤选择器</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript"></script>
+		<style type="text/css">
+			/*input一旦获取了焦点就改变里面的字体的颜色*/
+			input:focus{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" id="user" value="abc"/>
+		<!--【autofocus】属性可以让一个元素自动获取焦点-->
+		<input type="text" id="user1" value="aaaa" autofocus/>
+		<h1>我是h1</h1>
+		<h2>我是h2</h2>
+		<ul>
+			<p>粤嵌</p>
+			<li>最上面的li</li>
+		</ul>
+		<ul>
+			<li id="item">我是内容1</li>
+			<li id="1">我是内容2</li>
+			<li id="2">我是内容3</li>
+			<li id="3">我是内容4</li>
+			<li>我是内容5</li>
+			<li>我是内容6</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 寻找所有的li里面的第一个li,找到以后就可以直接调用
+			// css()函数改变样式。特别要注意：键值对后面不要加分号，否则失效
+			$("li:first").css({
+				backgroundColor: "red"
+			})
+			$("li:last").css({
+				backgroundColor: "blue"
+			})
+			//============
+			// 查找所有的li构成的集合元素中索引是1的元素
+			$("li:eq(1)").css({ // equal  相等的
+				backgroundColor: "yellow"
+			})
+			$("li:even").css({ // even 表示偶数
+				backgroundColor: "black"
+			})
+			$("li:odd").css({ // odd 表示奇数
+				backgroundColor: "red"
+			})
+			// 查找id的值不是item的所有的li标签
+			$("li:not(#item)").css({
+				backgroundColor: "blue"
+			})
+			// 选择下标大于2的所有的li元素(不包含下标2)
+			$("li:gt(2)").css({ // 【gt】  great than
+				backgroundColor: "green"
+			})
+			// 选择下标小于2的元素(不包含下标2)
+			$("li:lt(2)").css({ // 【lt】 little than
+				backgroundColor: "yellow"
+			})
+			// 选择所有的标题元素  h1 h2 h3----h6
+			$(":header").css({
+				color: "pink"
+			})
+			// 选中已经获取焦点的元素
+			$(":focus").css({
+				color: "red"
+			})
+		})
+	</script>
+</html>

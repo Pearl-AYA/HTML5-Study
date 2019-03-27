@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>最大公约数和最小公倍数</title>
+	</head>
+	<body>
+		<input type="text" placeholder="请输入a的值"/>
+		<input type="text" placeholder="请输入b的值"/>
+		<button id="submit">计算</button>
+		<input type="text" placeholder="最大公约数"/>
+		<input type="text" placeholder="最小公倍数"/>
+	</body>
+	<script type="text/javascript">
+		// 获取inputs数组
+		var inputs = document.getElementsByTagName("input")
+		var submit = document.getElementById("submit")
+		// 点击提交
+		submit.onclick = function(){
+			// 获取到a和b的值
+			var a = parseInt(inputs[0].value)
+			var b = parseInt(inputs[1].value)
+			// 调用求最大公约数的函数
+			var maxValue = maxDivisor(a,b)
+			inputs[2].value = maxValue
+			
+			// 调用求最小公倍数的函数
+			var minValue = minMultiple(a,b)
+			inputs[3].value = minValue
+		}
+		// 求最大公约数的函数
+		function maxDivisor(a,b){
+			// 辗转相除法
+			var temp
+			while(b != 0){
+				temp = a % b // 余数要作为新的b值
+				a = b
+				b = temp
+			}
+			return a
+		}
+		// 求最小公倍数的函数
+		function minMultiple(a,b){
+			// 思路: a * b / 最大公约数
+			var temp = maxDivisor(a,b)
+			return a * b / temp
+		}
+	</script>
+</html>

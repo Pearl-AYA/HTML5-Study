@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>支持正则表达式的方法</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【search】根据模式查找是否存在，如果存在则返回子串的下标
+		 * 如果不存在，则返回-1
+		 */
+		var str = "sa1776fhsad27873hjhfkjd348dsfdsjj"
+		var index
+		if((index = str.search(/\d{3}/i)) != -1){
+			//alert("找到的字符串的下标：" + index)
+		}else{
+			alert("没有找到")
+		}
+		//=================
+		/**
+		 * 【match】找到一个或多个正则表达式的匹配。
+		 * 在match内部的正则表达式，捕获组无效。
+		 */
+		//var r = str.match(/\d+(a)/gi)
+		var r = str.match(/\d+/gi)
+		console.log(r)
+		//================
+		/**
+		 * 【replace】替换
+		 */
+		//var str2 = "sagfd6125478fghjdsfg3276478ghsfghj734623"
+		var str2 = "我我我爱爱爱你"
+		// 表示某个字符出现至少两次的时候
+		var reg = /(.)\1+/gi
+		//var reg = /\d/gi
+		// 【🐷】$1表示保留一个，$2无效
+		alert(str2.replace(reg, "$1"))
+		//===============
+		/**
+		 * 【split】分割
+		 */
+		var str3 = "...welcome,to...yueqian..."
+		console.log(str3.split(/\.{3}/gi))
+	</script>
+</html>

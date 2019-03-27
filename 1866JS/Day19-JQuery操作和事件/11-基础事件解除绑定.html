@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>基础事件解除绑定</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<button>按钮1</button>
+		<button>解除按钮1的绑定的事件</button>
+		<button>按钮3</button>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			function click1(){
+				console.log("第一个处理程序!")
+			}
+			function click2(){
+				console.log("第二个处理程序!")
+			}
+			//============
+			// 可以同时给某个标签绑定多个事件
+			$("button:eq(0)").on("click", click1)
+			$("button:eq(0)").on("click", click2)
+			// 点击按钮2解除绑定事件
+			/*$("button:eq(1)").on("click", function(){
+				$("button:eq(0)").unbind("click", click1)
+			})*/
+			//off()方法解除所有绑定的click事件
+			//这个时候绑定在按钮1上面的所有的事件都失效了
+			//$("button:eq(0)").off("click")
+			$("button:eq(0)").unbind()
+			//================
+			// 直接绑定一个click事件
+			/*$("button:eq(0)").click(function(){
+				alert("哈哈")
+			})*/
+			// 常用的事件基本都支持
+			$("button:eq(0)").mouseover(function(){
+				alert("鼠标放上去了!")
+			})
+		})
+	</script>
+</html>

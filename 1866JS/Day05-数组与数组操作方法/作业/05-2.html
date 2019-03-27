@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			var arr=[99,85,82,63,60]
+			function btnclick(){
+				var str=document.getElementById("demo").value;
+				if (isNaN(str)) {
+					alert("输入错误");
+					document.getElementById("demo").value="";
+				} else{
+					arr.push(str);
+					arr.sort(descending);
+					for (i=0;i<arr.length;i++) {
+						if (i===0) {
+							document.getElementById("show").innerHTML=arr[i]+"&nbsp;&nbsp;"
+							document.getElementById("demo").value="";
+						} else{
+							document.getElementById("show").innerHTML+=arr[i]+"&nbsp;&nbsp;"
+							document.getElementById("demo").value="";
+						}
+					}
+				}
+			}
+			function descending(num1,num2){
+				return num2-num1;
+			}
+		</script>
+	</head>
+	<body>
+		<h1>输入一个数，排序</h1>
+		<input type="text" id="demo" value="" />
+		<button id="btn" onclick="btnclick()">确认</button>
+		<p id="show">99 85 82 63 60</p>
+	</body>
+</html>

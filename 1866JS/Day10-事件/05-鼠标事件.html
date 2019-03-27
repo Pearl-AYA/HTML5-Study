@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>鼠标事件</title>
+		<style type="text/css">
+			div{
+				position: absolute;
+				left: 200px;
+				width: 200px;
+				height: 100px;
+				border: 1px solid red;
+				background-color: greenyellow;
+			}
+			p{
+				position: absolute;
+				left: -150px;
+				width: 100px;
+				height: 50px;
+				background-color: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="btn">按钮</button>
+		<div>
+			<p>粤嵌</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var btn = document.getElementById("btn")
+		btn.ondblclick = function(){
+			alert("你双击了我")
+		}
+		var box = document.querySelector("div")
+		box.onmousedown = function(){
+			//alert("你想干嘛？")
+		}
+		box.onmouseup = function(){
+			alert("已经抬起")
+		}
+		//==============
+		// 可以冒泡
+		box.onmouseover = function(){
+			box.style.backgroundColor = 'red'
+		}
+		box.onmouseout = function(){
+			box.style.backgroundColor = 'greenyellow'
+		}
+		//================
+		// 鼠标处于元素的上方
+		// 不冒泡
+		/*box.onmouseenter = function(){
+			box.style.backgroundColor = 'red'
+		}
+		box.onmouseleave = function(){
+			box.style.backgroundColor = 'greenyellow'
+		}*/
+	</script>
+</html>

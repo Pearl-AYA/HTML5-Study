@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>封装私有对象</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var p = (function(){
+			var person = {
+				name: "李四",
+				age: 30,
+				sex: "男"
+			}
+			return {
+				// 在内部函数中使用外部函数的变量person，即【闭包】
+				getName: function(){
+					return person.name
+				},
+				setName: function(name){
+					person.name = name
+				},
+				setAge: function(age){
+					if(age > 120 || age < 0){
+						throw Error("年龄范围不对！")
+					}else{
+						person.age = age
+					}
+				}
+			}
+		})()
+		
+		console.log(p.getName()) //李四
+	</script>
+</html>

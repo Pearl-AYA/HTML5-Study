@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件对象的高级属性</title>
+		<style type="text/css">
+			div{
+				width: 400px;
+				height: 400px;
+				background-color: pink;
+				margin: 100px auto;
+			}
+			div p{
+				width: 200px;
+				height: 200px;
+				background-color: green;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<p></p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var box = document.getElementById("box")
+		/**
+		 * 【高级属性】offsetX和offsetY表示【触发点】相对于【当前
+		 * 元素的左上角的偏移值】
+		 * screenX和screenY：表示【触发点】相对于【屏幕的左上角】
+		 * 这两个值一般并没有什么太大用处
+		 * clientX和clientY：表示【触发点】相对于浏览器的显示区域的
+		 * 左上角的点的偏移值
+		 * pageX和pageY：表示触发点相对于【页面】的偏移值   如果页面没有
+		 * 滚动，则和clientX和clientY相同；如果页面有滚动，则值不同。
+		 */
+		box.addEventListener("mousemove", function(event){
+			console.log(event.offsetX + " " + event.offsetY)
+//			console.log(event.screenX + " " + event.screenY)
+//			console.log(event.clientX + " " + event.clientY)
+//			console.log(event.pageX + " " + event.pageY)
+		})
+	</script>
+</html>

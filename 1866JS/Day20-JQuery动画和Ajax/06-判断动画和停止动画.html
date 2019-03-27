@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>判断动画和停止动画</title>
+		<style type="text/css">
+			div{
+				position: absolute;
+				width: 200px;
+				height: 200px;
+				background-color: pink;
+			}
+			div:nth-child(2){
+				margin-top: 210px;
+				background-color: red;
+			}
+		</style>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="libs/jquery.easing.1.3.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div></div>
+		<div></div>
+		<button>停止动画</button>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			(function step(){
+				$('div')
+					.animate({
+						left: 1000
+					}, 2000, "easeInOutElastic")
+					.animate({
+						top: "500px"
+					}, 5000, "easeInOutElastic")
+					.animate({
+						left: 0
+					}, 5000, "easeInOutBounce")
+					.animate({
+						top: "30px"
+					}, 5000, "easeInOutBounce", function(){
+						step()
+					})
+			})() //函数的自执行
+			//=============
+			$("button:eq(0)").click(function(){
+				// 检测动画是否在运行
+				//var animated = $("div").is(":animated")
+				//alert(animated)
+				//===============
+				//不传入任何参数：表示结束正在执行的动画，
+                //开始执行动画队列中的下一个动画。
+				//$('div').stop()
+				//===============
+				/*stop有两个可选参数：
+				参数1：true/false  true表示立即清除所有动画队列中的所有动画，
+				并结束当前动画。已经执行到了什么地方就停在什么地方。默认是false，
+				表示停止当前动画，并开始动画队列中的下个动画。
+				参数2：true/false:  表示结束动画的时候，是否直接到达当前动画的末尾状态。
+				true表示直接去当前动画的末尾状态，false,表示维持当前状态，把动画停止
+				在当前位置*/
+				$("div").stop(true, true);
+//				$("div").stop(true, false);
+//				$("div").stop(false, false);
+				//$("div").stop(false, true);
+			})
+		})
+	</script>
+</html>

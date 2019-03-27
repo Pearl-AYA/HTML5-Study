@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>CSS操作</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			div{
+				width: 200px;
+				height: 200px;
+				font-size: 40px;
+			}
+			.big{
+				width: 400px;
+				height: 400px;
+			}
+			.font_color{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div style="background-color: pink;">你好</div>
+		<div></div>
+		<button>去掉样式</button>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 如果在原生JS中，访问行间样式和内部样式以及外部样式的方法
+			// 是不同的。但是在JQuery里面，都是一样的，没有区别
+			var color = $("div").css("background-color")
+//			console.log(color) //rgb(255, 192, 203) 获取到了【行间样式】
+			//============
+			var size = $("div").css("font-size")
+//			console.log(size) //40px   获取到了【内部样式】
+			//============
+			// 修改内部样式的属性的值
+			$("div").css("font-size", parseInt(size) + 30)
+			//============
+			// class也是属性，所以获取和设置的方法与【获取和设置属性的方法一致】
+			$("div").attr("class", "big")
+			// 上面已经设置了class="big",现在是追加一个class为font_color
+			$('div').addClass('font_color')
+			// 追加了一个【待移除的class】
+			$('div').addClass('cao-ni-ma')
+			//=============
+			// 移除Class属性(不是移除div)
+			$('div').removeClass('cao-ni-ma')
+			//============
+			// 点击按钮删除/添加big属性
+			$('button').click(function(){
+				// 如果没有这个类名，则追加这个类名；如果有，则删除
+				// 其中的toggle表示【开关】或者【切换】
+				$('div').toggleClass('big')
+				// 判断这个元素是否有指定的class  返回值：true或者false
+//				console.log($('div').hasClass('big'))
+			})
+			//=============
+			$('div').each(function(index, ele){
+				// ele是DOM对象，不是JQ对象
+				console.log($(ele))
+				// 【归纳】JQ中的each()方法和原生JS中的forEach()方法
+				// 完全一样。但是参数的位置刚好相反。
+				// 在each中，index和ele的位置和原生的JS中刚好不同
+			})
+		})
+	</script>
+</html>

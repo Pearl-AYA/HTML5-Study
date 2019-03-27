@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>分解质因数</title>
+	</head>
+	<body>
+		请输入一个待分解质因数的数字：<input type="text" id="inputValue"/>
+		<input type="submit" id="submit" value="提交"/>
+	</body>
+	<script type="text/javascript">
+		var inputValue = document.getElementById("inputValue")
+		var submit = document.getElementById("submit")
+		
+		submit.onclick = function(){
+			// 获取到输入框中的内容
+			var num = parseInt(inputValue.value)
+			// 分解质因数之前，要把【质数】先排除
+			var count = 1
+			if(num && num > 1){
+				for(var k = 2; k <= num; k++){
+					if(num % k == 0){
+						count++
+					}
+				}
+				if(count <= 2){
+					alert("这是一个质数，不能分解质因数!")
+					return
+				}
+				// 确定是一个【非质数】了，才开始分解质因数
+				document.write("分解质因数的结果：" + num + " = ")
+				// 120 = 2 * 2 * 2 * 3 * 5
+				for(var i = 2, temp = num; i <= temp; i ++){
+					if(temp % i === 0){
+						// 分解完毕
+						if(i === temp){
+							document.write(i)
+						}else{
+							document.write(i + "*")
+						}
+						// 更新temp
+						temp /= i
+						// 确保在某个i值不能继续整除了
+						i--
+					}
+				}
+			}else{
+				//【注意】即便是非0非1的正整数，里面也包含有质数
+				// 质数不能被分解，也不用分解
+				alert("输入错误，必须输入非零非1的正整数!")
+			}
+		}
+	</script>
+	<!--对一个整数分解质因数-->
+	<!--质数(素数)：2 3 5 7 11 13 17 19 23 29。。。-->
+</html>

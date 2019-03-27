@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件入门</title>
+	</head>
+	<body onclick="alert('body')">
+		<div onclick="alert('外部的div')">
+			<div onclick="alert('内部的div')">🍎</div>
+		</div>
+	</body>
+	<!--
+		事件三要素：
+		美女经过马路    这个事件
+		1、事件源：事件发生的地点   马路上   【按钮】
+		2、事件对象：美女    【点击事件对象】
+		3、事件监听器(函数)：看美女的人    【给onclick赋值的函数】
+	-->
+	<!--
+		【事件流】
+		1、从内向外：冒泡
+		2、从外向内：捕获
+		DOM事件流：先捕获再冒泡  a=>b=>c=>b=>a
+		目前所有的浏览器都支持【DOM事件流】
+		目前默认都是在冒泡阶段触发事件
+	-->
+</html>

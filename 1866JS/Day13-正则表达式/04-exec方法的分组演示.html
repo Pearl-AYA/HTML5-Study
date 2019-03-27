@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>exec分组</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+	  	/**
+	  	 * 【🐷】()内的内容就是第1组(Girl)。完整整个表达式
+	  	 * 可以看成第0组girlGirl。将来对应着匹配结果数组的下标。
+	  	 */
+		var pa = /girl(Girl)/gi;	
+		var test = "girlGirl abdfjla Girlgirl fal girl";
+		var girls;
+		while(girls = pa.exec(test)){
+	      //匹配之后，数组的第0个元素对应的这第0组的匹配结果，第1个元素对应着第1组的匹配结果
+			for (var i = 0; i < girls.length; i++) {
+				console.log(girls[i]);
+			}
+			console.log("-------------");
+		}
+</script>
+</html>

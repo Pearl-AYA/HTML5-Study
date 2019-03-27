@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>显式绑定</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		function foo(a, b){
+			console.log(this.name + " " + a +" " +  b);
+		}
+		// 【call和apply方法】中的参数一都是【显式】去指定this的指向
+		// 不同的是：call方法后面的参数必须是单个的指定；而apply方法
+		// 后面的参数是放到一个数组中集体进行指定
+		foo.call({name: "麦子"}, 10, 20);
+		foo.apply({name: "麻子"}, [30, 40]);
+		//=============
+		function foo(){
+			console.log(this.name)
+		}
+		// 【🐷】this已经通过bind方法绑定好新的函数对象【王二】
+		// 这个bind方法即修改this的指向，指向【王二】
+		var fooNew = foo.bind({name: "王二"});
+		fooNew()
+		//===========
+		var p = {
+			name: "张三",
+			foo: fooNew
+		}
+		// 通过bind()绑定的this是不会被修改的，也就会说不能重新再被绑定
+		// 所以这里仍然是【王二】
+		p.foo() // 王二
+		//==============
+		var p2 = {
+			name: "凤姐",
+			foo2: function(){
+				console.log(this.name)
+			}
+		}
+		// 构造方法
+		function Person1(){
+			this.name = "柏芝";
+			this.foo1 = p2.foo2;
+		}
+		var p1 = new Person1()
+		p1.foo1() //柏芝
+	</script>
+	<!--【归纳】call和apply函数在ES5之前就已经支持了。
+		bind(this绑定的对象)这个方法会返回一个新的绑定过的函数对象。
+		bind绑定的，则不会/不能再被修改。即不能重新被绑定。
+	-->
+</html>

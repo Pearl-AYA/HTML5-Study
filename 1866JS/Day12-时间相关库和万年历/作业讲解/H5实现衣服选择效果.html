@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>H5实现衣服选择效果</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.wrap{
+				margin: 0 auto;
+				width: 800px;
+				list-style: none;
+			}
+			.div_1{
+				width: 170px;
+				height: 170px;
+				border: 1px solid darkblue;
+				margin: 10px;
+				float: left;
+				position: relative;
+			}
+			.big_picture{
+				position: absolute;
+				top: 50px;
+				left: 0px;
+				border: 1px solid darkblue;
+				z-index: 1;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="wrap" id="wrap">
+			<li class="div_1">
+				<img src="img/shirt_1.jpg"/>
+				<img src="img/shirt_1_big.jpg" class="big_picture"/>
+			</li>
+			<li class="div_1">
+				<img src="img/shirt_2.jpg"/>
+				<img src="img/shirt_2_big.jpg" class="big_picture"/>
+			</li>
+			<li class="div_1">
+				<img src="img/shirt_3.jpg"/>
+				<img src="img/shirt_3_big.jpg" class="big_picture"/>
+			</li>
+			<li class="div_1">
+				<img src="img/shirt_4.jpg"/>
+				<img src="img/shirt_4_big.jpg" class="big_picture"/>
+			</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		var lis = document.getElementsByTagName("li")
+		for (var i = 0; i < lis.length; i ++) {
+			// 当鼠标放上去的时候触发这个事件
+			lis[i].onmouseover = function(){
+				this.lastElementChild.style.display = "block"
+				this.style.borderColor = "red"
+				// 当鼠标放上去并且移动的时候触发
+				this.onmousemove = function(event){
+					var x = event.clientX - this.offsetLeft
+					var y = event.clientY - this.offsetTop
+					console.log(x)
+					this.lastElementChild.style.left = x + 'px'
+					this.lastElementChild.style.top = y + 'px'
+				}
+			}
+			lis[i].onmouseout = function(){
+				this.lastElementChild.style.display = "none"
+				this.style.borderColor = "darkblue"
+			}
+		}
+	</script>
+</html>

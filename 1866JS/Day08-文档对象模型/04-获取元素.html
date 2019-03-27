@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>querySelector方法</title>
+	</head>
+	<body>
+		<p id="demo">我是第A个标签</p>
+		<p class="p_class">我是第B个标签</p>
+		<p id="demo2" class="p_class">我是第C个标签</p>
+		<div class="myDiv">我是DIV</div>
+		<div class="myDiv2">我是DIV</div>
+		<p class="class1 class2">我是第D个标签</p>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【document.querySelector()】根据各种不同的选择器查找元素
+		 * CSS选择器：指定一个或者多个匹配的CSS选择器
+		 * id，class，类型，属性
+		 * 如果针对多个选择器选择不同的标签，在同一个引号中中间使用逗号分隔
+		 */
+		var p_1 = document.querySelector("#demo")
+		var p_2 = document.querySelector(".p_class")
+		var p_3 = document.querySelector("#demo2", ".p_class")
+		var p_4 = document.querySelector("#demo2.p_class")
+		var p_5 = document.querySelector("p")
+		var p_6 = document.querySelector(".class1.class2")
+		var p_7 = document.querySelector(".myDiv, .myDiv2")
+//		console.log(p_1)
+		console.log(p_2)
+//		console.log(p_3)
+//		console.log(p_4)
+//		console.log(p_5)
+//		console.log(p_6)
+//		console.log(p_7)
+	</script>
+</html>

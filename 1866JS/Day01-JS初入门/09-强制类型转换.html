@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>强转</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【Number】将当前内容转换化成数字
+		 * 1、null转化成数字Number类型是值为0
+		 * 2、undefined转为数字是NaN
+		 * 3、boolean可以转化为数字
+		 * 4、如果转化内容中存在数字和点以外的内容，转化为NaN
+		 * 5、转化内容中存在空格在开始位置，并不影响转化
+		 * 6、如果转化内容中间存在空格，则返回NaN */
+		console.log(Number("123")) // 123
+		console.log(Number("*123")) // NaN
+		console.log(Number("+123")) // 123
+		console.log(Number("-123")) // -123
+		console.log(Number("      123")) // 123
+		console.log(Number("12.3")) // 12.3
+		console.log(Number("12a3")) // NaN
+		console.log(Number("12+3")) // NaN
+		console.log(Number("a123")) // NaN
+		console.log(Number(null)) // 0
+		console.log(Number(undefined)) // NaN
+		console.log(Number(true)) // 1
+		console.log(Number("123 456 789")) // NaN
+		console.log(Number("      ")) // 0
+		
+		
+	</script>
+</html>

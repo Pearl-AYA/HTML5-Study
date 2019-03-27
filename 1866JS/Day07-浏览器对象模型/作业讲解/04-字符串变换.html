@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>字符串变化</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 字符串变换
+		function change(str){
+			for (var i = 1; i < str.length; i++) {
+				if(str[i] >= 'A' && str[i] <= 'Z'){
+					var newStr = " " + str[i].toLowerCase()
+					str = str.replace(str[i], newStr)
+				}
+			}
+			return str
+		}
+		alert(change("HelloMyWorld"))
+	</script>
+</html>

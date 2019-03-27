@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>包裹节点</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<li><div><a href="">粤嵌</a></div></li>
+		<p>我是一个P标签</p>
+		<li>新东方</li>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 分别用ul标签包裹每个li
+			//$("li").wrap("<ul></ul>")
+			//==============
+			// 一个ul包裹所有的li。如果中间有不是li的标签存在
+			// 则会扔在后面。如果li中有不是li的标签，则认为是li的一部分
+//			$("li").wrapAll("<ul></ul>")
+			//==============
+			// div会成为li的唯一的一个子元素
+//			$("li").wrapInner("<div></div>")	
+			//==============
+			//只去除掉直接的父容器
+//			$("a").unwrap()
+		})
+	</script>
+</html>

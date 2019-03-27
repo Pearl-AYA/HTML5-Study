@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>全选、取消、反选功能</title>
+		<style type="text/css">
+			body{
+				text-align: center;
+			}
+			form{
+				width: 50%;
+				margin: 50px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="">
+			兴趣爱好: 大宝剑<input type="checkbox" />上网：
+			<input type="checkbox" />看电影：
+			<input type="checkbox" />敲代码:
+			<input type="checkbox" />绿帽：
+			<input type="checkbox" />
+		</form>
+		<button>全选</button>
+		<button>取消全选</button>
+		<button>全部反选</button>
+	</body>
+	<script type="text/javascript">
+		// 返回inputs构成的数组
+		var inp = document.getElementsByTagName("input")
+		// 返回button构成的数组
+		var btn = document.getElementsByTagName("button")
+		// 监听点击事件:全选
+		btn[0].onclick = function(){
+			for (var i = 0; i < inp.length; i++) {
+				inp[i].checked = true
+			}
+		}
+		// 取消全选
+		btn[1].onclick = function(){
+			for (var i = 0; i < inp.length; i++) {
+				inp[i].checked = false
+			}
+		}
+		// 全部反选
+		btn[2].onclick = function(){
+			for (var i = 0; i < inp.length; i++) {
+				inp[i].checked = !inp[i].checked
+			}
+		}
+	</script>
+</html>

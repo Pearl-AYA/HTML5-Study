@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function btnclick(){
+				var num1=document.getElementById("text1").value;
+				var num2=document.getElementById("text2").value;
+				var num3=commondivisor(num1,num2);
+				var num4=(num1*num2)/num3;
+				document.getElementById("text3").value=num3;
+				document.getElementById("text4").value=num4;
+			}
+			function  commondivisor(num1,num2){
+				if (num2==0) {
+					return num1;
+				}
+				var x=num1%num2;
+				return commondivisor(num2,x);
+			}
+		</script>
+	</head>
+	<body>
+		<input type="text" id="text1" value="" placeholder="输入a的值" />
+		<input type="text" id="text2" value="" placeholder="输入b的值" />
+		<button id="btn" onclick="btnclick()">计算</button>
+		<input type="text" id="text3" value="" placeholder="最大公约数" disabled="disabled" />
+		<input type="text" id="text4" value="" placeholder="最小公倍数" disabled="disabled" />
+	</body>
+</html>

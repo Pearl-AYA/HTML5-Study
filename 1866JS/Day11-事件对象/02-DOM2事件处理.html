@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>DOM2级事件处理</title>
+	</head>
+	<body>
+		<button id="btn">点击我</button>
+		<button id="btn1">取消第一个按钮的点击事件</button>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【🐷】可以给一个元素多次添加同一个事件的多个处理程序，
+		 * 浏览器会按照添加的顺序执行，即先注册的先执行，后注册的
+		 * 事件后执行。
+		 * 参数1：监听的时间类型    不能带on
+		 * 参数2：事件处理程序
+		 * 参数3：表示事件处理的阶段  true表示捕获阶段，false冒泡阶段
+		 * 如果不传参数3：默认为冒泡，即false
+		 * @param {Object} event
+		 */
+		function show(event){
+			console.log("你点击了我!")
+		}
+		// 匿名函数
+		var noName = function(){
+			console.log("你点我第二次了，想干嘛？")
+		}
+		// 给btn按钮注册click事件
+		btn.addEventListener("click", show, false)
+		btn.addEventListener("click", noName, false)
+		btn1.onclick = function(){
+			// 取消btn按钮的点击事件
+			btn.removeEventListener("click", show)
+			btn.removeEventListener("click", noName)
+		}
+	</script>
+</html>

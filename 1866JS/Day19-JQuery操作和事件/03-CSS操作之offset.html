@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>CSS操作之offset</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			div{
+				width: 200px;
+				height: 200px;
+				background-color: pink;
+				margin-top: 2000px;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<button>设置宽和高</button>
+		<button>查看offset</button>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 传入一个数组，表示获取多个属性值
+			// 返回的值是一个对象，键值对就包含了获取的属性的值
+			var atts = $('div').css(["width", "height", "background-color", "margin-top"])
+			console.log(atts)
+			// 获取到的宽度的值(width属性的值) ，它的单位默认是px
+			console.log($('div').width())
+			//==================
+			$("button:eq(1)").click(function(){
+				// offset()不需要传任何的参数
+				var offset = $("div").offset()
+				// 返回的值是一个Object对象：有两个属性：left和top
+				// 相对于【文档边缘】的距离。这个offset()类似于pageX和pageY
+				console.log(offset)
+			})
+		})
+	</script>
+</html>

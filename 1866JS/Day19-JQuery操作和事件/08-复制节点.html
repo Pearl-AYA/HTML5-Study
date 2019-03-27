@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>复制节点</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			$("ul").click(function(){
+				alert("abc")
+			})
+			//===========
+			// 【clone(参数)】都是深拷贝，true表示事件和数据也会copy
+			$("ul").after($("ul").clone(true))
+			//============
+			// 【replaceWith()方法】前面的标签被后面的替换掉
+			$("li:nth-child(3)").replaceWith("<p>一个P</p>")
+			// 前面的替换掉后面的
+			$("<p>这是个P</p>").replaceAll("li:nth-child(1)")
+		})
+	</script>
+</html>

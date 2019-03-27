@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>打地鼠效果</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				width: 900px;
+				margin: 0 auto;
+			}
+			.box{
+				height: 600px;
+				border: 1px solid red;
+				position: relative;
+				/*gray*/
+				background-color: #6D6D6D;
+			}
+			div input{
+				width: 100px;
+				height: 30px;
+				border: none;
+				outline: none;
+				/*background-color: orange;*/
+				border-radius: 10px;
+				background: linear-gradient(to bottom, red, greenyellow);
+			}
+			div input:first-of-type{
+				margin-left: 330px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box" class="box"></div>
+		<div>
+			<input type="button" value="开始"/>
+			<input type="button" value="暂停" disabled="disabled"/>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 准备一个空数组,用于存储创建的地鼠
+		var mouseArr = []
+		var btn01 = document.querySelectorAll("input")[0]
+		var btn02 = document.querySelectorAll("input")[1]
+		
+		// 点击【开始】按钮
+		btn01.onclick = function(){
+			/**
+			 * 如果intervalId已经存在，则点击无效
+			 * 也就是说，定时器存在的话，不会重复创建定时器
+			 */
+			if(intervalId){
+				return
+			}
+			var allChildCount = box.childElementCount
+			// 清空所有的地鼠
+			for (var i = 0; i < allChildCount; i++) {
+				box.removeChild(box.children[0])
+			}
+			if(this.value == '重新开始'){
+				// 反复地创建地鼠
+				rePeatCreateMouse()
+				// 当你点击了【重新开始】按钮，那么使能【暂停】按钮
+				btn02.removeAttribute("disabled")
+				btn02.value="暂停"
+				btn01.setAttribute("disabled","disabled");
+			}else if(this.value == '开始'){
+				// 反复地创建地鼠
+				rePeatCreateMouse()
+				this.value = '重新开始'
+				// 当你点击了开始按钮，那么使能【暂停】按钮
+				btn02.removeAttribute("disabled")
+				btn01.setAttribute("disabled","disabled");
+			}
+		}
+		// 点击【暂停】按钮
+		btn02.onclick = function(){
+			/**
+			 * 如果游戏已经结束，则无法再【继续】或者【暂停】
+			 */
+			if(this.value == '暂停'){
+				// 暂停游戏
+				clearInterval(intervalId)
+				intervalId = 0
+				// 循环设置所有的地鼠的点击事件为null
+				for (var i = 0; i < mouseArr.length; i++) {
+					mouseArr[i].onclick = null
+				}
+				this.value = '继续'
+				btn01.removeAttribute("disabled")
+			}else{
+				this.value = '暂停'
+				btn01.setAttribute("disabled","disabled");
+				// 反复创建地鼠
+				rePeatCreateMouse()
+				// 恢复所有的地鼠的点击事件
+				for (var i = 0; i < mouseArr.length; i++) {
+					mouseArr[i].onclick = function(){
+						// 把这个img从DOM元素中移除
+						this.parentElement.removeChild(this)
+					}
+				}
+			}
+		}
+		// 全局变量
+		var intervalId
+		// 反复创建地鼠
+		function rePeatCreateMouse(){
+			// 设置定时器，每隔500ms创建一只地鼠
+			intervalId = window.setInterval(function(){
+				// 创建地鼠
+				var mouse = createMouse()
+				//console.log(mouse)
+				var left = randomInt(0, 800)
+				var top = randomInt(0, 500)
+				mouse.style.left = left + 'px'
+				mouse.style.top = top + 'px'
+				box.appendChild(mouse)
+				// 每创建一只地鼠就压栈到数组mouseArr中
+				mouseArr.push(mouse)
+				//判断游戏结束
+				judgeGameOver()
+			}, 500)
+		}
+		// 让游戏结束
+		function judgeGameOver(){
+			var mouseCount = box.childElementCount
+			// 如果地鼠数量大于等于10，则【结束游戏】
+			if(mouseCount >= 10){
+				window.clearInterval(intervalId)
+				intervalId = 0
+				// 清空所有的地鼠
+				for (var i = 0; i < mouseCount; i++) {
+					box.removeChild(box.children[0])
+				}
+				// 放游戏结束的图片
+				var endImg = document.createElement("img")
+				endImg.style.position = 'absolute'
+				endImg.className = 'end'
+				endImg.src = 'img/end.png'
+				endImg.onclick = null
+				endImg.style.width = '500px'
+				endImg.style.height = '500px'
+				endImg.style.left = '250px'
+				box.appendChild(endImg)
+				btn01.removeAttribute("disabled")
+				btn02.setAttribute("disabled","disabled")
+			}
+		}
+		// 产生随机数
+		function randomInt(m, n){
+			return parseInt(Math.random() * (n - m + 1) + m)
+		}
+		var mouseImg
+		// 创建单只地鼠函数
+		function createMouse(){
+			mouseImg = document.createElement("img")
+			mouseImg.setAttribute("src", "img/mouse.png")
+			mouseImg.style.width = '100px'
+			mouseImg.style.height = '100px'
+			mouseImg.style.position = 'absolute'
+			//给每只地鼠设置点击事件
+			mouseImg.onclick = function(){
+				// 把这个img标签从DOM元素中删除
+				this.parentElement.removeChild(this)
+			}
+			return mouseImg
+		}
+	</script>
+</html>

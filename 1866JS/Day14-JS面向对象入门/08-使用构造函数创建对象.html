@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>构造函数创建对象</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 构造函数
+		function Person(){
+			this.name = "lisi"
+			this.age = 20
+			this.sayName = function(){
+				alert(this.name)
+			}
+		}
+		// 使用new创建对象，会【自动把创建的对象返回】
+		var p = new Person()
+		p.sayName()
+		//================
+		console.log(p)
+		console.log(typeof p) //object
+		console.log(typeof(p)) //object
+		console.log(p instanceof Person) //true
+		//=================
+		/**
+		 * 【总结】构造函数的方法创建对象，对象就具有了类型。
+		 * 工厂模式创建的对象，对象是Object类。其中instanceof
+		 * 可以用于测试一个对象是否是属于某一种类型。
+		 * 1、谁调用，this就指代哪个对象
+		 * 2、在构造函数中(当你使用new的方式调用函数的时候)需要写成this
+		 */
+		var arr = []
+		alert(arr instanceof Array) //true
+	</script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>验证字符串</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 判断字符串是否合法
+		function isRight(str){
+			if(str.length < 4 || str.length > 16){
+				alert("长度必须在4--16范围内，你的长度目前是" + str.length)
+				return false
+			}
+			for (var i = 0; i < str.length; i++) {
+				var ch = str.charAt(i)
+				if(i === 0 && ch >= '0' && ch <= '9'){
+					alert("第一个字符不能是数字！")
+					return false
+				}
+				if(i > 0 && !((ch >= 'a' && ch <= 'z') ||
+				(ch >= 'A' && ch <= 'Z') ||
+				(ch >= '0' && ch <= '9') ||
+				ch == '_')){
+					alert("必须是数字、字母或者下划线")
+					return false
+				}
+			}
+			return true
+		}
+		// 调用函数: 验证字符串是否满足要求
+		if(isRight("fhdVDS52736JGDS")){
+			alert("这是一个合法的字符串!")
+		}
+		
+	</script>
+</html>

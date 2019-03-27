@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>DOM节点操作</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<!--ul.banner>li{$}*3-->
+		<ul class="banner">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 创建一个元素
+			// 同时创建了【文本节点】【元素节点】【属性节点】
+			// 功能和传统的JS里面的：document.createElement()是相同的
+			var $li = $("<li id='item4'>4</li>")
+			var $li2 = $("<li id='item4'>6</li>")
+			console.log($li)
+			//==============
+			// a.append(b)  把参数b表示的元素，添加到对象a中
+			// JQ可以实现【链式表达式】
+			//追加到最后面
+			$(".banner").append($li).append("<li>5</li>")
+			//==============
+			// 把XXX标签追加到xxx
+			$li2.appendTo($(".banner"))
+			//==============
+			// 插入到最前面
+			$(".banner").prepend($li)
+			// 把XXX插入到最前面
+			$li.prependTo($(".banner"))
+			//============
+			// 在ul的后面插入，插入后的$li是ul的兄弟元素
+			$(".banner").after($li)
+			// 在ul的前面插入，插入后的$li是ul的兄弟元素
+			$(".banner").before($li)
+		})
+	</script>
+</html>

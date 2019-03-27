@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>JQuery对象和DOM对象的互换</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div>粤嵌</div>
+		<div>新东方</div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// $divs1是【jQuery对象集合】divs2是【DOM对象集合】
+			// 这是完全不同类型的两种集合，但是可以进行转化
+			var $divs1 = $("div") // jQuery.fn.init(2)
+			console.log($divs1)
+			var divs2 = document.getElementsByTagName("div")
+			console.log(divs2)
+			
+			/**
+			 * 【转化方法】
+			 * 1、把jquery对象转化成dom对象，两种方法：
+			 * 1）a对象.get(index)
+			 * 2）a对象[i]
+			 */
+			console.log($divs1.get(0)) // <div>粤嵌</div>
+			console.log($divs1[0]) // <div>粤嵌</div>
+			console.log($divs1[0].innerHTML = "H5")
+			//================
+			// 判断jquery对象集合是否是Array的子类
+			console.log($divs1 instanceof Array) // false
+			//================
+			/**
+			 * 【DOM对象转JQuery对象】
+			 * $(元素Dom对象)
+			 */
+			console.log($(divs2[1])) // jQuery.fn.init [div]
+			console.log($(divs2)) // jQuery.fn.init(2) [div, div]
+		})
+	</script>
+</html>

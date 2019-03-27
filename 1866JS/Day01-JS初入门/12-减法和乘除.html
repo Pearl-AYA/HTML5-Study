@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>减法</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		console.log(10 - 5) // 5
+		console.log("10" - 5) // 5
+		console.log("add" - 5) // NaN
+		console.log(true - 5) // -4
+		console.log(false - 5) // -5
+		console.log(undefined - 5) // NaN
+		console.log(NaN - 5) // NaN
+		/**
+		 * 【减法】在运算之前在后台调用Number转型函数进行转化，
+		 * 然后再进行普通运算。
+		 * 如果有一个操作数是对象，则调用对象的valueOf()方法
+		 * 以取得表示该对象的数值。如果得到的值是NaN，则减法的
+		 * 结果就是NaN。如果对象没有valueOf()方法，则调用其
+		 * toString()方法并将得到的字符串转换为数值
+		 */
+	</script>
+</html>

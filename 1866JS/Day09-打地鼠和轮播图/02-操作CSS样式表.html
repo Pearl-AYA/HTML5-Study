@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>操作CSS样式表</title>
+		<!--内部样式-->
+		<style type="text/css">
+			div{
+				width: 300px;
+				height: 200px;
+				background-color: springgreen;
+			}
+		</style>
+	</head>
+	<body>
+		<!--【🐷】行间样式的优先级最高，也可以被element.style.属性名获取-->
+		<div id="box" style="width: 500px;background-color: red;"></div>
+		<br />
+		<button>更改div的背景色</button>
+		<button>获取内部或者外部样式</button>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【操作CSS样式表】
+		 * 三种样式：
+		 * 1、行间样式
+		 * 2、内部样式和外部样式
+		 */
+		// 更改和获取【行内样式】
+		var box = document.getElementById("box")
+		// 【🐷】这样根本获取不到内部样式和外部样式
+		console.log(box.style.width)
+		// 【🐷】连接的css属性，都应该写成驼峰命名法的形式
+		console.log(box.style.backgroundColor)
+		// 如果想写成字符串的形式，则可以使用如下的形式
+		console.log(box.style['width'])
+		console.log(box.style['background-color'])
+		//================
+		document.getElementsByTagName("button")[0].onclick = function(){
+			// 红+绿=黄
+			box.style.backgroundColor = "rgb(255,255,0)"
+		}
+		document.getElementsByTagName("button")[1].onclick = function(){
+			// 在IE浏览器下获取【内部或者外部样式】
+			/*var style = box.currentStyle
+			console.log(style['width'])*/
+			
+			// 在IE以外的浏览器下获取【内部或者外部样式】
+			// 【🐷】这种获取方式IE浏览器不支持
+			// 参数1表示要获取哪一个DOM元素的样式表
+			/*var style = window.getComputedStyle(box, null)
+			console.log(style['width']) */
+			//==============
+			// 兼容版的获取方式
+			console.log(getStyleValue(box, 'backgroundColor'))
+		}
+		
+		/**
+		 * 可兼容【所有浏览器】
+		 * 获取【内部或者外部样式】的处理方式
+		 */
+		function getStyleValue(ele, prop){
+			if(ele.currentStyle){
+				return ele.currentStyle[prop]
+			}else{
+				return window.getComputedStyle(ele, null)[prop]
+			}
+		}
+	</script>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>动态原型模式</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 构造方法️
+		function Person(age, name){
+			this.age = age
+			this.name = name
+			if(!Person.prototype.speak){
+				Person.prototype.speak = function(){
+					alert(this.name)
+				}
+			}
+			if(!Person.prototype.eat){
+				Person.prototype.eat = function(){
+					alert("吃 " + this.age)
+				}
+			}
+		}
+		// 创建对象
+		var p1 = new Person(20, "lisi")
+		var p2 = new Person(11, "麦子")
+		console.log(p1.speak === p2.speak) // true
+	</script>
+</html>

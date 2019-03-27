@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>作用域链2</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var a = 10
+		function f1(){
+			var b = 20
+			function f2(){
+				return b
+			}
+			console.log(f2()) // 20
+			b = 30
+			return f2; 
+		}
+		var r = f1()()
+		console.log(r) // 30
+	</script>
+</html>

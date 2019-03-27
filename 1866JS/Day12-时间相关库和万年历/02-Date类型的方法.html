@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Date的相关方法</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 创建一个日期对象
+		var time1 = new Date()
+		//console.log(time1)
+		console.log(time1.getTime()) //1548137540405
+		time1.setTime(21674537463854)
+		console.log(time1)
+		//==============
+		//【归纳】getFullYear()获取4位数的年份值
+		console.log(time1.getFullYear()) //2656
+		//time1.setFullYear(2999)
+		time1.setFullYear(1969)
+		console.log(time1)
+		//===============
+		/**
+		 * 【getYear()】函数已经被废弃掉了。只能返回2位数
+		 * 比如：1999   99   1997   97
+		 * 2000年以后，对于2000年以后的年份返回3/4位错误的数字
+		 */
+		console.log(time1.getYear())
+		//==============
+		var time2 = new Date()
+		/**
+		 * 【归纳】getMonth()返回当前的月份  值为从0---11
+		 * 【🐷】1月----> 返回0
+		 * 2月----> 返回1
+		 * 。。。
+		 * 12月---> 返回11
+		 */
+		console.log(time2.getMonth())
+		time2.setMonth(9) // 设置10月份
+		console.log(time2.getMonth())
+		// 【归纳】setMonth()方法设置的值和getMonth()返回的值一致
+		// 比如：想设置10份，则传入setMonth()中的参数应该写9
+		//================
+		console.log(time2)
+		// 获取当前日是一个月中的第几天
+		console.log(time2.getDate()) // 22
+		time2.setDate(28)
+		console.log(time2)
+		//================
+		// 【归纳】getDay()返回【星期几】
+		console.log("这一天是星期：" + time2.getDay())
+		//================
+		// 获取和设置【小时】
+		var time3 = new Date()
+		console.log(time3.getHours()) //14
+		time3.setHours(18)
+		console.log(time3.getHours()) // 18
+		//=================
+		// 获取和设置【分钟】
+		console.log(time3.getMinutes()) // 44
+		time3.setMinutes(49)
+		console.log(time3.getMinutes()) // 49
+		//=================
+		// 获取和设置【秒数】
+		console.log(time3.getSeconds())
+		time3.setSeconds(55)
+		console.log(time3.getSeconds())
+		//===================
+		// 获取和设置【毫秒数】
+		console.log(time3.getMilliseconds()) // 1秒 === 1000毫秒
+		time3.setMilliseconds(888)
+		console.log(time3.getMilliseconds())
+	</script>
+</html>

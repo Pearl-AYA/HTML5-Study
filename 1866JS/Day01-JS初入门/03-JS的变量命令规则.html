@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>命名规则</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// var 3a
+		var a3
+		// 在C语言中，变量规定不能以$开头，但是它不报错
+		// 在JS中，可以以$开头
+		var $a
+		
+		// 不要太过于简单
+		// var a,b,c,d
+		var age
+		var name
+		var grade
+		var class01
+		// 驼峰命名法
+		var ageAndName
+		//===============
+		// 在JS中定义的变量都会成为【window对象】的属性
+		var num = 10
+		// 上面定义了一个变量num，相当于window.num = 10
+		// JS的变量会自动提前
+		var num
+		// 因为对象的属性是唯一的，所以不会重复
+		alert(num)
+	</script>
+</html>

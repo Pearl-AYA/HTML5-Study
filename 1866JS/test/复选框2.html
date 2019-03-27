@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			body{
+				margin: 0;
+			}
+			div{
+				width: 500px;
+				margin: 80px auto;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="div_1">
+			<input type="checkbox" class="option" />选项1
+			<input type="checkbox" class="option" />选项2
+			<input type="checkbox" class="option" />选项3
+			<input type="checkbox" class="option" />选项4
+			<input type="checkbox" class="option" />选项5
+		</div>
+		<div class="btn">
+			<button id="checkAll">全选</button>
+			<button id="deselectAll">取消全选</button>
+			<button id="selectInvert">反选</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function () {
+			var $checkAll=$("#checkAll")
+			var $deselectAll=$("#deselectAll")
+			var $selectInvert=$("#selectInvert")
+			var $inp=$("input")
+			$checkAll.click(function(){
+				$inp.prop("checked",true)
+			})
+			$deselectAll.click(function () {
+				$inp.prop("checked",false)
+			})
+			$selectInvert.click(function () {
+				$inp.each(function () {
+					if ($(this).is(":checked")) {
+						$(this).prop("checked",false)
+					} else{
+						$(this).prop("checked",true)
+					}
+				})
+			})
+		})
+	</script>
+</html>

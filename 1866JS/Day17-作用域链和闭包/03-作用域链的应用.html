@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>作用域链的应用</title>
+	</head>
+	<body>
+		<button>按钮1</button>
+		<button>按钮2</button>
+		<button>按钮3</button>
+	</body>
+	<script type="text/javascript">
+		var btns = document.getElementsByTagName("button")
+		/*for(var i = 0; i < btns.length; i++){
+			btns[i].onclick = function(){
+				console.log(i)
+			}
+		}*/
+		//=============
+		/*for (var i = 0; i < btns.length; i++) {
+			btns[i].onclick = (function(a){
+				// 闭包：内部函数可以直接使用外部函数的变量a
+				return function(){
+					console.log(a)
+				}
+			})(i) //函数的自执行  相当于a = i
+		}*/
+		//===================
+		/*for(var i = 0; i < btns.length;i ++){
+			// 在这里给按钮新增一个属性index用于存储变量i的临时值
+			btns[i].index = i
+			btns[i].onclick = function(){
+				console.log("输出 " + this.index)
+			}
+		}*/
+		//===================
+		// 在ES6中，新增了一个关键字用于取代var
+		for(let i = 0; i < btns.length; i++){
+			btns[i].onclick = function(){
+				console.log(i)
+			}
+		}
+	</script>
+</html>

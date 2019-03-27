@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function btnclick(){
+				var flag=0;
+				var index;
+				var str=document.getElementById("text").value;
+				var str1=String();
+				for (var i=0;i<str.length;i++) {
+					var asc=str.charCodeAt(i);
+					if (asc>=65&&asc<=90) {
+						flag++;
+						if (flag==1) {
+							index=i;
+						}else if (flag==2) {
+							str1+=str.substring(index,i);
+							str1+="\n";
+							index=i;
+						}else if (flag>2) {
+							var str2=str.substring(index,i);
+							str2=str2.toLowerCase();
+							str1+=str2;
+							str1+="\n";
+							index=i;
+						}
+					}else if (i==(str.length-1)) {
+						var str2=str.substring(index,i+1);
+						str2=str2.toLowerCase();
+						str1+=str2;
+					}
+				}
+				document.getElementById("show").innerHTML=str1;
+			}
+		</script>
+	</head>
+	<body>
+		<input type="text" id="text" value="" />
+		<button onclick="btnclick()">确认</button>
+		<p id="show"></p>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>计算1---100的和</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var count = 0
+		var sum = 0
+		// 求1--100 的和的递归函数
+		function sumFromOneToHundred(count, sum){
+			count++
+			// 结束条件
+			if(count === 101){
+				alert("1+2+3+...+100 = " + sum)
+				return
+			}
+			sum += count
+			sumFromOneToHundred(count, sum)
+		}
+		// 函数的调用
+		sumFromOneToHundred(count, sum)
+	</script>
+</html>

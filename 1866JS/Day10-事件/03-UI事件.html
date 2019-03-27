@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>UI事件</title>
+		<style type="text/css">
+			div{
+				width: 200px;
+				height: 100000px;
+				background-color: springgreen;
+			}
+		</style>
+	</head>
+	<body>
+		<p></p>
+		<div></div>
+		<a href="http://www.baidu.com">去百度</a>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			var div = document.getElementsByTagName("div")[0]
+			div.style.backgroundColor = "red"
+		}
+		//============
+		// 只是IE浏览器支持
+		window.onunload = function(){
+			alert("你终究还是要抛弃我了!")
+		}
+		//============
+		window.onresize = function(){
+			console.log("你改变了我的尺寸!")
+			var width = window.innerWidth ||
+			document.documentElement.clientWidth
+			var height = window.innerHeight ||
+			document.documentElement.clientHeight
+			document.querySelector("p").innerHTML = "宽：" + 
+			width + "，高:" + height
+		}
+		//===============
+		/**
+		 * 当页面滚动的时候触发这个事件，这个事件会重复多次触发
+		 * 所以写在onscroll的函数中的逻辑不要太复杂
+		 */
+		window.onscroll = function(){
+			console.log("😡滚")
+			console.log(document.documentElement.scrollTop || 
+			document.body.scrollTop)
+		}
+	</script>
+</html>

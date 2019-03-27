@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 随机产生一个数字(100范围内的数字)，然后让玩家去猜
+		 * 如果太大了，那么提示【太大了】如果太小了，提示【太小了】
+		 * 直到玩家猜出数字为止，统计猜的次数
+		 */
+		// 【Math.random()】方法可以产生[0，1）范围内的小数
+		// 0.9999 * 100 = 99.99
+		var randomNum = parseInt(Math.random() * 100)
+		// console.log(randomNum)
+		var guestCount = 0
+		do{
+			var guestNum = parseInt(prompt("请猜一个数"))
+			guestCount++
+			if(randomNum < guestNum){
+				alert("太大了！")
+			}else if(randomNum > guestNum){
+				alert("太小了！")
+			}
+		}while (randomNum != guestNum);
+		alert("太厉害了，思密达!" + "你一共猜了：" + guestCount + "次")
+	</script>
+</html>

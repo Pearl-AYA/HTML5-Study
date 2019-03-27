@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>打开窗口</title>
+	</head>
+	<body>
+		<button onclick="openBaiDu();">打开百度窗口</button>
+	</body>
+	<script type="text/javascript">
+		// 打开新串钩，窗口特征全部使用【默认值】
+		/*function openBaiDu(){
+			window.open("http://www.baidu.com")
+		}*/
+		//================
+		var win
+		function openBaiDu(){
+			win = window.open("http://www.baidu.com", "", "width=400,height=400,toolbar=no,\
+			menubar=no,left=500,top=500")
+			
+			//关闭当前窗口
+			//win.close()
+		}
+		
+	</script>
+</html>

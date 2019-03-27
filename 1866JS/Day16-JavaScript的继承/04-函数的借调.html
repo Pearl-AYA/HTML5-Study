@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>函数的借调</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 构造函数
+		function Father(name, sex){
+			this.name = name
+			this.sex = sex
+		}
+		// Father的原型添加一个方法
+		Father.prototype.speak = function(){
+			console.log("父类的原型中的方法！")
+		}
+		//  Son构造方法
+		function Son(name, age, sex){
+			// 这样做，就相当于使用了Father的name和sex属性
+			// 这里的this指向Son将来即将创建的对象
+			// 这样会一次性(临时性)使用Father的属性name和sex
+			// Son并没有name和sex属性，临时拿了Father的name和sex属性
+			// 用一次，但不是真正的继承。用完之后，和Father没有任何联系了
+			// 参数1的this就是重新定义了Father函数内部的this的指向
+			Father.call(this, name, sex)
+			this.age = age
+		}
+		Son.prototype = new Father("张三")
+		Son.prototype.constructor = Son
+		// 创建对象
+		var son1 = new Son("张四", 20, "男")
+		son1.speak()
+		console.log(son1)
+		console.log(son1.name)
+		console.log(son1.sex)
+		console.log(son1.age)
+	</script>
+	<!--【归纳】如果某一个对象没有某些属性，那么可以借用另外的函数
+		将这个被借用的函数的中的第一个参数写成this，这个this指的就是
+		当前的这个需要某些属性的对象。任何的函数对象都有一个call方法，
+		可以使用这个方法去调用构造函数。如：Father.call(this，name，sex)
+		此时的this指的就是Son
+	-->
+</html>

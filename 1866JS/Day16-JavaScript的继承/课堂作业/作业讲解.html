@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>轮播图(原型链继承)</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 构造方法
+		function Banner(selector){
+			this.banner = document.querySelector(selector)
+			this.imgBox = this.banner.querySelector("ul")
+			this.lis = this.banner.querySelectorAll("li")
+			this.width = this.lis[0].offsetWidth
+			this.index = 0
+			this.timer = null
+		}
+		// 在原型中添加方法
+		Banner.prototype.changeImage = function(){
+			var _this = this;
+			this.timer = setInterval(function(){
+				_this.index++;
+				// 如果轮播图到达最末尾，重新开始
+				if(_this.index > _this.lis.length - 1){
+					_this.index = 0;
+				}
+				console.log(_this.index * _this.width)
+				_this.imgBox.style.marginLeft = -(_this.index * _this.width) + "px";
+			}, 1000)
+		}
+	</script>
+</html>

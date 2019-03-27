@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>给对象添加属性</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 空对象
+		var obj = {}
+		console.log(obj)
+		// 如果obj对象中原来没有某个属性，但是你赋值给该属性
+		// 它会临时新添加一个属性
+		obj.haha = "哈哈"
+		console.log(obj.haha)
+		//==============
+		// 给对象添加方法
+		obj.play = function(){
+			alert("Hight 起来!")
+		}
+		obj.play()
+	</script>
+</html>

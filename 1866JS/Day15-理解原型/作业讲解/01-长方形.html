@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 动态原型模式创建对象
+		function Rectangle(length, width){
+			//属性每个对象各有一份
+			this.length = length;
+			this.width = width;
+			// 希望方法只有一份
+			/*if(!Rectangle.prototype.area){
+				Rectangle.prototype.area = function(){
+					var sumArea = this.length * this.width
+					return sumArea
+				}
+			}
+			// 求周长的方法添加到原型中
+			if(!Rectangle.prototype.perimeter){
+				Rectangle.prototype.perimeter = function(){
+					var sumLength = (this.length + this.width) * 2
+					return sumLength
+				}
+			}*/
+		}
+		
+		// 使用【组合模式】不需要判断，但是要写在构造函数外面
+		Rectangle.prototype.area = function(){
+			var sumArea = this.length * this.width
+			return sumArea
+		}
+		Rectangle.prototype.perimeter = function(){
+			var sumLength = (this.length + this.width) * 2
+			return sumLength
+		}
+		// 创建对象
+		var rect1 = new Rectangle(18, 6)
+		var rect2 = new Rectangle(12, 4)
+		var rect3 = new Rectangle(14, 2)
+		console.log(rect1.area())
+		console.log(rect1.perimeter())
+		//=================
+	</script>
+</html>

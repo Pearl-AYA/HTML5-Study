@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>获取元素</title>
+	</head>
+	<body>
+		<form action="" method="get">
+			<input type="checkbox" name="input_name"
+				id="input_name" value="吃鸡"/>吃鸡🐔
+			<input type="checkbox" name="input_name_2"
+				id="input_name" value="LOL"/>打撸
+		</form>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【document.getElementsbyName()】是通过标签的name属性
+		 * 来获取元素。可能出现多个相同的name值，所以返回的是个数组
+		 * 数组的每个元素是Element组成的集合。
+		 * 【最好别用】有严重的兼容性问题。在IE浏览器中，此方法还可以
+		 * 获取ID属性匹配的值。一般把ID和name设置成不同的值。
+		 */
+		var names = document.getElementsByName("input_name")
+		for (var i = 0; i < names.length;i ++) {
+			console.log(names[i].value)
+		}
+	</script>
+</html>

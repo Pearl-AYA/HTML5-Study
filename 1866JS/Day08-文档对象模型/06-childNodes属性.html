@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>childNodes属性</title>
+	</head>
+	<body>
+		<div id="box"></div>
+		<div id="div">
+			<a href="###">简书</a>
+			<!--div>a[href=###]{博客}-->
+			<div><a href="###">博客</a></div>
+			<input type="text" name="user" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【childNodes属性】获取一个元素的所有的子节点
+		 * 返回值是一个数组。只获取子节点，不能获取子节点的子节点
+		 * 【特征】包含文本节点
+		 */
+		var nodes = document.getElementById("div").childNodes
+		//console.log(nodes)
+		for (var i = 0; i < nodes.length; i++) {
+			//console.log(nodes[i].nodeName)
+		}
+		//==============
+		/**
+		 * 【firstChild属性】获取元素的第一个子节点
+		 * 如果选定的节点没有子节点，则返回null
+		 */
+		var div = document.getElementById("div")
+		// 获取第一个子节点
+		var firstChild = div.firstChild
+		console.log(firstChild)
+		console.log(firstChild.nodeName)
+		//===============
+		/**
+		 * 【lastChild属性】获取元素最后一个子节点
+		 */
+		var lastChild = div.lastChild
+		console.log(lastChild)
+		console.log(lastChild.nodeName)
+		//================
+		var box = document.getElementById("box")
+		console.log(box.childNodes)
+		console.log(box.firstChild)
+	</script>
+</html>

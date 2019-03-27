@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		function Father(name){
+			this.name = name
+			this.girls = ["凤姐", "柏芝", "谢大脚"]
+		}
+		function Son(){
+			
+		}
+		// 实现继承
+		// 这个时候传递的参数将来对子类型的所有的实例都有效。
+		Son.prototype = new Father("李四")
+		var son1 = new Son()
+		var son2 = new Son()
+		// son1谈了个女友
+		son1.girls.push("刘亦菲")
+		// son2共享
+		// alert(son2.girls)
+		alert(son1.name)
+		alert(son2.name)
+	</script>
+</html>

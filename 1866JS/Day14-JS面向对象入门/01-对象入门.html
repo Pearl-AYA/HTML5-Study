@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>对象入门</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 字面量的形式创建对象
+		var p = {
+			age: 20,
+			sex: "男",
+			name: "lisi",
+			//属性的值是函数，这个时候我们更喜欢把这样的属性称之为【方法】
+			eat: function(){
+				alert("很能吃！")
+			}
+		}
+		//【小结】p是普通变量，内存在栈中。{}表示字面量的对象
+		// 对象的内存在【堆】中。
+		
+		//访问对象的属性  用【点语法】
+		console.log(p.name)
+		console.log(p.age)
+		// 使用[]去访问对象的属性 而且支持变量
+		console.log(p["sex"])
+		//=================
+		/**
+		 * 【归纳】js中声明一个对象，最直接和最简单的方法就是
+		 * 使用【对象的字面量】的形式。比如上面的p
+		 * p只是存储对象的内存地址而已，并不是对象本身。
+		 * 这称之为【对象的引用】
+		 * 1、用【.语法】去访问对象的属性   .属性名
+		 * 2、用[]访问对象的属性
+		 */
+	</script>
+</html>

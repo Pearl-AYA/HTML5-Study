@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>基础DOM操作</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<ul>
+			<li><a href="http://www.baidu.com">百度一下</a></li>
+			<li><a href="#">广州粤嵌</a></li>
+			<li>腾讯</li>
+		</ul>
+		<input type="text" value="BBC"/>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 不传参数就是【读取】匹配的【第一个元素的html】
+			var h = $("li a").html() //<a href="http://www.baidu.com">百度一下</a>
+			console.log(h)
+			// 有参数就是【设置】匹配的【所有元素的html】
+//			$("li").html("欢迎大家来到粤嵌")
+			//================
+			// text()方法不传参数就是【读取】匹配的【所有元素的text】
+			var text1 = $("li").text()
+			console.log(text1)
+			// text()方法有参数就是【设置】匹配的【所有元素的text】
+			////类似ele.innerText
+//			$("li").text("<a href='http://www.baidu.com'>百度一下</a>")
+			//================
+			// val()方法就是读取表单中的值，类似于value()方法
+			console.log($("input").val())
+			//==============
+			// 设置指定的属性的值
+			$("a:eq(0)").attr("href", "http://www.alibaba.com").text("阿里巴巴")
+			// 如果attr只有一个参数，则表示获取指定的属性的值
+			var href = $("a:eq(0)").attr("href")
+			console.log(href)
+			//================
+			// 如果没有id属性，那么表示添加一个id属性
+			$("a:eq(0)").attr("href", "http://www.alibaba.com")
+						.attr("id", "alibaba")
+			var IDBCursor = $("a:eq(0)").attr("id")
+			console.log(IDBCursor)
+			//================
+			//如果想设置多个属性，则可以传递一个对象参数进去
+			//因为class是一个关键字，所以要加上引号
+			$("a:eq(0)").attr({
+				href: "http:www.baidu.com",
+				id: "alibaba",
+				"class": "abc"
+			})
+		})
+	</script>
+</html>

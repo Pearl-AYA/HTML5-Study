@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>get方法和post方法</title>
+		<script src="libs/jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/*$.get("data1.php", "user=lisi&pwd=abc", function(obj, status, xhr){
+			console.log(obj)
+		}, "html")*/
+		//===============
+		$.post("data2.php", {name:"zs", age:20}, function(obj, status, xhr){
+			console.log(obj)
+		}, "html");
+	</script>
+</html>

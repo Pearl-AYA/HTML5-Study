@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>属性选择器</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div id="b1" class="cbbox1 cc">div1</div>
+		<div id="b2" class="ox2 bb">div2</div>
+		<div id="b3" class="bbox3">div3</div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 查找具有id属性的元素
+			var $boxs = $("[id]")
+			console.log($boxs)
+			//=============
+			// 查找具有id属性，并且属性的值是box1的元素
+			var $boxs2 = $("[id=box1]")
+			console.log($boxs2)
+			//查找id的属性不是box1的元素
+			//如果元素没有id属性也会被找到
+			var $boxs3 =$("[id!=box1]")
+			console.log($boxs3)
+			//==============
+			// 查找具有id属性，并且id属性的值是以b开头
+			var $boxs4 = $("[id^=b]")
+			console.log($boxs4)
+			// 查找具有id属性，并且id属性的值是以1结尾
+			var $boxs5 = $("[id$=1]")
+			console.log($boxs5)
+			//==================
+			// class属性的值包含子字符串bb  *表示包含"字符串"
+			var $boxs6 = $("[class*=bb]")
+			console.log($boxs6)
+			// class属性的值包含   单词bb   ~表示包含【单词】
+			var $boxs7 = $("[class~=bb]")
+			console.log($boxs7)
+		})
+	</script>
+</html>

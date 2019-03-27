@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>isNaN函数</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * NaN：not a number的缩写
+		 * 0 / 0 不是无限大，而是NaN
+		 * 把一个非数字形式的字符串转换成数字的时候，为NaN
+		 */
+		console.log(0 / 0) // NaN
+		console.log(parseInt("60")) //60
+		console.log(parseInt("a")) // NaN
+		
+		// isNaN()函数是判断当前内容是否是NaN(not a number)
+		// 如果是一个数字   返回false    ====> 是数字
+		// 如果不是数字，返回true ====> 不是数字
+		// 如果是字符串： 返回值不确定
+		// 如果是纯数字组成：false
+		// 如果包含了字母： true
+		// null： false
+		// undefined: true
+		// true: false
+		// false: false
+		// NaN: true
+		console.log(isNaN(null)) // false
+		console.log(isNaN(undefined)) // true
+		console.log(isNaN(true)) // false
+		console.log(isNaN(false)) // false
+		console.log(isNaN(NaN)) // true
+		console.log(isNaN("red")) // true
+		console.log(isNaN("3")) // false
+		console.log(isNaN("3a")) // true
+	</script>
+</html>

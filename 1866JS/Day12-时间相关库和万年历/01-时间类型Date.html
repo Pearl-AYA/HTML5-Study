@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Date</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 不用new创建的Date是字符串类型
+		// 和toString()处理后的效果一样
+		var time = Date()
+		console.log(time)
+		console.log(typeof time) //string
+		
+		//=============
+		// new出来的是时间对象
+		var time2 = new Date()
+		console.log(time2)
+		console.log(typeof time2) //object
+		//=============
+		//使用支持的格式的字符串创建日期对象
+		var time3 = new Date("2019/1/22 11:09:50")
+		console.log(time3)
+		//=============
+		// 使用毫秒值创建日期对象
+		var time4 = new Date(546728797479689)
+		console.log(time4)
+		//================
+		// 使用参数创建日期对象
+		var time5 = new Date(2019, 1, 22)
+		console.log(time5)
+		//=================
+		console.log(time5.getFullYear()) //得到年份值
+		console.log(time5.getTime()) //得到毫秒值
+		//=================
+		var time55 = time5.toString()
+		console.log(typeof time55) //string
+		// 返回本地化的格式的时间字符串
+		console.log(time5.toLocaleString())
+		
+		//valueOf()函数返回毫秒值和getTime()效果一样
+		console.log(time5.valueOf())
+		console.log(typeof time5.valueOf())
+		console.log(time5.getTime())
+		console.log(typeof time5.getTime())
+	</script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>作用域链</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var b = 20
+		console.log(window.b) //20
+		// 函数执行环境中有【变量对象】这个时候叫【活动对象】
+		// 但是没有办法直接访问
+		function f1(){
+			console.log(a) // undefined
+			var a = 10
+			// 函数里面定义函数
+			function f2(){
+				console.log(a) // 10
+			}
+			f2()
+		}
+		f1()
+		//==============
+		function f3(){
+			var a = 10
+			function f4(){
+				console.log(a) // 20
+			}
+			a = 20
+			return f4
+		}
+		var f = f3()
+		f()
+		//=============
+		var a = 10
+		window.b = 20
+		delete window.a
+		delete window.b
+		console.log(window.a) //10  全局变量不能删除
+		console.log(window.b) //20  全局变量不能删除
+		console.log(b) //20
+	</script>
+</html>

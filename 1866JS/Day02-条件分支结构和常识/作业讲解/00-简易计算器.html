@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>简易计算器</title>
+	</head>
+	<body>
+		<input type="text" name="box1" id="box1" value=""/>
+		<select name="" id="sign">
+			<option value="add">+</option>
+			<option value="sub">-</option>
+			<option value="mul">*</option>
+			<option value="div">/</option>
+		</select>
+		<input type="text" name="box2" id="box2" value=""/>
+		<input type="text" name="result" id="result" value=""/><br />
+		<button id="btn">计算</button>
+		<button id="btn02">清空</button>
+	</body>
+	<script type="text/javascript">
+		// document.getElementById("btn").onclick = function(){
+		btn.onclick = function(){
+			// 按钮点击的时候要执行的代码
+			var ss = sign.value
+			var a = parseInt(box1.value)
+			var b = parseInt(box2.value)
+			var x
+			
+			switch(ss){
+				case "add":
+				    x = a + b
+				    break
+				case "sub":
+				    x = a - b
+				    break
+				case "mul":
+				    x = a * b
+				    break
+				case "div":
+				    x = a / b
+				    break
+			}
+			result.value = x
+		}
+		btn02.onclick = function(){
+			box1.value = ''
+			box2.value = ''
+			result.value = ''
+		}
+	</script>
+</html>

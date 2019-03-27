@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>存储Cookie</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【存储Cookie】在存储Cookie的时候，需要指定：name和value
+		 * 参数1：cookie的name
+		 * 参数2：cookie的value
+		 * 参数3：存储时间   单位:天
+		 */
+		function saveCookie(name, value, expiredays){
+			var date = new Date()
+			//alert(date.getDate()) //获取【天】15号
+			date.setDate(date.getDate() + expiredays)
+			//alert(date.toGMTString())
+			
+			//Cookie要经过URL编码
+			var cookieText = encodeURIComponent(name) + "=" +
+			encodeURIComponent(value) + ";expires=" +
+			date.toGMTString()
+			document.cookie = cookieText
+		}
+		// 调用函数
+		saveCookie("name", "麻子", 5)
+		//======================
+		// 获取Cookie
+		function getCookie(name){
+			// 先拿到Cookie字符串
+			var cookieText = document.cookie
+			console.log(cookieText)
+			// 获取要查找的cookie的name所在的下标
+			var index = cookieText.indexOf(name + "=")
+			// 如果index ！= -1 则说明找到了
+			if(index != -1){
+				// 查找指定的cookie的结束位置
+				var endIndex = cookieText.indexOf(";", index)
+				// 如果endIndex == -1，则说明没有找到，则把末尾设置为
+				// 字符串的末尾
+				endIndex = (endIndex == -1) ?
+				cookieText.length : endIndex
+				// 把想要的cookie的value值截取出来
+				var value = cookieText.substring(index + (name + "=").length, endIndex)
+				console.log("拿到的value是" + value)
+				// 因为存储的时候使用了URL编码，所以查到的东西需要URL解码
+				return decodeURIComponent(value)
+			}
+		}
+		var value = getCookie("name")
+		alert("欢迎你：" + value)
+		//=================
+		// 删除Cookie
+		// 删除Cookie的原理非常简单：只要把超时时间设置为0，就立即删除了
+		// 以删除Cookie的形式调用：saveCookie
+		saveCookie("name", "李四", 0)
+		//再次调用的时候，Cookie中的【键name】所在的信息已经被删除，无法再访问到value值
+		var value = getCookie("name")
+		alert("欢迎你：" + value)
+	</script>
+</html>

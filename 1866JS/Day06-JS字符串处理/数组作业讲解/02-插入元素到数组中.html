@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" id="numInput"/>
+		<button id="btn">插入元素到数组中</button>
+	</body>
+	<script type="text/javascript">
+		var arr = [99, 85, 82, 63, 60]
+		alert("插入前的数组为：" + arr)
+		btn.onclick = function(){
+			// 假设输入80
+			var numInputValue = numInput.value
+			var numValue = parseInt(numInputValue)
+			for (var i = 0, len = arr.length; i < len; i++) {
+				if(arr[i] < numValue){
+					arr.splice(i, 0, numValue)
+					break
+				}
+				// 如果待插入的数是最小的，则直接插入到末尾即可
+				if(i === arr.length - 1){
+					arr.push(numValue)
+				}
+			}
+			alert("插入后：" + arr)
+		}
+	</script>
+</html>

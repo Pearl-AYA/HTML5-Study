@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function btnclick(){
+				var flag1=0;
+				var flag2=0;
+				var flag3=0;
+				var str=document.getElementById("text").value;
+				if (str.length<4||str.length>16) {
+					flag1=1;
+				}
+				var first=str.charCodeAt(0);
+				if (first>=48&&first<=57) {
+					flag2=1;
+				}
+				for (var i=0;i<str.length;i++) {
+					var asc=str.charCodeAt(i);
+					if ((asc>=48&&asc<=57)||(asc>=65&&asc<=90)||(asc>=97&&asc<=122)||asc==95) {
+						
+					}else{
+						flag3=1;
+					}
+				}
+				if (flag1==0&&flag2==0&&flag3==0) {
+					alert("输入正确");
+				}else{
+					if (flag1==1) {
+						alert("长度必须为4-16");
+					}
+					if (flag2==1) {
+						alert("首字母不能为数字");
+					}
+					if (flag3==1) {
+						alert("包含违法字符")
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<h1>长度4-16;只能包含数字、英文字符、下划线三种符号;首字符不能是数字</h1>
+		<input type="text" id="text" value="" />
+		<button onclick="btnclick()">确认</button>
+	</body>
+</html>

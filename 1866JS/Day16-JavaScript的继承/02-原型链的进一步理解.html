@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原型链的进一步理解</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 这是一个普通的函数
+		 var Father = function(name){
+		 	this.name = name;
+		 }
+		 // 给Father的原型中添加一个speak方法
+		 Father.prototype.speak = function(){
+		 	console.log("我是父类型的方法！")
+		 }
+		 // Son
+		 var Son = function(age){
+		 	this.age = age
+		 }
+		 // 修改Son的原型为Father的对象
+		 Son.prototype = new Father("李四")
+		 // Father的constructor属性指向Son
+		 Son.prototype.constructor = Son
+		 // Son的原型(即Father对象)中添加一个speak方法
+		 // 这个speak方法会覆盖掉从Father的原型中继承过来的speak方法
+		 Son.prototype.speak = function(){
+		 	console.log("我是子类中的方法！")
+		 }
+		 // 创建对象
+		 var son1 = new Son(20)
+		 son1.speak()
+		 //=================
+		 /*
+		  * console.log(son1 instanceof Son) //true
+		 console.log(son1 instanceof Father) //true
+		 console.log(son1 instanceof Object) //true
+		 */
+		 //=================
+		 // 判断某个原型是不是son1的原型链中的一环
+		 console.log(Object.prototype.isPrototypeOf(son1)) // true
+		 console.log(Father.prototype.isPrototypeOf(son1)) // true
+		 console.log(Son.prototype.isPrototypeOf(son1)) //true
+		 //=============
+		 console.log(new Father("").__proto__.isPrototypeOf(son1)) //true
+		 // new Father("").__proto__ == Father.prototype
+	</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>高级选择器</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<ul>
+			<a href="">粤嵌</a>
+			<li></li>
+			<li id="li1">gsadhjgdjka</li>
+			<p></p>
+			<li>哈哈</li>
+			<li></li>
+			<li></li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		// 【Next选择器( + )】紧挨着的下一个兄弟;如果+号后面有具体的指定
+		// 那么还要满足第二个条件   【+】号叫做【下一个兄弟选择器】
+		// 找到ul的子元素中id为#li1的元素的紧挨着的下一个标签名为li的元素
+		// 这样的元素不存在，所以返回的li1的长度为0。因为紧挨着的是p元素，并不是
+		// li元素。单纯地写+号表示next()方法. 但是如果+li就表示下一个兄弟元素
+		// 的标签名必须为li的条件。next()表示下一个任意元素。
+		var $li1 = $("ul > #li1 + li")
+		console.log($li1)
+		var $li2 = $("ul > #li1").next()
+		console.log($li2)
+		//================
+		// 【~号】表示所有的后面的兄弟(即同辈元素，不包括后代子孙)
+		var $li3 = $("ul > #li1 ~ li")
+		console.log($li3)
+		var $li4 = $("ul > #li1").nextAll("li")
+		console.log($li4)
+		//=================
+		// 上一个兄弟
+		var $li5 = $("ul > #li1").prev()
+		console.log($li5)
+		// 所有前面的兄弟
+		var $li6 = $("ul > #li1").prevAll()
+		console.log($li6)
+		//=================
+		// 【同辈标签】找ul元素的子节点中国id为li1的所有的标签名为li的兄弟元素
+		var $li7 = $("ul > #li1").siblings("li")
+		console.log($li7)
+	</script>
+</html>

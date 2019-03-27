@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>querySelectAll函数</title>
+	</head>
+	<body>
+		<!--div.p_1{$}*3-->
+		<div class="p_1">1</div>
+		<div class="p_1">2</div>
+		<div class="p_1">3</div>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【NodeList对象】NodeList表示节点列表
+		 * 类数组集合：返回的是一个只读的类数组对象
+		 * 也拥有length属性，可以像数组一样用索引访问
+		 * 【querySelectorAll】返回所有匹配的元素
+		 * HTML5才开始引入。
+		 */
+		var all = document.querySelectorAll(".p_1")
+		console.log(all)
+		console.log(all.length)
+		console.log(all[1])
+		
+		//=================
+		/**
+		 * 【documentElement元素】documentElement 属性以一个元素对象
+		 * 返回一个文档的文档元素。HTML 文档返回对象为 HTML元素。
+		 */
+		console.log(document.documentElement.nodeName)
+		console.log(document.documentElement.nodeValue)
+		console.log(document.documentElement.nodeType)
+	</script>
+</html>

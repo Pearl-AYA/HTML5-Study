@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>元素属性操作</title>
+	</head>
+	<body>
+		<a href="http://www.baidu.com" id="a_id"
+			target="_blank">点击打开百度</a>
+		<button onclick="getShuXing()">获取属性值</button>
+		<button onclick="setShuXing()">设置新属性</button>
+		<button onclick="removeShuXing()">删除属性</button>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【元素属性操作】
+		 * 【element.getAttribute(attributeName)】
+		 * 功能：获取属性的值
+		 * 【element.setAttribute(attributeName, attributeValue)】
+		 * 功能：设置属性
+		 * 【element.removeAttribute(attributeName)】
+		 * 功能：删除属性
+		 */
+		//====================
+		/**
+		 * 【getAttribute(attributeName)】
+		 * 获取元素的某个属性名称
+		 * 【🐷】属性可以是任意类型的，比如：id  class value  name
+		 * 返回值：获取指定属性的属性值
+		 */
+		function getShuXing(){
+			var a = document.getElementById("a_id")
+			alert("id = " + a.getAttribute("id") +
+			"\ntarget = " + a.getAttribute("target")+
+			"\nhref = " + a.getAttribute("href")+
+			"\nclass = " + a.getAttribute("class"))
+		}
+		//=====================
+		/**
+		 * 【setAttribute(attributeName, attributeValue)】
+		 * 作用：创建或者更改某个属性的值
+		 * 如果指定的属性已经存在，则只设置该值即可。
+		 * 如果指定的属性不存在，则先创建该属性，然后设置该属性的值
+		 * 参数：
+		 * 1、attributeName  属性名
+		 * 2、attributeValue  新的属性值
+		 */
+		function setShuXing(){
+			var a = document.getElementById("a_id")
+			a.setAttribute("href", "http://www.gec-edu.org/?gzbdgzbdyueqianpc000521")
+			//a.setAttribute("class", "clickElement")
+		}
+		//======================
+		/**
+		 * 【removeAttribute(attributeName)】
+		 * 移除属性
+		 * 参数：
+		 * 必选参数   需要移除的属性的名称
+		 */
+		function removeShuXing(){
+			var a = document.getElementById("a_id")
+			a.removeAttribute("href")
+		}
+		//=================
+		/**
+		 * 【拓展】hasAttribute(AttributeName)
+		 * 检测是否包含某个属性(判断某个属性是否存在)
+		 * 返回值是true或者false
+		 */
+		console.log(document.getElementById("a_id").hasAttribute("type"))
+		console.log(document.getElementById("a_id").hasAttribute("href"))
+	</script>
+</html>

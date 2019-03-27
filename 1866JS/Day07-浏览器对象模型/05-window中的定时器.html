@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>window中的定时器</title>
+	</head>
+	<body>
+		<h1 id="time"></h1>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【window中的定时器】window.setTimeout(code, 3000)
+		 * 参数2表示时间：单位是ms
+		 * 语法：超时调用。在指定的时间之后去之执行函数code的代码
+		 */
+//		var timeoutId = window.setTimeout(Go, 3000)
+		// 【🐷】函数调用的时候，传入的参数1没有小括号
+		// 因为这个方法不是我们调用的，是通过【引擎】去进行调用的
+//		function Go(){
+//			window.open('http://www.baidu.com')
+//		}
+//		console.log("超时调用的定时器" + timeoutId)
+		//清除定时器
+//		window.clearTimeout(timeoutId)
+		//====================
+		/**
+		 * 【window.setInterval(code，时间)】
+		 * 语法：周期调用。指每隔指定的时间就去执行函数code代码
+		 */
+		var h1 = document.getElementById("time")
+		var count = 0
+		var timeIntervalId = window.setInterval(function(){
+			var msg = new Date().toLocaleString()
+			h1.innerHTML = msg
+			count++
+//			console.log(count)
+			if(count == 5){
+				window.clearInterval(timeIntervalId)
+				// 定时器变量设置为0
+				timeIntervalId = 0
+				console.log("定时器被清除后:" + timeIntervalId)
+			}
+		}, 1000)
+		console.log(typeof timeIntervalId);
+//		console.log("定时器被清除前:" + timeIntervalId)
+		/**
+		 * 取消定时器：可以使用window.clearInterval(定时器变量)
+		 * 参数：需要清除的内容的名称
+		 */
+		// window可以省略
+	</script>
+</html>

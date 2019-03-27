@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>打地鼠效果</title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				width: 900px;
+				margin: 0 auto;
+			}
+			.box{
+				height: 600px;
+				border: 1px solid red;
+				position: relative;
+				/*gray*/
+				background-color: #6D6D6D;
+			}
+			#btns{
+				width: 205px;
+				margin: 10px auto;
+			}
+			#btns input{
+				width: 100px;
+				height: 30px;
+				border: none;
+				outline: none;
+				/*background-color: orange;*/
+				border-radius: 10px;
+				background: linear-gradient(to bottom, red, greenyellow);
+				cursor: pointer;
+			}
+			#btns input:disabled{
+				background: #CCCCCC !important;
+				color: black;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box" class="box"></div>
+		<div id="btns">
+			<input type="button" value="开始"/>
+			<input type="button" value="暂停" disabled="disabled"/>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function () {
+			$(document).on("selectstart",function () {
+				return false;
+			})
+			.on("contextmenu",function () {
+				return false;
+			})
+			var $btn01 = $("input:eq(0)")
+			var $btn02 = $("input:eq(1)")
+			// 点击【开始】按钮
+			$btn01.click(function () {
+				if (intervalId1) {
+					return
+				}
+				// 清空所有的地鼠
+				$(".box").empty()
+				if ($(this).val()=="重新开始") {
+					// 反复地创建地鼠
+					rePeatCreateMouse()
+					// 当你点击了【重新开始】按钮，可以点击【暂停】按钮
+					$btn02.removeAttr("disabled")
+					$btn02.val("暂停")
+					$btn01.attr("disabled","disabled")
+				}else {
+					rePeatCreateMouse()
+					$(this).val("重新开始")
+					$btn02.removeAttr("disabled")
+					$btn01.attr("disabled","disabled")
+				}
+			})
+			// 点击【暂停】按钮
+			$btn02.click(function () {
+				/**
+				 * 如果游戏已经结束，则无法再【继续】或者【暂停】
+				 */
+				var $mouse=$(".box").children()
+				if ($(this).val()=="暂停") {
+					clearInterval(intervalId1)
+					intervalId1 = 0
+					$(this).val("继续")
+					$btn01.removeAttr("disabled")
+					$mouse.unbind("click")
+				}else{
+					$(this).val("暂停")
+					$btn01.attr("disabled","disabled")
+					rePeatCreateMouse()
+					$mouse.click(function () {
+						$(this).remove()
+					})
+				}
+			})
+		// 全局变量
+		var intervalId1
+		// 反复创建地鼠
+		function rePeatCreateMouse(){
+			// 设置定时器，每隔500ms创建一只地鼠
+			intervalId1 = window.setInterval(function(){
+				// 创建地鼠
+				var $mouse = createMouse()
+				//console.log(mouse)
+				var left = randomInt(0, 800)
+				var top = randomInt(0, 500)
+				$mouse.css({
+					left:left,
+					top:top
+				})
+				$(".box").append($mouse)
+				//判断游戏结束
+				judgeGameOver()
+			}, 500)
+		}
+		// 让游戏结束
+		function judgeGameOver(){
+			var $mouseCount = $(".box").children().length
+			// 如果地鼠数量大于等于10，则【结束游戏】
+			if($mouseCount >= 10){
+				window.clearInterval(intervalId1)
+				intervalId1 = 0
+				// 清空所有的地鼠
+				$(".box").empty()
+				// 放游戏结束的图片
+				var $endImg = $("<img src='img/end.png' class='end' />")
+				$endImg.css({
+					position:"absolute",
+					width:500,
+					height:500,
+					left:250
+				})
+				$(".box").append($endImg)
+				$btn01.removeAttr("disabled")
+				$btn02.attr("disabled","disabled")
+			}
+		}
+		// 产生随机数
+		function randomInt(m, n){
+			return parseInt(Math.random() * (n - m + 1) + m)
+		}
+		var $mouseImg
+		// 创建单只地鼠函数
+		function createMouse(){
+			$mouseImg=$("<img src='img/mouse.png' />")
+			$mouseImg.css({
+				width:100,
+				height:100,
+				position:"absolute"
+			})
+			//给每只地鼠设置点击事件
+			$mouseImg.click(function () {
+				$(this).remove()
+			})
+			return $mouseImg
+		}
+		})
+	</script>
+</html>

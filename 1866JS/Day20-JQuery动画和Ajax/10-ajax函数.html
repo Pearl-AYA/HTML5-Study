@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax函数</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 该ajax函数是最底层的实现，load、get、post、getScript、getJSON
+		//等函数都是对这个ajax函数进行了特殊的封装而已
+		/*$.ajax("data1.json", {
+			method: "GET",
+			dataType: "json",
+			success: function (data, status, jqxhr){
+				console.log(data)
+			}
+		})*/
+		//===============
+		/*$.ajax({
+			url: "data1.php",
+			method: "GET",
+			dataType: "text",
+			data: {
+				user: "abc",
+				pwd: "123"
+			},
+			success: function(data, status, jqxhr){
+				console.log(data)
+			}
+		})*/
+		//================
+		var formData = new FormData()
+		formData.append("user", "李四")
+		formData.append("pwd", "123456")
+		
+		//该方法是JQuery底层的AJAX实现，前面的方法都是对这个方法的封装。只有一个参数(对象)，所有关于请求的数据都可以封装到这个参数中。
+		//$.ajax ( [ setting ] )
+		$.ajax({
+			url: "data2.php",
+			method: "POST",
+			dataType: "text",
+			data: formData,
+			success: function(data, status, jqxhr){
+				console.log(data)
+			}
+		})
+	</script>
+</html>

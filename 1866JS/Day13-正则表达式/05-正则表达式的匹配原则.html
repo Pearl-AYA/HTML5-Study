@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>匹配原则</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 匹配3个a或者多个a
+		var reg = /a{3,}/gi
+		console.log(reg.exec("abaa")) //null
+		console.log(reg.exec("aaa")) //匹配的结果
+		console.log(reg.exec("dddaaaaaaaaghjk"))
+		/**
+		 * 【🐷】？  例如(x?)  匹配0个或者1个x
+		 * 默认都是贪婪模式，非默认的懒惰模式：在数量词后面
+		 * 添加一个？
+		 */
+		//=============
+		var reg2 = /(a*)/gi
+		console.log(reg2.exec("aaaaabbbaghjahjka"))
+	</script>
+</html>

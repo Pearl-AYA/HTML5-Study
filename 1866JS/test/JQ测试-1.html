@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			body{
+				margin: 0;
+				text-align: center;
+			}
+			table{
+				width: 600px;
+				margin: 50px auto;
+			}
+			tbody tr:nth-child(even){
+				background-color: pink;
+			}
+			tbody tr:nth-child(odd){
+				background-color: lightskyblue;
+			}
+			thead{
+				background-color: #CCCCCC;
+			}
+			.yellow{
+				background-color: yellow !important;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>员工信息</h2>
+		<table border="1">
+			<thead>
+				<th></th>
+				<th>姓名</th>
+				<th>薪水</th>
+				<th>年龄</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>张三</td>
+					<td>20000</td>
+					<td>23</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>李四</td>
+					<td>22000</td>
+					<td>22</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>王五</td>
+					<td>14000</td>
+					<td>26</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>马六</td>
+					<td>15000</td>
+					<td>21</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+	<script type="text/javascript">
+		$(function () {
+			$("input").each(function () {
+				$(this).change(function () {
+					if ($(this).prop("checked")) {
+						$(this).parent().parent().attr("class","yellow")
+					}else{
+						$(this).parent().parent().removeClass("yellow")
+					}
+				})
+			})
+		})
+	</script>
+</html>

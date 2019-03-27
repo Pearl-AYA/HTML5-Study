@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>万年历效果</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#calendar{
+				width: 700px;
+				margin: 100px auto;
+				/*background-color: pink;*/
+			}
+			#year_month{
+				text-align: center;
+			}
+			#content ul{
+				list-style: none;
+			}
+			#content li{
+				width: 100px;
+				float: left;
+				text-align: center;
+				height: 50px;
+				line-height: 50px;
+				/*background-color: greenyellow;*/
+			}
+			/*鼠标放上去，背景变成红色*/
+			#content li:hover{
+				background-color: greenyellow;
+				border-radius: 50%;
+				/*color: white;*/
+			}
+		</style>
+	</head>
+	<body>
+		<div id="calendar">
+			<div id="year_month">
+				<select id="year"></select>年
+				<select id="month"></select>月
+			</div>
+			<!--=============-->
+			<div id="content">
+				<ul>
+					<li>周日</li>
+					<li>周一</li>
+					<li>周二</li>
+					<li>周三</li>
+					<li>周四</li>
+					<li>周五</li>
+					<li>周六</li>
+				</ul>
+				<!--============-->
+				<ul id="days"></ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var yearSelect = document.getElementById("year")
+		var monthSelect = document.getElementById("month")
+		var daysUI = document.getElementById("days")
+		
+		// 填充所有的能够选择的【年份】
+		for (var year = 1900; year < 3000; year++) {
+			// 创建option的函数
+			createOption(year, yearSelect)
+		}
+		// 填充所有的能够选择的【月份】
+		for (var month = 1; month <= 12; month ++) {
+			createOption(month, monthSelect)
+		}
+		// 根据指定的参数创建一个【option】并把这个option
+		// 插入到指定的select中
+		function createOption(value, parentSelect){
+			// 创建option标签
+			var opt = document.createElement("option")
+			opt.value = value
+			opt.innerHTML = value
+			//把创建的option插入到传入的父容器节点中
+			parentSelect.appendChild(opt)
+		}
+		// 设置年份和月份的当前时间
+		setCurrentYearAndMonth()
+		// 开始向days这个ul中填入具体的日期
+		fillDays(+yearSelect.value, monthSelect.value - 1)
+		/**
+		 * 监听用户的年份发生改变
+		 */
+		yearSelect.onchange = function(){
+			// 填充日期
+			fillDays(+yearSelect.value, monthSelect.value - 1)
+		}
+		// 监听用户的月份发生改变
+		monthSelect.onchange = function(){
+			fillDays(+yearSelect.value, monthSelect.value - 1)
+		}
+		// 向days标签中填充指定的年和月的所有日期
+		function fillDays(year, month){
+			daysUI.innerHTML = ''
+			// 代表指定的年月的1日
+			var d = new Date(year, month, 1)
+			// 计算1日是星期几
+			var dayOfWeek = d.getDay()
+			console.log(dayOfWeek) //2
+			// 向1日之前添加内容是空的li标签
+			for (var i = 0; i < dayOfWeek; i ++) {
+				createLi("", daysUI)
+			}
+			// 计算当前月有多少天   x月
+			// 先求下个月的第一天的日期对象
+			var nextOne = new Date(year, month + 1, 1)
+			// 设置为0，表示上个月的最后一天
+			nextOne.setDate(0)
+			// 获取到这个月有多少天
+			var currentDays = nextOne.getDate()
+			// 循环创建标签
+			for (var i = 1; i <= currentDays; i++) {
+				createLi(i, daysUI)
+			}
+			// 当前日期的背景高亮  1---31
+			// today是数字
+			var today = new Date().getDate()
+			// 获取表示当前日期的li   
+			var li = document.getElementById(today + "")
+			li.style.backgroundColor = "red"
+			li.style.borderRadius = "50%"
+		}
+		// 创建具有指定内容的li标签，并把它插入到指定的位置
+		function createLi(content, ul){
+			// 创建标签
+			var li = document.createElement("li")
+			li.innerHTML = content
+			if ((content+"").length > 0) {
+				// 给li标签添加id值
+				li.id = content
+			}
+			// 将li标签追加给ul
+			ul.appendChild(li)
+		}
+		// 设置【select默认选择】的是【当前的年份和月份】
+		function setCurrentYearAndMonth(){
+			var date = new Date()
+			yearSelect.value = date.getFullYear()
+			monthSelect.value = date.getMonth() + 1
+		}
+	</script>
+</html>

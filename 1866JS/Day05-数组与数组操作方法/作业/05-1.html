@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			var arr1=[]
+			function btnclick(){
+				if (arr1.length===10) {
+					alert("输入已完成")
+				}else{
+					var str=document.getElementById("text1").value;
+					if (isNaN(str)) {
+						alert("输入错误")
+						document.getElementById("text1").value="";
+					} else{
+						arr1.push(str);
+						document.getElementById("text1").value="";
+						if (arr1.length===10) {
+							for (var i=0;i<10;i++) {
+								document.getElementById("show").innerHTML+=arr1[i]+"&nbsp;&nbsp;"
+							}
+						}
+					}
+				}
+				
+			}
+			
+		</script>
+	</head>
+	<body>
+		<h1>1.输入10个数字</h1>
+		<input type="text"  id="text1" value="" /><p id="show"></p>
+		<button id="btn1" onclick="btnclick()">确认</button>
+	</body>
+</html>

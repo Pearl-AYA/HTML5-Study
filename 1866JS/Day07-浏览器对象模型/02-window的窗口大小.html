@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>window的窗口大小</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 有三种方式获取浏览器的窗口大小：
+		 * (浏览器的视口，不包括工具栏和滚动条)
+		 */
+		//var msg = "窗口的高度" + window.innerHeight +"\n窗口的宽度" + window.innerWidth
+		//alert(msg)
+		//==============
+//		var msg = "窗口宽度：" + document.documentElement.clientWidth +
+//		"\n窗口高度：" + document.documentElement.clientHeight;
+//		alert(msg);
+		//==============
+		var w = window.innerWidth || document.documentElement.clientWidth;
+		var h = window.innerHeight || document.documentElement.clientHeight;
+		alert("窗口宽度：" + w + "\n窗口高度：" + h);
+	</script>
+</html>

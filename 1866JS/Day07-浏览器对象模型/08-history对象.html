@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>history对象</title>
+	</head>
+	<body>
+		<button onclick="urlCount()">显示历史记录列表个数</button>
+		<button onclick="myForward()">前进</button>
+		<button onclick="myBack()">后退</button>
+		<button onclick="myGo(-2)">后退两步</button>
+	</body>
+	<script type="text/javascript">
+		function urlCount(){
+			alert("历史列表中有" + history.length + "个URL")
+		}
+		function myForward(){
+			// 前进
+			history.forward()
+		}
+		function myBack(){
+			// 后退
+			history.back()
+		}
+		function myGo(index){
+			// 指定跳转
+			history.go(index)
+		}
+	</script>
+</html>

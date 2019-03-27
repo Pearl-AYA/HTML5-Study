@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>阻止事件的默认行为</title>
+	</head>
+	<body>
+		<form action="" id="form">
+			<input type="text" name="user"/><br />
+			<input type="submit" value="提交"/>
+		</form>
+	</body>
+	<script type="text/javascript">
+		var form = document.getElementById("form")
+		form.addEventListener("submit", function(event){
+			//阻止表单的默认提交事件
+    			event.preventDefault();
+		}, false)
+	</script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>调整window的大小</title>
+	</head>
+	<body>
+		<button onclick="to()">changeWindowSize</button>
+		<br />
+		<button onclick="by()">reduce 10px</button>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【调整窗口大小】
+		 * 1、resizeTo()   调整到指定的大小
+		 * 2、resizeBy()   增加/缩减指定的宽度和高度
+		 * 支持情况：Chrome和Firefox都禁用了这两个方法，但是
+		 * IE和Safari浏览器仍然支持。
+		 */
+		function to(){
+			//alert("变Small")
+			window.resizeTo(600, 800)
+		}
+		function by(){
+			window.resizeBy(-10, -10)
+		}
+	</script>
+</html>

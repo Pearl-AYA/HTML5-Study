@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>innerHTML和innerText</title>
+	</head>
+	<body>
+		<p id="p1"></p>
+		<br />
+		<button id="btn1">给p添加文本类型的innerHTML</button>
+		<button id="btn2">给p添加a标签innerHTML</button>
+		<button id="btn3">给p添加文本a标签形式的innerText</button>
+		<button id="btn4">给p添加文本内容形式的innerHTML</button>
+	</body>
+	<script type="text/javascript">
+		btn1.onclick = function(){
+			//console.log(p1.innerHTML)
+			p1.innerHTML = "🍎🍌🌰"
+			console.log(p1.innerHTML)
+		}
+		
+		btn2.onclick = function(){
+			p1.innerHTML = "<a href='http://www.baidu.com'>百度一下，你就知道</a>"
+			// 【🐷】获取innnerText只会获取这个标签中的文本部分
+			console.log(p1.innerText)
+			// 获取innerHTML会获得标签开始和结束之间的所有的部分
+			console.log(p1.innerHTML)
+		}
+		btn3.onclick = function(){
+			p1.innerText = "<a href='http://www.baidu.com'>百度一下，你就知道</a>"
+			console.log(p1.innerText)
+			console.log(p1.innerHTML)
+		}
+		btn4.onclick = function(){
+			p1.innerText = "🍎🍌🌰"
+		}
+	</script>
+</html>

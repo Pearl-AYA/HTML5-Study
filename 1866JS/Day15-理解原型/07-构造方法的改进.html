@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 构造方法
+		function Person(name, age){
+			this.name = name;
+			this.age  = age;
+			this.speak = speak;
+		}
+		
+		// 具名函数
+		function speak(){
+			alert("说话");
+		}
+		var p1 = new Person("李四", 20)
+		var p2 = new Person("麦子", 21)
+		
+		console.log(p1.speak == p2.speak) //true
+	</script>
+	<!--【归纳】属性写在构造方法内部，不共享。方法写在构造函数的
+		外部，共享。目的达到了。但是【封装性太差】
+	-->
+</html>

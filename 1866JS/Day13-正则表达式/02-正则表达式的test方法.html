@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>test方法</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【归纳】g表示全局匹配，i表示不区分大小写，m表示多行匹配
+		 * 其中的g在每次匹配完成之后会继续上次匹配的位置向后匹配
+		 * (会跳过整个上次匹配的字符串部分)如果没有g，则每次从头匹配。
+		 * 匹配一轮之后，又会从头开始匹配。
+		 */
+		//var reg = /girl/g
+		var reg = /girl/
+		var s = "dsfhdkjgirlfgskjdgfjgirlfdsjh"
+		// reg.lastIndex属性用于规定下次匹配的起始位置
+		console.log(reg.lastIndex) //0
+		console.log(reg.test(s)) // true
+		console.log(reg.lastIndex) //11
+		console.log(reg.test(s)) // true
+		console.log(reg.lastIndex) //24
+		console.log(reg.test(s)) // false
+		console.log(reg.lastIndex) //0
+		console.log(reg.test(s)) // true
+		console.log(reg.lastIndex) //11
+		reg.lastIndex = 13
+		console.log(reg.test(s)) //true
+		console.log(reg.lastIndex) //24
+	</script>
+</html>

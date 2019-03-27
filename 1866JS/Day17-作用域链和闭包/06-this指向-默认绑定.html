@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>this指向-默认绑定</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var p = {
+			f: function(){
+				console.log(this)
+			}
+		}
+		// 将对象p的函数赋值给foo
+		var foo = p.f;
+		foo(); // Window  执行函数foo，是Window在调用
+		p.f(); // object  直接使用p调用f函数，那么this指代object
+		//===============
+		function foo(){
+			console.log(this)
+		}
+		foo(); // 是window在调用foo，所以this指代window
+	</script>
+	<!--【归纳】this指向和书写的位置没有关系，只和调用方式(谁调用)有关
+		【默认绑定】当直接调用一个函数的时候，那么这个函数的this默认绑定在
+		window上。
+	-->
+</html>

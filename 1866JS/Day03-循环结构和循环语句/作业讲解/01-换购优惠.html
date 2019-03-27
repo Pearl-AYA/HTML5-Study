@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		请输入消费金额：<input type="text" id="consumeMoney"/>
+		<p>是否参加优惠活动：
+			<br />1、满50元，加2元换购百事可乐饮料一瓶
+			<br />2、满100元，加3元换购500ml可乐一瓶
+			<br />3、满100元，加10元换购5公斤面粉
+			<br />4、满200元，加10元换过1个苏泊尔草踩过
+			<br />5、满200元，加20元换购欧莱雅爽肤水一瓶
+			<br />0、不换购
+			<br />
+		</p>
+		<p>
+			请选择: <input type="text" id="select"/>
+		</p>
+		<button id="result">结算</button>
+	</body>
+	<script type="text/javascript">
+		// 返回的inputs是数组
+		var inputs = document.getElementsByTagName("input")
+		document.getElementById("result").onclick = function(){
+			var consumeMoney = parseFloat(inputs[0].value)
+			var select = parseInt(inputs[1].value)
+			var sumMoney, product
+			// 匹配换购方式
+			switch(select){
+				case 0:
+					sumMoney = consumeMoney
+					product = '你没有换购'
+					break
+				case 1:
+					if(consumeMoney >= 50){
+						sumMoney = consumeMoney + 2
+						product = '百事可乐饮料一瓶'
+					}else{
+						sumMoney = consumeMoney
+						product = '消费金额不够，不给换购'
+					}
+					break
+				case 2:
+					if(consumeMoney >= 100){
+						sumMoney = consumeMoney + 3
+						product = '成功换购500ml可乐一瓶'
+					}else{
+						sumMoney = consumeMoney
+						product = '消费金额不够，不给换购'
+					}
+					break
+				case 3:
+					if(consumeMoney >= 100){
+						sumMoney = consumeMoney + 10
+						product = '5公斤面粉'
+					}else{
+						sumMoney = consumeMoney
+						product = '消费金额不够，不给换购'
+					}
+					break
+				case 4:
+					if(consumeMoney >= 200){
+						sumMoney = consumeMoney + 10
+						product = '1个苏泊尔草踩过'
+					}else{
+						sumMoney = consumeMoney
+						product = '消费金额不够，不给换购'
+					}
+					break
+				case 5:
+					if(consumeMoney >= 200){
+						sumMoney = consumeMoney + 20
+						product = '欧莱雅爽肤水1瓶'
+					}else{
+						sumMoney = consumeMoney
+						product = '消费金额不够，不给换购'
+					}
+					break
+			}
+			alert("本次消费总金额" + sumMoney + "\n" + product)
+		}
+	</script>
+</html>

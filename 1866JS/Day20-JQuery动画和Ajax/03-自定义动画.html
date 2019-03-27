@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>自定义动画</title>
+		<style type="text/css">
+			div{
+				width: 200px;
+				height: 200px;
+				background-color: blue;
+				position: absolute;
+			}
+		</style>
+		<script src="libs/jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+		<!--【注意】如果想在动画中支持颜色的变化，则需要这个插件-->
+		<script src="libs/jquery-ui.js" type="text/javascript" charset="utf-8"></script>
+		<!--但是仅仅为了颜色的变化而引入jquery-ui.js插件。一般我们用【过渡】
+			完成颜色的变化。CSS3中-->
+	</head>
+	<body>
+		<button>开始动画</button>
+		<div></div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 点击按钮开始动画
+			$('button:eq(0)').click(function(){
+				// 可以给元素添加多个自定义动画，它们会按照添加的顺序执行
+				$("div").animate({
+						left: "1000px",
+						width: "400px",
+						height: "400px",
+						backgroundColor: "red"
+					}, 2000)
+				.animate({ // 把前面的动画执行完毕之后再执行下面的变化
+					top: "500px"
+				}, 4000)
+				.animate({
+					left: "0"
+				}, 2000)
+				.animate({
+					top: "0"
+				}, 2000)
+			})
+		})
+	</script>
+</html>

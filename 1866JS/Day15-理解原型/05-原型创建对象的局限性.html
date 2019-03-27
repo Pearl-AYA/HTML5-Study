@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原型创建对象的局限性</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 构造方法
+		function Person(){
+			
+		}
+		Person.prototype.age = 10
+		Person.prototype.name = "lisi"
+		Person.prototype.girls = ["柏芝", "马蓉", "凤姐"]
+		Person.prototype.eat = function(){
+			alert("吃")
+		}
+		// 创建对象
+		var p1 = new Person() //哥哥
+		p1.eat()
+		var p2 = new Person() //弟弟
+		p2.eat()
+	</script>
+	<!--原型中的属性和方法都共有，但是这种情况不是我们想要的
+		我们希望属性每个对象都有自己的属性。方法应该是所有的
+		对象所共有。这是最佳状态。
+	-->
+</html>

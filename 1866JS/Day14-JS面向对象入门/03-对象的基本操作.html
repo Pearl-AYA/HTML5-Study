@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>对象的基本操作</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 创建p对象
+		var p = {
+			name: "李四",
+			age: 20,
+			girlFriends: ["志玲", "柏芝", "凤姐"],
+			eat: function(){
+				console.log("吃东西")
+			}
+		}
+		// 修改对象的属性
+		p.name = "冠希"
+		console.log(p.name)
+		//============
+		// 动态添加属性
+		p.sex = "男"
+		console.log(p.sex)
+		// delete可以用于删除属性
+		//delete p.sex
+		console.log(p.sex)
+		//注意：delete是个【操作符】，不是方法，所以后面没有必要添加括号啊
+		// delete也可以用于删除方法
+		//delete p.eat
+		//console.log(p.eat()) // eat方法已经被删除，报错
+		//=================
+		// 【🐷】使用for...in遍历对象，遍历出来的是对象的属性名
+		for(var att in p){
+			console.log(att)
+			// att是对象p的属性的名
+			
+			//下面的写法是访问属性的值
+			//【归纳】中括号的写法中如果是变量，可以直接写
+			// 如果是字符串，必须加引号
+			console.log(p[att])
+		}
+		//===============
+		// for...in遍历数组
+		var arr = ["a","b","c","d"]
+		for (var temp in arr) {
+			// for...in遍历数组，得到的temp是数组的元素的下标
+			console.log(temp)
+		}
+		//===============
+		/**
+		 * 【总结】修改属性的值：对象.属性名 = 新的值
+		 * 给对象动态添加属性：
+		 * 1、JS可以动态的去添加或删除属性
+		 * 2、如果给对象的属性赋值的时候，这个属性不存在，则
+		 * 会动态地添加一个新的属性。
+		 * 3、删除对象的属性：delete  操作符
+		 * 4、如果一个对象的属性的值是函数的时候，这个时候我们一般
+		 * 习惯叫【方法】在面向对象的语言中，方法和函数等价。
+		 */
+	</script>
+</html>

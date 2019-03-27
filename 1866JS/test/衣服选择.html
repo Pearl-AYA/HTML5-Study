@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.wrap{
+				margin: 0 auto;
+				width: 800px;
+				list-style: none;
+			}
+			.div_1{
+				width: 170px;
+				height: 170px;
+				border: 1px solid darkblue;
+				margin: 10px;
+				float: left;
+				position: relative;
+			}
+			.big_picture{
+				position: absolute;
+				top: 50px;
+				left: 0px;
+				border: 1px solid darkblue;
+				z-index: 1;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="wrap" id="wrap">
+			<li class="div_1">
+				<img src="img/shirt_1.jpg"/>
+			</li>
+			<li class="div_1">
+				<img src="img/shirt_2.jpg"/>
+			</li>
+			<li class="div_1">
+				<img src="img/shirt_3.jpg"/>
+			</li>
+			<li class="div_1">
+				<img src="img/shirt_4.jpg"/>
+			</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		$(function () {
+			var $bImg
+			$(".div_1").hover(function () {
+				$bImg=$("<img class='big_picture' src='img/shirt_"+($(this).index()+1)+"_big.jpg' />")
+				$(this).append($bImg)
+				$bImg.show(1000)
+			},function () {
+				$(this).find($bImg).remove()
+			})
+			$(".div_1").mousemove(function (event) {
+				var x=event.clientX-this.offsetLeft
+				var y=event.clientY-this.offsetTop
+				$(this).find($bImg).css({
+					left:x,
+					top:y
+				})
+			})
+		})
+	</script>
+</html>

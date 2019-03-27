@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>拓展</title>
+	</head>
+	<body>
+		<div>
+			123
+			<!--我是注释-->
+		</div>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【🐷】在IE9以下，alert当前节点的firstChild实际上是p
+		 * 但是在现代新浏览器下，比如：Chrome FireFox等会将<div></div>
+		 * 之间的空白节点也解析出来，所以弹出的是#text
+		 * 因为空白字符也属于文本节点。
+		 * 【问题】如何删除空白节点，得到有内容的节点？
+		 */
+		function getFirst(elem){
+			for (var i = 0, e; e = elem.childNodes[i++];) {
+				if(e.nodeType == 1){
+					return e
+				}
+			}
+		}
+		 var first = document.getElementsByTagName("div")[0]
+		 console.log(first)
+//		 console.log(getFirst(first).nodeName)
+		 //=================
+		 /**
+		  * DOM中直接扩展了一个新的属性：
+		  * firstChild----->firstElementChild
+		  * lastChild ----> lastElementChild
+		  * nextSibling ----> nextElementSibling
+		  * previousSibling---> previousElementSibling
+		  */
+//		 console.log(first.firstElementChild)
+//		 console.log(first.firstElementChild.nodeName)
+		 //=================
+		 /**
+		  * 【🐷】但是拓展的属性firstElementChild在IE6/7/8中没有该属性
+		  * 一旦使用，立即报错。不兼容。
+		  * 【children属性】不是标准属性。返回指定元素的子元素结合。
+		  * 只返回HTML元素节点，不会返回文本节点。虽然不是标准属性，但是它和
+		  * innnerHTML一样，几乎得到了所有的浏览器的支持。
+		  */
+		 console.log(first.children.length)
+		 console.log(first.children[0])
+		 // 【childElementCount属性】获取子元素的数量和children.length相同
+		 console.log(first.childElementCount)
+		 console.log(first.children)
+	</script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组合继承</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【组合继承】
+		 * 1、子类型的构造函数借调父类型的构造函数
+		 * 2、子类型的构造函数的原型对象，仍然改为父类型的对象
+		 */
+		function Father(name){
+			this.name = name
+			// 方法定义在原型中
+			if((typeof Father.prototype.eat) != "function"){
+				Father.prototype.eat = function () {
+					alert(this.name + " 在吃东西");
+				}
+			}
+		}
+		Father.prototype.speak = function(){
+			console.log("父类型原型中的方法!")
+		}
+		function Son(name, age){
+			// 借调Father的构造方法，但是this指针需要修改成Son的this
+			Father.call(this, name)
+			this.age = age
+		}
+		// 修改Son的原型为Father
+		Son.prototype = new Father("张三")
+		// 创建Son对象
+		var son = new Son("lisi", 20)
+		console.log(son.name)
+	</script>
+</html>

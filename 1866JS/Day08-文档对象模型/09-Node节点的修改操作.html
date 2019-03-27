@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Node节点的修改操作</title>
+	</head>
+	<body>
+		<div id="div"></div>
+		<ul id="language">
+			🍎🍌🌰
+			<li>Java</li>
+			<li>JavaScript</li>
+		</ul>
+		<button onclick="addNode()">点击添加新节点</button>
+		<button onclick="removeNode()">点击移除第一个节点</button>
+		<button onclick="replaceNode()">点击替换第一个节点</button>
+		<button onclick="cloneNode_1()">点击克隆ul列表</button>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【修改】
+		 * 1、创建文本节点：createTextNode()
+		 * 2、添加一个child元素：appendChild()
+		 * 3、创建新的元素节点：createElement()
+		 * 4、在一个节点之前插入新的节点：insertBefore()
+		 * 5、移除子节点：removeChild()
+		 * 6、替换子节点：replaceChild()
+		 * 7、克隆节点：cloneNode()
+		 */
+		//===========================
+		/**
+		 * 【createTextNode()】创建文本节点
+		 * 参数：text 替换的文本
+		 * 返回值：
+		 * 	创建的文本标签
+		 * 方法属于【document】
+		 */
+		var textNode = document.createTextNode("粤嵌")
+		console.log(textNode.nodeName) //#text
+		console.log(textNode.nodeValue) // "粤嵌"
+		//===================
+		/**
+		 * 【appendChild(node)】
+		 * 给一个元素添加child元素
+		 * 参数：node 是需要添加的节点
+		 * 必选参数。
+		 * 返回值：
+		 * 参数对象本身
+		 * 如果本身元素已经有child了，则直接追加到原本的child之后
+		 * 添加进去就是lastChild。
+		 */
+		var div  = document.getElementById("div")
+		div.appendChild(textNode)
+		//================
+		/**
+		 * 【createElementNode(nodeName)】创建一个元素节点
+		 * 参数：nodeName  需要创建元素的名称
+		 * 返回值：
+		 * 	创建的元素节点
+		 */
+		var newElement = document.createElement("a")
+		var textNode_1 = document.createTextNode("首页")
+		newElement.appendChild(textNode_1)
+		var v = div.appendChild(newElement)
+		console.log(v === newElement)
+		//==================
+		/**
+		 * 【insertBefore(newnode,existingnode)】
+		 * 在一个节点前面插入一个新的节点
+		 * 参数：newNode  需要插入的新的节点
+		 * existingnode：目标节点
+		 * 功能： 会将参数1的节点插入到目标节点之前
+		 */
+		function addNode(){
+			var newItem = document.createElement("li")
+			var textNode_2 = document.createTextNode("C#")
+			newItem.appendChild(textNode_2)
+			//============
+			var languageList = document.getElementById("language")
+			// 将newItem添加到language列表中
+			languageList.insertBefore(newItem, languageList.firstChild)
+		}
+		//====================
+		/**
+		 * 【removeChild(node)】移除子节点
+		 * 参数：
+		 * node 必选参数
+		 * 需要移除的子节点
+		 */
+		function removeNode(){
+			var languageList = document.getElementById("language")
+			var li_list = languageList.getElementsByTagName("li")
+			console.log(li_list)
+			languageList.removeChild(li_list[0])
+			console.log(li_list.length)
+		}
+		//===============
+		/**
+		 * 【replaceChild(newNode, oldNode)】
+		 * 替换子节点
+		 * 参数：
+		 * newNode  新节点
+		 * oldNode  旧节点
+		 */
+		function replaceNode(){
+			var languageList = document.getElementById("language")
+			var newLi = document.createElement("li")
+			newLi.innerHTML = "NodeJS"
+			// 使用新的节点替换旧的节点
+			languageList.replaceChild(newLi, languageList.firstElementChild)
+		}
+		//===============
+		/**
+		 * 【cloneNode（deep）】克隆节点
+		 * 该方法是可以用于创建指定的节点的精确拷贝
+		 * 拷贝所有的属性和属性值
+		 * 该方法将赋值并返回它的节点的副本
+		 * 如果传递的参数是true，则它将递归赋值当前节点的所有子节点
+		 * 如果传入的参数为false
+		 * 则只复制当前节点(不会复制子节点)
+		 */
+		function cloneNode_1(){
+			var languageList = document.getElementById("language")
+			// 克隆整个languageList节点
+			var newList = languageList.cloneNode(true)
+			// 先获取到第一个button
+			var button01 = document.getElementsByTagName("button")[0]
+			document.getElementsByTagName("body")[0].insertBefore(newList, button01)
+		}
+	</script>
+</html>

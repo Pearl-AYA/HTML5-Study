@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<h1 id="clock"></h1>
+		<button id="star_stop">开始</button>
+		<button id="reset" disabled="disabled">重置</button>
+		<button id="record" disabled="disabled">记录</button>
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			var hour=0
+			var minute=0
+			var second=0
+			var millisecond=0
+			var timeIntervalId
+			var $recTable
+			$("#clock").html(hour+":"+minute+":"+second+"\'"+millisecond+"\"")
+			$("#star_stop").click(function(){
+				if ($(this).html()=="开始") {
+					timeIntervalId=window.setInterval(timer,10)
+					$("#record").removeAttr("disabled")
+					$(this).html("暂停")
+				}else if ($(this).html()=="暂停") {
+					window.clearInterval(timeIntervalId)
+					timeIntervalId=0
+					$(this).html("继续")
+					$("#reset,#record").removeAttr("disabled")
+				}else if ($(this).html()=="继续") {
+					timeIntervalId=window.setInterval(timer,10)
+					$(this).html("暂停")
+					$("#reset").attr("disabled","disabled")
+				}
+			})
+			$("#record").click(function() {
+				console.log($("#recTable").length)
+				if ($("#recTable").length>0) {	
+					$recTable.html($recTable.html()+hour+":"+minute+":"+second+"\'"+millisecond+"\"<br />")
+				} else{
+					$recTable=$("<div id='recTable'></div>")
+					$(this).after($recTable)
+					$recTable.html($recTable.html()+hour+":"+minute+":"+second+"\'"+millisecond+"\"<br />")
+				}
+			})
+			$("#reset").click(function() {
+				window.clearInterval(timeIntervalId)
+				timeIntervalId=0
+				$("#star_stop").html("开始")
+				$("#reset,#record").attr("disabled","disabled")
+				$recTable.remove()
+				hour=0
+				minute=0
+				second=0
+				millisecond=0
+				$("#clock").html(hour+":"+minute+":"+second+"\'"+millisecond+"\"")
+			})
+			function timer(){
+				millisecond++;
+				if (millisecond>=100) {
+					millisecond=0;
+					second++;
+				}
+				if (second>=60) {
+					second=0;
+					minute++;
+				}
+				if (minute>=60) {
+					minute=0;
+					hour++
+				}
+				$("#clock").html(hour+":"+minute+":"+second+"\'"+millisecond+"\"")
+			}
+		})
+	</script>
+</html>

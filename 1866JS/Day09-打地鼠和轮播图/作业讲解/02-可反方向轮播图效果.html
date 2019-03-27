@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.div_1{
+				width: 600px;
+				height: 700px;
+				margin: 0 auto;
+				position: relative;
+				overflow: hidden;
+			}
+			.div_2{
+				width: 3600px;
+				height: 700px;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			img{
+				width: 600px;
+				height: 700px;
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="div_1">
+			<div class="div_2">
+				<img src="img/1.jpg"/>
+				<img src="img/2.jpg"/>
+				<img src="img/3.jpg"/>
+				<img src="img/4.jpg"/>
+				<img src="img/5.jpg"/>
+				<img src="img/6.jpg"/>
+			</div>
+	</body>
+	<script type="text/javascript">
+		var div = document.getElementsByClassName("div_2")[0]
+		var left = 0
+		var flag = true
+		// 向左轮播
+		function Left(){
+			left -= 10
+			// left = left - 10
+			div.style.left = left + 'px'
+		}
+		// 向右轮播
+		function Right(){
+			left += 10
+			div.style.left = left + 'px'
+		}
+		// 控制轮播
+		function output(){
+			if(flag){
+				Left()
+				if(left == -3000){
+					flag = !flag
+				}
+			}else{
+				Right()
+				if(left == 0){
+					flag = !flag
+				}
+			}
+		}
+		// 定时器每隔30ms执行一次output方法
+		var timer = setInterval(output, 30)
+	</script>
+</html>

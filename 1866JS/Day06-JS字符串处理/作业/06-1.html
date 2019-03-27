@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function btnclick(){
+				var Capital=0;
+				var lowercase=0;
+				var num=0;
+				var other=0;
+				var str=document.getElementById("text1").value;
+				for (var i=0;i<str.length;i++) {
+					var asc=str.charCodeAt(i);
+					if (asc>=65&&asc<=90) {
+						Capital++;
+					}else if (asc>=97&&asc<=122) {
+						lowercase++;
+					}else if (asc>=48&&asc<=57) {
+						num++;
+					}
+				}
+				other=str.length-Capital-lowercase-num;
+				document.getElementById("show").innerHTML=str+"<br>大写字母:"+Capital+"&nbsp;小写字母:"+lowercase+"&nbsp;数字:"+num+"&nbsp;其他:"+other;
+				document.getElementById("text1").value="";
+			}
+		</script>
+	</head>
+	<body>
+		<h1>输入任意字符串，分别统计字符串中的大写字母、小写字母、数字、其他字符的个数</h1>
+		<input type="text" id="text1" value="" />
+		<button onclick="btnclick()">确认</button>
+		<p id="show"></p>
+	</body>
+</html>

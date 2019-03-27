@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>删除节点</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			// 返回刚刚被干掉的那个元素(绑定的事件会丢失)
+			/*var removed = $("li:nth-child(1)").remove()
+			console.log(removed)*/
+			//===========
+//			var removed = $("li:nth-child(2)").click(function(){
+//				$("li:nth-child(2)").remove()
+//			})
+			//===========
+			// 把删除的元素追加到末尾
+//			$("ul").append(removed)
+			//===========
+			// detach()绑定的事件不会消失
+			var detached = $("li:nth-child(1)").click(function(){
+				$("li:nth-child(1)").detach()
+			})
+			$("ul").append(detached)
+			
+			//==============
+			// empty()清空所有的ul的后代，但是ul还在
+			//$("ul").empty()
+			//$("ul").html("")
+		})
+	</script>
+</html>

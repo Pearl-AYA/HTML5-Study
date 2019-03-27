@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>变量的作用域</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		/**
+		 * 【变量的作用域】变量的作用域指的是变量起作用的范围。
+		 * 能够访问到的有效范围。JS变量作用域可以分为：
+		 * 1、全局变量    在window上的变量
+		 * 2、局部变量    不在window上
+		 */
+		
+		/**
+		 * 定义在函数外部的变量都是全局变量。
+		 */
+		alert(a) //undefined
+		// 全局变量的【声明可以被提前】但是赋值的过程不会被提前
+		var a = 20
+	</script>
+	<script type="text/javascript">
+		// 以下两种方式是一样的
+		console.log(window)
+		console.log(window.a)
+	</script>
+	<!--=============-->
+	<script type="text/javascript">
+		/**
+		 * 【局部变量】局部变量就是在函数的内部声明的变量
+		 * 局部变量的作用域是当前函数的内部
+		 * 在函数外部是无法使用的变量的。
+		 */
+		function myFunction(){
+			var f = 'stfte'
+		}
+		console.log(f)
+	</script>
+</html>

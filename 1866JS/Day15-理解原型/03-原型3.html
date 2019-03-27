@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原型</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 构造函数
+		function Person(){
+			
+		}
+		// 马云爸爸
+		var obj = {
+			// 【🐷】这里修改了constructor的指向
+			constructor: Person,
+			age: 53,
+			name: "马云"
+		}
+		// 开始认干爹
+		Person.prototype = obj
+		console.log(Person.prototype.constructor) //Person
+	</script>
+	<!--【归纳】如果更改了构造函数的原型对象，则一般让原型对象
+		的constructor属性重新指向这个构造函数
+	-->
+</html>

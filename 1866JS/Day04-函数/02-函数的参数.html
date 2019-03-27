@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 函数的声明
+		function add(num1,num2){
+			for (var i = 0;i < arguments.length; i ++) {
+				console.log(arguments[i])
+			}
+			// 形参是局部变量
+			return num1 + num2
+		}
+		// 函数的调用
+		console.log(add(1,2,3,4,5))
+		/*console.log(add(1,2))
+		console.log(add(1,2,3))
+		console.log(add(1))
+		console.log(add())*/
+		console.log(add(1))
+		/**
+		 * 【注意】如果实参的个数小于形参的个数。那么接收不到实参的
+		 * 形参的值是undefined
+		 */
+		/**
+		 * 【arguments】本质是一个对象。类似于数组。
+		 * 它的属性是是当前函数所能接收到的所有参数。
+		 * arguments对象在函数调用的时候会自动被创建。
+		 * 可以使用[]去访问内部的每一个元素。在arguments
+		 * 内部存在两个特殊的属性：
+		 * 1、callee
+		 * 该属性指向拥有这个arguments对象的函数
+		 * 2、caller
+		 * 该属性保存着调用当前函数的引用   调用当前函数的函数
+		 */
+		function outer(){
+			inner()
+		}
+		function inner(){
+			console.log(arguments.callee.caller)
+		}
+		//  调用
+		outer()
+	</script>
+</html>

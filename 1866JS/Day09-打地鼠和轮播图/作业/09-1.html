@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 500px;
+				margin: 50px auto;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1">
+			<p>选项:</p>
+			<input type="checkbox" >选项1</input>
+			<input type="checkbox" >选项2</input>
+			<input type="checkbox" >选项3</input>
+			<input type="checkbox" >选项4</input>
+			<input type="checkbox" >选项5</input>
+		</div>
+		<div id="btn">
+			<button id="CheckallBtn">全选</button>
+			<button id="DeselectallBtn">取消全选</button>
+			<button id="SelectinvertBtn">全部反选</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var btn01=document.getElementById("CheckallBtn");
+		var btn02=document.getElementById("DeselectallBtn");
+		var btn03=document.getElementById("SelectinvertBtn");
+		btn01.onclick=function(){
+			for (var i=1;i<div1.childElementCount;i++) {
+				div1.children[i].checked=true;
+			}
+		}
+		btn02.onclick=function(){
+			for (var i=1;i<div1.childElementCount;i++) {
+				div1.children[i].checked=false;
+			}
+		}
+		btn03.onclick=function(){
+			for (var i=1;i<div1.childElementCount;i++) {
+				if (div1.children[i].checked) {
+					div1.children[i].checked=false;
+				}else{
+					div1.children[i].checked=true;
+				}
+			}
+		}
+	</script>
+</html>

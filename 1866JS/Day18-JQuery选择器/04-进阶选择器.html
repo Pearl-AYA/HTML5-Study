@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>进阶选择器</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<ul id="ul1">
+			<li>1 <a href=""></a></li>
+			<li>2</li>
+			<li>3</li>
+			<a href=""></a>
+			<p></p>
+		</ul>
+		<ul id="ul2">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<p></p>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			console.log($("p,ul"))
+			console.log($("#ul2 li"))
+			// 获取到所有非空的节点
+			console.log($("ul#ul1 *"))
+		})
+	</script>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jquery入门</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div id="yueQian">粤嵌</div>
+	</body>
+	<script type="text/javascript">
+		// js的入口：document.onload / window.onload = function(){xxx}
+		// jquery的入口： $(document).ready(function(){xxx})
+		
+		$(document).ready(function(){
+			// 【比较传统的JS】找到的是【DOM对象】
+			var myDiv = document.getElementById("yueQian")
+			console.log(myDiv)
+			// 这里的$div不是一个DOM对象，它是一个【jQuery对象】
+			var $div = $("div:first-child")
+			console.log($div)
+			console.log(myDiv === $div) //false
+			var msg = $div.html()
+			console.log(msg)
+		})
+		// 前面的入口函数的简便写法
+		$(function(){
+			var msg = $("div:first-child").html()
+			console.log(msg)
+		})
+	</script>
+</html>

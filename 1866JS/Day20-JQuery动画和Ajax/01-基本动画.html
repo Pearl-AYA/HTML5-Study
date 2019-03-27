@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>基本动画</title>
+		<script src="libs/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			div{
+				width: 350px;
+				height: 350px;
+				background-color: pink;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<button>显示</button>
+		<button>隐藏</button>
+		<button>淡入</button>
+		<button>淡出</button>
+		<button>展开</button>
+		<button>收起</button>
+		<div><img src="模拟测试题/img/small.jpg"/></div>
+	</body>
+	<script type="text/javascript">
+		// JQ对象
+		var div = $('div');
+		$(function(){
+			// 点击显示
+			$("button:eq(0)").click(function(){
+				div.show(2000)
+			})
+			// 点击隐藏
+			$("button:eq(1)").click(function(){
+				//div.hide(2000)
+				//div.hide("slow")
+				//div.hide("normal")
+				div.hide("fast")
+			})
+			//==============
+			// 点击【淡入】
+			$("button:eq(2)").click(function(){
+				//div.fadeIn("slow")
+				div.fadeIn(3000)
+			})
+			// 点击【淡出】
+			$("button:eq(3)").click(function(){
+				div.fadeOut(3000)
+			})
+			// 点击【展开】
+			$("button:eq(4)").click(function(){
+				div.slideDown(3000)
+			})
+			// 点击【收起】
+			$("button:eq(5)").click(function(){
+				div.slideUp(3000)
+			})
+		})
+	</script>
+</html>

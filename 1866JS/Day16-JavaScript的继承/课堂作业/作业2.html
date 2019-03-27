@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 二维平面的点的构造方法
+		function Point(x, y){
+			this.x = x
+			this.y = y
+			if(!Point.prototype.calculateDistance){
+				Point.prototype.calculateDistance = function(otherPoint){
+					var dis2 = Math.pow(this.x - otherPoint.x, 2) +
+					Math.pow(this.y - otherPoint.y, 2)
+					var dis = Math.sqrt(dis2)
+					return dis
+				}
+			}
+		}
+		// 创建两个点
+		var p1 = new Point(1, 1)
+		var p2 = new Point(1, 2)
+		var r = p1.calculateDistance(p2)
+		console.log("两个点的距离是" + r)
+		//==============
+		/**
+		 * 二维的圆Circle的构造方法
+		 */
+		function Circle(x,y,r){
+			// 借调Point的属性x和y
+			//Point.call(this, x, y)
+			// Point.apply也就是说使用apply也可以实现借调
+			// 但是需要把后面的参数放到数组中，而使用call只能一个一个传参
+			Point.apply(this, [x, y])
+			this.r = r
+			if(!Circle.prototype.arear){
+				Circle.prototype.arear = function(){
+					return Math.PI * this.r * this.r
+				}
+			}
+			if(!Circle.prototype.allLong){
+				Circle.prototype.allLong = function(){
+					return 2 * Math.PI * this.r
+				}
+			}
+		}
+		// 圆柱体的构造方法
+		function Cylinder(x,y,r,h){
+			// 借调Circle的属性
+			Circle.call(this, x, y, r)
+			this.h = h
+			// 求圆柱体的体积的方法
+			if(!Cylinder.prototype.volume){
+				Cylinder.prototype.volume = function(){
+					return this.arear() * this.h
+				}
+			}
+		}
+		// 原型继承的方法
+		Cylinder.prototype = new Circle()
+		// 创建圆柱体对象
+		var c = new Cylinder(3,4, 10, 20)
+		// 求圆柱体的体积
+		console.log("以该圆为底面圆的圆柱体的体积为" + c.volume())
+		// 求圆的面积
+		console.log("圆的面积" + c.arear())
+		// 求圆的周长
+		console.log("圆的周长" + c.allLong())
+	</script>
+	<!--2、完成如下功能 
+   a: 设计构造函数表示二维平面的点Point。  应该有属性 x，y坐标。
+   提供一个可以计算两个点距离的方法。
+   (x1-x2)**2 + (y1-y2)**2
+   b: 设计构造函数表示二维的圆Circle，提供周长和面积
+   c: 设计构造函数表示圆柱体Cylinder，提供体积的功能
+   d: 分别使用原型继承和构造函数借调的方式来完成继承。-->
+</html>
